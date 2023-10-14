@@ -8,39 +8,59 @@
     <link rel="stylesheet" type="text/css" href="cadastro.css">
 </head>
 <body>
-    <div id="cadastro">
-        <form class="form">
-            <h3> Cadastro</h3>
-            <form name = "Usuário">
-                <input type = "text" name = "nome" placeholder="nome">
-                <br>
-                <br>
-                <input type = "text" name = "sobrenome" placeholder="sobrenome">
-                <br>
-                <br>
-                <input type="text" name = "genero" placeholder="genero">
-                <br>
-                <select> 
-                    <option value = "feminino"> feminino</option>
-                    <option value="masculino"> masculino</option>
-                    <option value="nao binario"> nao binario</option>
-                    <option value="prefiro nao informar"> prefiro nao informar</option>
-                </select>
-                <br> 
-                <br>
-                <input type = "email" name = "email" placeholder="email">
-                <br>
-                <br>
-                <input type = "password" name = "senha" placeholder="senha">
-                <br>
-              
-                <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">Email address</label>
-                  </div>
-                  <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
-                  </div>
+    <div class="caixa">
+    <nav><a class="logo"> <img src="js/img/Tons de Beleza.png" height="36"></a></nav>
+    <div class="form-group d-flex justify-content-center"></div>
+    <div class="container">
+      <form> 
+          <div class="form-group">
+              <div class="   col-md-6 offset-md-3">
+                  <label > Nome</label>
+                  <input type="text" name="login" class="form-control" placeholder="Nome">    
+              </div>
+              <div class="   col-md-6 offset-md-3">
+                <label > Sobrenome</label>
+                <input type="text" name="login" class="form-control" placeholder="Sobrenome">    
+            </div> 
+            <br>
+            <div class="col-md-6 offset-md-3">
+              <label > Gênero</label> 
+              <select>
+              <option value="feminino"> Feminino</option>
+              <option value="masc">Maculino</option>
+              <option value="naob"> Não Binário</option>
+              <option value="naoinf"> Prefiro não informar</option>
+              </select>  
+            </div>
+            <br>
+           <div class="   col-md-6 offset-md-3">
+            <label > Data de Nascimento</label>
+            <input type="date" name="login" class="form-control" placeholder="Data de Nascimento">    
+        </div> <div class="   col-md-6 offset-md-3">
+          <label > Email</label>
+          <input type="text" name="login" class="form-control" placeholder="Nome@exemplo.com">    
+      </div>
+          </div>
+          <div class="form-group">
+              <div class="col-md-6 offset-md-3">
+                  <label> Senha </label>  
+                  <input type="password" name="senha" class="form-control" placeholder="Senha" >
+              </div>
+          </div>      
+              <div class="col-md-6 offset-md-3">
+                <button type="button" class="btn"><a href= "telainicial.html"> Cadastro </button>
+              </div>
+          </div>
+      </form> 
+    </div>
+  </div>
+  
+
+
+
+
+
+
+
 
 </body>
