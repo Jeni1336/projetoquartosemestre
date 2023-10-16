@@ -37,5 +37,8 @@ a{
     border-radius: 8px;
     height: 110%;
     width: 50%;
-    
+}
+.check{
+    color:#770624;
+    margin-left: 125px;
 }
