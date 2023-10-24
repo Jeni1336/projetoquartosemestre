@@ -17,11 +17,11 @@
           <div class="form-group">
               <div class="col-md-6 offset-md-3">
                   <label > Nome</label>
-                  <input type="text" name="nome" class="form-control" placeholder="Nome" required>    
+                  <input type="text" name="nome" class="form-control" placeholder="Nome" maxlength="30" required>    
               </div>
               <div class="col-md-6 offset-md-3">
                 <label > Sobrenome</label>
-                <input type="text" name="sobrenome" class="form-control" placeholder="Sobrenome" required>    
+                <input type="text" name="sobrenome" class="form-control" placeholder="Sobrenome" maxlength="30" required>    
             </div> 
             <br>
             <div class="col-md-6 offset-md-3">
@@ -36,16 +36,16 @@
             <br>
            <div class="   col-md-6 offset-md-3">
             <label > Data de Nascimento</label>
-            <input type="date" name="data_nasc" class="form-control" placeholder="Data de Nascimento" required>    
+            <input type="date" name="data_nasc" class="form-control" placeholder="Data de Nascimento" maxlength="10" required>    
         </div> <div class="   col-md-6 offset-md-3">
           <label > Email</label>
-          <input type="text" name="email" class="form-control" placeholder="Nome@exemplo.com" required>    
+          <input type="text" name="email" class="form-control" placeholder="Nome@exemplo.com" maxlength="30" required>    
       </div>
           </div>
           <div class="form-group">
               <div class="col-md-6 offset-md-3">
                   <label> Senha </label>  
-                  <input type="password" name="senha" class="form-control" placeholder="Senha" required>
+                  <input type="password" name="senha" class="form-control" placeholder="Senha" maxlength="32" required>
               </div>
               <br>
               <div class="check">
