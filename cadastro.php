@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+  require_once '../projetov1/classes/usuarios.php';
+  $u = new Usuario();
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +16,7 @@
     <nav><a class="logo"> <img src="js/img/Tons de Beleza.png" height="36"></a></nav>
     <div class="form-group d-flex justify-content-center"></div>
     <div class="container">
-      <form name ="Cadastro" action = "cadastroFORM.php" method = "POST">
+      <form name ="Cadastro" method = "POST">
         
           <div class="form-group">
               <div class="col-md-6 offset-md-3">
@@ -47,6 +51,10 @@
                   <label> Senha </label>  
                   <input type="password" name="senha" class="form-control" placeholder="Senha" maxlength="32" required>
               </div>
+              <div class="col-md-6 offset-md-3">
+                  <label> Confirmar Senha </label>  
+                  <input type="password" name="senha" class="form-control" placeholder="Senha" maxlength="32" required>
+              </div>
               <br>
               <div class="check">
                 <input type="checkbox">
@@ -58,8 +66,35 @@
       </form> 
     </div>
   </div>
-  
+  <?php
+//verificar se clicou no botao
+isset($_POST['nome']){
+$nome = addcslashes($_POST ['nome']);
+$sobrenome = addcslashes($_POST ['sobrenome']);
+$genero = addcslashes($_POST ['genero']);
+$data_nasc = addcslashes($_POST ['data_nasc']);
+$email = addcslashes($_POST ['email']);
+$senha = addcslashes($_POST ['senha']);
+//verificar se esta preenchido
+if(!empty($nome) && !empty($sobrenome) && !empty($genero) && !empty($data_nasc) && !empty($email) && !empty($senha)){
+  $u-> conectar( "cadastro_cliente", "localhost", "root", "admin");
+  if($u -> msgErro == "")//esta tudo certo 
+  {
+      $u -> cadastrar($nome, $sobrenome, $genero, $data_nasc, $email, $senha);
+      
+  }
+  else{
+    echo"Erro: ".$u->msgErro;
+  }
+}
+else{
+  echo "Preencha todos os campos!";
+}
+}
+
+?>
 
 
 
 </body>
+</html>
