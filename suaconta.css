@@ -1,0 +1,23 @@
+.cabecalho{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.cabecalho-item{
+    color: #963c54;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
+.nav-item{
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    text-decoration: underline;
+    margin: 10px;
+}
+#carouselExampleIndicators{
+   padding: 30px;
+}
+.bg-light{
+    margin: 15px;
+}
