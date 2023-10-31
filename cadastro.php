@@ -16,7 +16,7 @@
     <nav><a class="logo"> <img src="../projetoquartosemestre/images/Logo-Bonito.png" height="60"></a></nav>
     <div class="form-group d-flex justify-content-center"></div>
     <div class="container">
-      <form name ="Cadastro" method ="POST">
+      <form name ="Cadastro" onsubmit="confereSenha2();" method ="POST">
         
           <div class="form-group">
               <div class="col-md-6 offset-md-3">
@@ -32,7 +32,7 @@
               <label > Gênero</label> 
               <select name="genero">
               <option value="feminino"> Feminino</option>
-              <option value="masc">Maculino</option>
+              <option value="masc">Masculino</option>
               <option value="naob"> Não Binário</option>
               <option value="naoinf"> Prefiro não informar</option>
               </select>  
@@ -61,7 +61,7 @@
                 <label required> Concordo com os termos de uso</label> </div>
               <div class="col-md-6 offset-md-3">
                 <button type="submit" class="btn" >Cadastrar </button>
-                  <script src="cadastro.js"> </script>
+                  
           </div>
       </form> 
     </div>
@@ -75,15 +75,16 @@ $genero = ($_POST ['genero']);
 $data_nasc = ($_POST ['data_nasc']);
 $email = ($_POST ['email']);
 $senha = ($_POST ['senha']);
-//$confirmar_senha = ($_POST ['confirmar_senha']);
+$confirmar_senha = ($_POST ['confirmar_senha']);
 //verificar se esta preenchido
 if(!empty($nome) && !empty($sobrenome) && !empty($genero) && !empty($data_nasc) && !empty($email) && !empty($senha)){
   $u-> conectar( "cadastro_cliente", "localhost", "root", "admin");
 if($u -> msgErro == "")//esta tudo certo 
   {
-    
+    if($senha === $confirmar_senha){
     $u -> cadastrar($nome, $sobrenome, $genero, $data_nasc, $email, $senha);
     header("location: telainicial.html");
+    }
  
   }
   else{
@@ -97,8 +98,22 @@ else{
 
 
 ?>
+<script type="text/javascript">
 
+function confereSenha2()
+{
+    const senha = document.querySelector('input[name=senha]');
+    const confirma = document.querySelector('input[name=confirmar_senha]');
 
+    if(confirma.value === senha.value){
+        confirma.setCustomValidity('');
+    }else{
+       // confirma.setCustomValidity('As senhas não conferem');
+       alert ('Senhas incorretas!');
+    }
+}
+</script>
+<!-- <script src="../projetoquartosemestre/cadastro.js"> </script>-->
 
 </body>
 </html>

@@ -13,7 +13,10 @@ function confereSenha()
     if(confirma.value === senha.value){
         confirma.setCustomValidity('');
     }else{
-        confirma.setCustomValidity('As senhas não conferem');
+       // confirma.setCustomValidity('As senhas não conferem');
+       alert ('Senhas incorretas!');
     }
 }
+
+
 
