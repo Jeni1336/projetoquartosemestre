@@ -82,10 +82,24 @@ if(!empty($nome) && !empty($sobrenome) && !empty($genero) && !empty($data_nasc) 
 if($u -> msgErro == "")//esta tudo certo 
   {
     if($senha === $confirmar_senha){
-    $u -> cadastrar($nome, $sobrenome, $genero, $data_nasc, $email, $senha);
-    header("location: telainicial.html");
+    if($u -> cadastrar($nome, $sobrenome, $genero, $data_nasc, $email, $senha)){
+      ?>
+  
+      <script type="text/javascript">
+        alert ("Cadastro realizado com sucesso! Faça o login para continuar.");
+      </script>
+
+      <?php
+      header("location: telainicial.html");
+    }else{
+      ?>
+    <script type="text/javascript">
+  alert ("Email já cadastrado! Efetue o login");
+    </script>
+      <?php
     }
- 
+  
+    }
   }
   else{
     echo"Erro: ".$u->msgErro;
@@ -96,24 +110,9 @@ else{
 }
 }
 
-
 ?>
-<script type="text/javascript">
 
-function confereSenha2()
-{
-    const senha = document.querySelector('input[name=senha]');
-    const confirma = document.querySelector('input[name=confirmar_senha]');
-
-    if(confirma.value === senha.value){
-        confirma.setCustomValidity('');
-    }else{
-       // confirma.setCustomValidity('As senhas não conferem');
-       alert ('Senhas incorretas!');
-    }
-}
-</script>
-<!-- <script src="../projetoquartosemestre/cadastro.js"> </script>-->
+<script src="../projetoquartosemestre/cadastro1.js"> </script>
 
 </body>
 </html>
