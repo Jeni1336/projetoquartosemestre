@@ -2,7 +2,7 @@
 
 Class Usuario{
 
-    private $pdo;
+    public $pdo;
     public $msgErro = "";
 
     public function conectar($nome, $host, $usuario, $senha){
@@ -18,7 +18,8 @@ Class Usuario{
     public function cadastrar($nome, $sobrenome, $genero, $data_nasc, $email, $senha){
         global $pdo;
         //verificar se já existe o email cadastrado
-        $sql = $pdo -> prepare("SELECT id_cliente FROM cliente WHERE email = :e");
+        //O ERRO TA AQUI PORRA OLHA ISSO AMANHA
+        $sql = $pdo -> prepare("SELECT id FROM cliente WHERE email = :e");
         $sql -> bindValue(":e", $email);
         $sql -> execute();
         if($sql -> rowCount() > 0){
@@ -32,19 +33,20 @@ Class Usuario{
         //$email = $_POST ['email'];
         //$senha = $_POST ['senha'];
         //$strcon = mysqli_connect ("localhost", "root", "admin", "cadastro_cliente") or die("Erro ao conectar com o banco");
-        $sql = $pdo-> prepare ("INSERT INTO cliente (nome, sobrenome, genero, data_nasc, email, senha) VALUES (:n, :sn, :g, d, :e, :s)");
-        $sql-> bindValue(":n", $nome); 
-        $sql-> bindValue(":sn", $sobrenome); 
-        $sql-> bindValue(":g", $genero); 
-        $sql-> bindValue(":d", $data_nasc); 
-        $sql-> bindValue(":e", $email); 
-        $sql-> bindValue(":s", $senha); 
+        global $pdo;
+        $sql = $pdo-> prepare ("INSERT INTO cliente (nome, sobrenome, genero, data_nasc, email, senha) VALUES (:n, :sn, :g, :d, :e, :s)");
+        $sql-> bindValue(":n", $nome, PDO::PARAM_STR); 
+        $sql-> bindValue(":sn", $sobrenome, PDO::PARAM_STR); 
+        $sql-> bindValue(":g", $genero, PDO::PARAM_STR); 
+        $sql-> bindValue(":d", $data_nasc, PDO::PARAM_STR); 
+        $sql-> bindValue(":e", $email, PDO::PARAM_STR); 
+        $sql-> bindValue(":s", md5($senha), PDO::PARAM_STR); 
 
         //$sql = $pdo-> prepare ("INSERT INTO cliente ('".$nome."' , '".$sobrenome."','".$genero."' ,'".$data_nasc."' , '".$email."' , '".$senha."' );"); 
         //mysqli_query($strcon, $sql) or die ('Erro ao tentar cadastrar registro');
         $sql->execute();
         return true;
-        //header("location: telainicial.html");
+        
     } }
 
     public function logar($email, $senha){
@@ -52,7 +54,7 @@ Class Usuario{
         $sql = $pdo -> prepare("SELECT id_cliente FROM cliente WHERE 
         email = :e AND senha = :s");
         $sql -> bindValue(":e", $email);
-        $sql -> bindValue(":s", $senha);
+        $sql -> bindValue(":s", md5($senha));
         $sql -> execute();
         if($sql->rowCount() > 0)
         {

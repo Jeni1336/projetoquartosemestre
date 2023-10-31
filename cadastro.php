@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-  require_once '../projetov1/classes/usuarios.php';
+  require_once '../projetoquartosemestre/classes/usuarios.php';
   $u = new Usuario();
 ?>
 <html lang="en">
@@ -16,7 +16,7 @@
     <nav><a class="logo"> <img src="js/img/Tons de Beleza.png" height="36"></a></nav>
     <div class="form-group d-flex justify-content-center"></div>
     <div class="container">
-      <form name ="Cadastro" method = "POST">
+      <form name ="Cadastro" method ="POST">
         
           <div class="form-group">
               <div class="col-md-6 offset-md-3">
@@ -53,14 +53,14 @@
               </div>
               <div class="col-md-6 offset-md-3">
                   <label> Confirmar Senha </label>  
-                  <input type="password" name="senha" class="form-control" placeholder="Senha" maxlength="32" required>
+                  <input type="password" name="confirmar_senha" class="form-control" placeholder="Senha" maxlength="32" required>
               </div>
               <br>
               <div class="check">
                 <input type="checkbox">
                 <label required> Concordo com os termos de uso</label> </div>
               <div class="col-md-6 offset-md-3">
-                <button type="submit" class="btn">Cadastrar </button>
+                <button type="submit" class="btn" >Cadastrar </button>
                   <script src="cadastro.js"> </script>
           </div>
       </form> 
@@ -68,20 +68,23 @@
   </div>
   <?php
 //verificar se clicou no botao
-isset($_POST['nome']){
-$nome = addcslashes($_POST ['nome']);
-$sobrenome = addcslashes($_POST ['sobrenome']);
-$genero = addcslashes($_POST ['genero']);
-$data_nasc = addcslashes($_POST ['data_nasc']);
-$email = addcslashes($_POST ['email']);
-$senha = addcslashes($_POST ['senha']);
+if(isset($_POST['nome'])){
+$nome = ($_POST ['nome']);
+$sobrenome = ($_POST ['sobrenome']);
+$genero = ($_POST ['genero']);
+$data_nasc = ($_POST ['data_nasc']);
+$email = ($_POST ['email']);
+$senha = ($_POST ['senha']);
+//$confirmar_senha = ($_POST ['confirmar_senha']);
 //verificar se esta preenchido
 if(!empty($nome) && !empty($sobrenome) && !empty($genero) && !empty($data_nasc) && !empty($email) && !empty($senha)){
   $u-> conectar( "cadastro_cliente", "localhost", "root", "admin");
-  if($u -> msgErro == "")//esta tudo certo 
+if($u -> msgErro == "")//esta tudo certo 
   {
-      $u -> cadastrar($nome, $sobrenome, $genero, $data_nasc, $email, $senha);
-      
+    
+    $u -> cadastrar($nome, $sobrenome, $genero, $data_nasc, $email, $senha);
+    header("location: telainicial.html");
+ 
   }
   else{
     echo"Erro: ".$u->msgErro;
@@ -91,6 +94,7 @@ else{
   echo "Preencha todos os campos!";
 }
 }
+
 
 ?>
 
