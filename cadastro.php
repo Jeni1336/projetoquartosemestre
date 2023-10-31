@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="caixa">
-    <nav><a class="logo"> <img src="js/img/Tons de Beleza.png" height="36"></a></nav>
+    <nav><a class="logo"> <img src="../projetoquartosemestre/images/Logo-Bonito.png" height="60"></a></nav>
     <div class="form-group d-flex justify-content-center"></div>
     <div class="container">
       <form name ="Cadastro" method ="POST">

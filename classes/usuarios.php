@@ -51,7 +51,7 @@ Class Usuario{
 
     public function logar($email, $senha){
         global $pdo;
-        $sql = $pdo -> prepare("SELECT id_cliente FROM cliente WHERE 
+        $sql = $pdo -> prepare("SELECT id FROM cliente WHERE 
         email = :e AND senha = :s");
         $sql -> bindValue(":e", $email);
         $sql -> bindValue(":s", md5($senha));
@@ -61,7 +61,7 @@ Class Usuario{
             //entrar no sistema (sessao)
             $dado = $sql->fetch();
             session_start();
-            $_SESSION['id_cliente'] = $dado['id_cliente'];
+            $_SESSION['id'] = $dado['id'];
             return true;//logado com sucesso
     }else{
         return false; //nao foi possivel logar
