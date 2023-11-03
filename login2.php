@@ -15,7 +15,7 @@ $u = new Usuario;
 </head>
 <body>
   <div class="caixa">
-  <nav><a class="logo"> <img src="../projetoquartosemestre/images/Logo-Bonito.png" height="60"></a></nav>
+  <nav><a class="logo"> <img src="https://i.imgur.com/gBQhCJ6.png" height="60"></a></nav>
   <div class="form-group d-flex justify-content-center"></div>
   <div class="container">
     <form> 
