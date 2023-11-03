@@ -35,10 +35,13 @@ a{
     border: 1px solid #ccc;
     padding: 45px;
     border-radius: 8px;
-    height: 110%;
-    width: 50%;
+    height: 120%;
+    width: 50%;   
 }
 .check{
     color:#770624;
     margin-left: 125px;
+}
+.termos{
+    color: #770624;
 }
