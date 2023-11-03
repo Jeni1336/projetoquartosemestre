@@ -65,9 +65,9 @@
                                       <h3 class="h2 text-white mb-0">Dados Pessoais</h3>
                                   </div>
                                   <ul class="list-unstyled mb-1-9">
-                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Nome:</span> Maria Silva</li>
-                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> mariasilva@gmail.com</li>
-                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Data de Nascimento:</span> 22/10/2003</li>
+                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Nome:</span> </li>
+                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> </li>
+                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Data de Nascimento:</span> </li>
                                       <li> <a href="#">Alterar Dados</a> <ion-icon name="create-outline"></ion-icon></li>
                                   </ul>
                               </div>
@@ -114,7 +114,7 @@
                           </div>
       </section>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn btn-primary me-md-2" type="button">Sair da Conta</button>
+        <a class="btn btn-primary me-md-2" type="button" href="sair.php">Sair da Conta</href=></a>
       </div>
 
 
