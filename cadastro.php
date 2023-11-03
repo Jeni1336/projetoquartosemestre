@@ -58,7 +58,7 @@
               <br>
               <div class="check">
                 <input type="checkbox">
-                <label required> Concordo com os termos de uso</label> </div>
+                <a class="termos" href="termos.html" required>Concordo com os termos de uso</a></div>
               <div class="col-md-6 offset-md-3">
                 <button type="submit" class="btn" >Cadastrar </button>
                   
@@ -84,18 +84,12 @@ if($u -> msgErro == "")//esta tudo certo
     if($senha === $confirmar_senha){
     if($u -> cadastrar($nome, $sobrenome, $genero, $data_nasc, $email, $senha)){
       ?>
-  
-      <script type="text/javascript">
-        alert ("Cadastro realizado com sucesso! Faça o login para continuar.");
-      </script>
-
+    cadastroRealizado();
       <?php
       header("location: telainicial.html");
     }else{
       ?>
-    <script type="text/javascript">
-  alert ("Email já cadastrado! Efetue o login");
-    </script>
+    msgErro();
       <?php
     }
   

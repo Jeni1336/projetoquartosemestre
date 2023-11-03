@@ -12,5 +12,14 @@ function confereSenha()
     }
 }
 
+function cadastroRealizado(){
+    alert ("Cadastro realizado com sucesso! Faça o login para continuar.");
+}
+
+function msgErro(){
+
+    alert ("Não foi possível fazer o login, email já cadastrado.");
+}
+
 
 

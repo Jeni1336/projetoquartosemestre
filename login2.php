@@ -18,7 +18,7 @@ $u = new Usuario;
   <nav><a class="logo"> <img src="../projetoquartosemestre/images/Logo-Bonito.png" height="60"></a></nav>
   <div class="form-group d-flex justify-content-center"></div>
   <div class="container">
-    <form> 
+    <form method ="POST"> 
         <div class="form-group">
             <div class="col-md-6 offset-md-3">
                 <label > Email</label>
@@ -31,31 +31,29 @@ $u = new Usuario;
             </div>      
         <div class="form-group">
             <div class="col-md-6 offset-md-3">
-              <button type="button" class="btn">Login</button>
+              <button type="submit" class="btn">Login</button>
             </div>
         </div>
     </form> 
 </div>
 </div>
-<a class="linkcad" href="cadastro.html"> Não possui conta? Cadastra-se agora</a>
+<a class="linkcad" href="cadastro.php"> Não possui conta? Cadastra-se agora</a>
 
 <?php
 if(isset($_POST['email'])){
   $email = ($_POST ['email']);
   $senha = ($_POST ['senha']);
   
-  $u-> conectar( "cadastro_cliente", "localhost", "root", "admin");
-  if ($u -> msgErro == ""){
   if(!empty($email) && !empty($senha)){
+    $u-> conectar( "cadastro_cliente", "localhost", "root", "admin");
+    if ($u -> msgErro == ""){
     if($u->logar($email, $senha)){
-      header("suaconta.html");
+      header("suaconta.php");
 
     }else{
-      ?>
-      <script type="text/javascript">
-        alert ("Email e/ou senha estão incorretos!");
-      </script>
-      <?php
+      
+        echo "Email e/ou senha estão incorretos!";
+
     }
   } else{
 
