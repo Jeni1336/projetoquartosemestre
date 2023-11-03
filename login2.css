@@ -22,9 +22,10 @@ body {
     margin: 10px;
     border-radius: 10px;
     width: 100px;
+    color: white;
 }
 a{
-    color: white;
+    color: rgb(255, 255, 255);
 }
 .caixa{
     background-color: #fff;
