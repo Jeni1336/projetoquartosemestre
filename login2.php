@@ -48,7 +48,7 @@ if(isset($_POST['email'])){
     $u-> conectar( "cadastro_cliente", "localhost", "root", "admin");
     if ($u -> msgErro == ""){
     if($u->logar($email, $senha)){
-      header("suaconta.php");
+      header("location: suaconta.php");
 
     }else{
       
