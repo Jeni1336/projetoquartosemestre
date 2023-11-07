@@ -83,9 +83,7 @@ if($u -> msgErro == "")//esta tudo certo
   {
     if($senha === $confirmar_senha){
     if($u -> cadastrar($nome, $sobrenome, $genero, $data_nasc, $email, $senha)){
-      ?>
-    cadastroRealizado();
-      <?php
+    
       header("location: telainicial.html");
     }else{
       ?>
