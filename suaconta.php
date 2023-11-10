@@ -74,10 +74,10 @@ $usuario = $objUsuario->obterDadosUsuarioLogado();
                                       <h3 class="h2 text-white mb-0">Dados Pessoais</h3>
                                   </div>
                                   <ul class="list-unstyled mb-1-9">
-                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Nome:</span> <?php  echo $usuario['nome'] . $usuario['sobrenome'];?></li>
+                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Nome:</span> <?php  echo $usuario['nome'] ." ". $usuario['sobrenome'];?></li>
                                       <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span>  <?php  echo $usuario['email'] . "<br>";?></li>
                                       <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Data de Nascimento:</span>  <?php  echo $usuario['data_nasc'] . "<br>";?></li>
-                                      <li> <a href="#">Alterar Dados</a> <ion-icon name="create-outline"></ion-icon></li>
+                                      <li> <a href="editar.php">Alterar Dados</a> <ion-icon name="create-outline"></ion-icon></li>
                                   </ul>
                               </div>
                           </div>
@@ -122,6 +122,22 @@ $usuario = $objUsuario->obterDadosUsuarioLogado();
                               </div>
                           </div>
       </section>
+      <?php
+      echo '<form method="post" onsubmit="return confirm(\'Tem certeza que deseja excluir sua conta?\');">';
+      echo '<input class="btn btn-primary me-md-2" type="submit" name="excluir" value="Excluir Conta">';
+      echo '</form>';
+      if (isset($_POST['excluir'])) {
+        // Chame o método deletar para excluir o usuário
+        $objUsuario->deletar($usuario['id']);
+        //destruindo a sessao
+        session_destroy();
+        // Redirecione para a página de logout ou qualquer outra página após excluir o usuário
+        // Use JavaScript para redirecionar após a confirmação
+        echo '<script>window.location.href = "telainicial.html";</script>';
+        exit(); // Certifique-se de encerrar o script após o redirecionamento
+    }
+      ?>
+
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a class="btn btn-primary me-md-2" type="button" href="sair.php">Sair da Conta</href=></a>
       </div>

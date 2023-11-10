@@ -67,11 +67,16 @@ Class Usuario{
     }
 
     }
-    public function deletar($nome, $sobrenome, $genero, $data_nasc, $email, $senha){
+    public function deletar($idUsuario) {
         global $pdo;
+        // Verifique se $this->pdo está definido antes de chamar prepare
+            $cmd = $pdo->prepare("DELETE FROM cliente WHERE id=:id");
+            $cmd->bindValue(":id", $idUsuario);
+            $cmd->execute();
+            $this->pdo = null; // Feche a conexão
 
+}
 
-    }
     public function editar($nome, $sobrenome, $genero, $data_nasc, $email, $senha){
         global $pdo;
 
