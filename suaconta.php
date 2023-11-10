@@ -1,16 +1,19 @@
 <?php
+require_once '../projetoquartosemestre/classes/usuarios.php';
 
-include('../projetoquartosemestre/classes/usuarios.php');
-
-$consulta = "SELECT * FROM cliente";
-
-
-  session_start();
-  
-  if(!isset($_SESSION['id'])){
+session_start();
+if(!isset($_SESSION['id'])){
   header("location: login2.php"); 
   exit;
   }
+
+
+$objUsuario = new Usuario();
+$objUsuario-> conectar( "cadastro_cliente", "localhost", "root", "admin");
+
+$usuario = $objUsuario->obterDadosUsuarioLogado();
+
+
 
 ?>
 
@@ -71,9 +74,9 @@ $consulta = "SELECT * FROM cliente";
                                       <h3 class="h2 text-white mb-0">Dados Pessoais</h3>
                                   </div>
                                   <ul class="list-unstyled mb-1-9">
-                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Nome:</span> </li>
-                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> </li>
-                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Data de Nascimento:</span> </li>
+                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Nome:</span> <?php  echo $usuario['nome'] . $usuario['sobrenome'];?></li>
+                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span>  <?php  echo $usuario['email'] . "<br>";?></li>
+                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Data de Nascimento:</span>  <?php  echo $usuario['data_nasc'] . "<br>";?></li>
                                       <li> <a href="#">Alterar Dados</a> <ion-icon name="create-outline"></ion-icon></li>
                                   </ul>
                               </div>

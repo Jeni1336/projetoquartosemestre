@@ -18,7 +18,6 @@ Class Usuario{
     public function cadastrar($nome, $sobrenome, $genero, $data_nasc, $email, $senha){
         global $pdo;
         //verificar se já existe o email cadastrado
-        //O ERRO TA AQUI PORRA OLHA ISSO AMANHA
         $sql = $pdo -> prepare("SELECT id FROM cliente WHERE email = :e");
         $sql -> bindValue(":e", $email);
         $sql -> execute();
@@ -67,7 +66,38 @@ Class Usuario{
         return false; //nao foi possivel logar
     }
 
-}
     }
+    public function deletar($nome, $sobrenome, $genero, $data_nasc, $email, $senha){
+        global $pdo;
+
+
+    }
+    public function editar($nome, $sobrenome, $genero, $data_nasc, $email, $senha){
+        global $pdo;
+
+
+    }
+    public function obterDadosUsuarioLogado() {
+        global $pdo;
+
+        // Verificar se a sessão está ativa
+        if (isset($_SESSION['id'])) {
+            $idUsuario = $_SESSION['id'];
+
+            $sql = $pdo->prepare("SELECT * FROM cliente WHERE id = :id");
+            $sql->bindValue(":id", $idUsuario);
+            $sql->execute();
+
+            if ($sql->rowCount() > 0) {
+                return $sql->fetch(PDO::FETCH_ASSOC);
+            } else {
+                return false; // Usuário não encontrado
+            }
+        } else {
+            return false; // Sessão não está ativa
+        }
+    }
+
+}
 
 ?>
