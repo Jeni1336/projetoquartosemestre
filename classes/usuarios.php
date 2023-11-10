@@ -123,7 +123,7 @@ Class Usuario{
         $sqlVerifica->bindValue(":idCliente", $idCliente);
         $sqlVerifica->execute();
     
-        if($sqlVerifica->rowCount() > 3){
+        if($sqlVerifica->rowCount() > 0){
             return false; // Já está cadastrado
         } else {
             // Insere o novo endereço
@@ -155,16 +155,35 @@ Class Usuario{
             return array();
         }
     }
-    function get_endereco($cep){
+    function DeleteEndereco($idCliente){
+        global $pdo;
+        //VERIFICANDO SE EXISTE ANTES DA EXCLUSAO
+        $cmdVerifica = $pdo->prepare("SELECT id FROM endereco WHERE id_cliente = :idCliente");
+        $cmdVerifica->bindValue(":idCliente", $idCliente);
+        $cmdVerifica->execute();
+            
+        if($cmdVerifica->rowCount() > 0){
+            $cmd = $pdo->prepare("DELETE FROM endereco WHERE id_cliente = :idCliente");
+            $cmd->bindValue(":idCliente", $idCliente, PDO::PARAM_INT);
+            $cmd->execute();
+            $this->pdo = null; // Feche a conexão
+            return true; //exclusão deboa
+        }else{
+            return false; //sem endereço p excluir
+        }
+
+    }
+
+    //function get_endereco($cep){
 
 
         // formatar o cep removendo caracteres nao numericos
-        $cep = preg_replace("/[^0-9]/", "", $cep);
-        $url = "http://viacep.com.br/ws/$cep/xml/";
+     //   $cep = preg_replace("/[^0-9]/", "", $cep);
+     //   $url = "http://viacep.com.br/ws/$cep/xml/";
       
-        $xml = simplexml_load_file($url);
-        return $xml;
-      }
+     //   $xml = simplexml_load_file($url);
+     //   return $xml;
+     // }
       
 
 }

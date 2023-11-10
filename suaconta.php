@@ -112,6 +112,9 @@ $dadosEndereco = $objUsuario->SelectEndereco($usuario['id']);
             echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Estado:</span>' . $dadosEndereco['estado'] . '</li>';
             echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">CEP:</span>' . $dadosEndereco['cep'] . '</li>';
             echo '<li><a href="editarEndereco.php">Editar Endereço</a> <ion-icon name="create-outline"></ion-icon></li>';
+            echo '<form name="Endereco" method="POST" id="enderecoForm">';
+            echo ' <li><a href="#" onclick="removerEndereco()">Remover Endereço</a> <ion-icon name="create-outline"></ion-icon></li>
+            </form>';
         } else {
             echo '<li>Nenhum endereço cadastrado. <a href="testeEndereco.php">Adicionar Endereço</a> <ion-icon name="add-outline"></ion-icon></li>';
         }
@@ -163,8 +166,36 @@ $dadosEndereco = $objUsuario->SelectEndereco($usuario['id']);
       </div>
 
 
+<?php
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['removerEndereco'])) {
+  // Execute a exclusão do endereço
+  if ($objUsuario->DeleteEndereco($usuario['id'])) {
+      echo "Endereço excluído com sucesso!";
+  } else {
+      echo "Erro ao excluir o endereço.";
+  }
+}
+?>
+<script>
+function removerEndereco() {
+    // Confirmar com o usuário antes de excluir
+    if (confirm("Tem certeza que deseja remover o endereço?")) {
+        // Obter o formulário pelo ID
+        var form = document.getElementById('enderecoForm');
 
+        // Adicionar um campo oculto ao formulário para indicar a exclusão
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'removerEndereco';
+        input.value = '1'; // Pode ser qualquer valor, apenas para indicar a exclusão
+        form.appendChild(input);
+
+        // Enviar o formulário
+        form.submit();
+    }
+}
+</script>
 
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 
