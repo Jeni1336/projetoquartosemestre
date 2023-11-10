@@ -77,8 +77,17 @@ Class Usuario{
 
 }
 
-    public function editar($nome, $sobrenome, $genero, $data_nasc, $email, $senha){
+    public function editar($idUsuario, $nome, $sobrenome, $genero, $data_nasc, $email, $senha){
         global $pdo;
+        $cmd = $pdo->prepare("UPDATE cliente SET nome = :n, sobrenome = :sn, genero = :g, data_nasc = :d, email = :e, senha = :s WHERE id=:id");
+        $cmd-> bindValue(":n", $nome, PDO::PARAM_STR); 
+        $cmd-> bindValue(":sn", $sobrenome, PDO::PARAM_STR); 
+        $cmd-> bindValue(":g", $genero, PDO::PARAM_STR); 
+        $cmd-> bindValue(":d", $data_nasc, PDO::PARAM_STR); 
+        $cmd-> bindValue(":e", $email, PDO::PARAM_STR); 
+        $cmd-> bindValue(":s", md5($senha), PDO::PARAM_STR); 
+        $cmd->bindValue(":id", $idUsuario, PDO::PARAM_STR);
+        $cmd->execute();
 
 
     }
