@@ -1,6 +1,7 @@
 <?php
 require_once '../projetoquartosemestre/classes/usuarios.php';
 
+
 session_start();
 if(!isset($_SESSION['id'])){
   header("location: login2.php"); 
@@ -11,7 +12,12 @@ if(!isset($_SESSION['id'])){
 $objUsuario = new Usuario();
 $objUsuario-> conectar( "cadastro_cliente", "localhost", "root", "admin");
 
+
+
 $usuario = $objUsuario->obterDadosUsuarioLogado();
+$dadosEndereco = $objUsuario->SelectEndereco($usuario['id']);
+
+
 
 
 
@@ -93,9 +99,23 @@ $usuario = $objUsuario->obterDadosUsuarioLogado();
                                     <div class="col-lg-6 px-xl-10">
                                         <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
                                             <h3 class="h2 text-white mb-0">Endereço</h3>
+
                                         </div>
                                         <ul class="list-unstyled mb-1-9">
-                                          <li> <a href="#">Adicionar Endereço</a> <ion-icon name="add-outline"></ion-icon></li>
+                                        <ul class="list-unstyled mb-1-9">
+    <?php
+        // Verificar se há endereço cadastrado
+        if (!empty($dadosEndereco)) {
+            echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Endereço:</span>' . $dadosEndereco['endereco'] . '</li>';
+            echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Cidade:</span>' . $dadosEndereco['cidade'] . '</li>';
+            echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Bairro:</span>' . $dadosEndereco['bairro'] . '</li>';
+            echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Estado:</span>' . $dadosEndereco['estado'] . '</li>';
+            echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">CEP:</span>' . $dadosEndereco['cep'] . '</li>';
+            echo '<li><a href="editarEndereco.php">Editar Endereço</a> <ion-icon name="create-outline"></ion-icon></li>';
+        } else {
+            echo '<li>Nenhum endereço cadastrado. <a href="testeEndereco.php">Adicionar Endereço</a> <ion-icon name="add-outline"></ion-icon></li>';
+        }
+    ?>
                                         </ul>
                                     </div>
                                 </div>

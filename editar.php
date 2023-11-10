@@ -68,6 +68,7 @@ $usuario = $objUsuario->obterDadosUsuarioLogado();
               <br>
               
                 <button type="submit" class="btn"> Alterar </button>
+                <a type="button" class="btn" href="../projetoquartosemestre/suaconta.php"> Cancelar </a>
                   
           </div>
       </form> 
@@ -102,9 +103,6 @@ if($objUsuario -> msgErro == "")//esta tudo certo
   else{
     echo"Erro: ".$objUsuario->msgErro;
   }
-}
-else{
-  echo "Preencha todos os campos!";
 }
 ?>
 <script src="../projetoquartosemestre/cadastro1.js"> </script>

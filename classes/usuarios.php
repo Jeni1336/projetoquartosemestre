@@ -115,6 +115,57 @@ Class Usuario{
             return false; // Sessão não está ativa
         }
     }
+    public function cadastrarEndereco($idCliente, $endereco, $cidade, $bairro, $estado, $cep){
+        global $pdo;
+    
+        // Verifica se já existe um endereço cadastrado para o cliente
+        $sqlVerifica = $pdo->prepare("SELECT id FROM endereco WHERE id_cliente = :idCliente");
+        $sqlVerifica->bindValue(":idCliente", $idCliente);
+        $sqlVerifica->execute();
+    
+        if($sqlVerifica->rowCount() > 3){
+            return false; // Já está cadastrado
+        } else {
+            // Insere o novo endereço
+            $sql = $pdo->prepare("INSERT INTO endereco (id_cliente, endereco, cidade, bairro, estado, cep) VALUES (:idCliente, :endereco, :cidade, :bairro, :estado, :cep)");
+            $sql->bindValue(":idCliente", $idCliente, PDO::PARAM_INT);
+            $sql->bindValue(":endereco", $endereco, PDO::PARAM_STR);
+            $sql->bindValue(":cidade", $cidade, PDO::PARAM_STR);
+            $sql->bindValue(":bairro", $bairro, PDO::PARAM_STR);
+            $sql->bindValue(":estado", $estado, PDO::PARAM_STR);
+            $sql->bindValue(":cep", $cep, PDO::PARAM_STR);
+            
+            $sql->execute();
+            return true;
+        }
+    }
+    function SelectEndereco($idCliente){
+        global $pdo;
+        // Preparar a consulta SQL
+        $sql = $pdo->prepare("SELECT endereco, cidade, bairro, estado, cep FROM endereco WHERE id_cliente = :idCliente");
+        $sql->bindValue(":idCliente", $idCliente);
+        $sql->execute();
+    
+        // Verificar se há endereço cadastrado
+        if ($sql->rowCount() > 0) {
+            return $sql->fetch(PDO::FETCH_ASSOC);
+        }
+        else {
+            // Se nenhum endereço for encontrado, retornar array vazio
+            return array();
+        }
+    }
+    function get_endereco($cep){
+
+
+        // formatar o cep removendo caracteres nao numericos
+        $cep = preg_replace("/[^0-9]/", "", $cep);
+        $url = "http://viacep.com.br/ws/$cep/xml/";
+      
+        $xml = simplexml_load_file($url);
+        return $xml;
+      }
+      
 
 }
 
