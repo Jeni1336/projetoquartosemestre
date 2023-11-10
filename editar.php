@@ -91,9 +91,11 @@ $objUsuario-> conectar( "cadastro_cliente", "localhost", "root", "admin");
 if($objUsuario -> msgErro == "")//esta tudo certo 
   {
     //$idUsuario = $_SESSION['id']; // Adicione esta linha para obter o ID do usuário da sessão
-    if($objUsuario->editar($idUsuario, $nome, $sobrenome, $genero, $data_nasc, $email, $senha)){
+    if ($objUsuario->editar($idUsuario, $nome, $sobrenome, $genero, $data_nasc, $email, $senha)) {
       header("Location: suaconta.php");
       exit();
+  } else {
+      echo "Erro ao editar o usuário.";
   }
 }
   }

@@ -79,6 +79,7 @@ Class Usuario{
 
     public function editar($idUsuario, $nome, $sobrenome, $genero, $data_nasc, $email, $senha){
         global $pdo;
+        try {
         $cmd = $pdo->prepare("UPDATE cliente SET nome = :n, sobrenome = :sn, genero = :g, data_nasc = :d, email = :e, senha = :s WHERE id=:id");
         $cmd-> bindValue(":n", $nome, PDO::PARAM_STR); 
         $cmd-> bindValue(":sn", $sobrenome, PDO::PARAM_STR); 
@@ -88,8 +89,11 @@ Class Usuario{
         $cmd-> bindValue(":s", md5($senha), PDO::PARAM_STR); 
         $cmd->bindValue(":id", $idUsuario, PDO::PARAM_STR);
         $cmd->execute();
-
-
+        return true; // Adicionado para indicar que a edição foi bem-sucedida
+         } catch (PDOException $e) {
+        $this->msgErro = $e->getMessage();
+        return false;
+    }
     }
     public function obterDadosUsuarioLogado() {
         global $pdo;
