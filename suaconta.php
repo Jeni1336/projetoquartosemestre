@@ -62,7 +62,7 @@ $dadosEndereco = $objUsuario->SelectEndereco($usuario['id']);
           </ul>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
-            <button class="btn btn-outline-primary" type="submit">Pesquisa</button>
+            <button class="btn-1" type="submit">Pesquisa</button>
           </form>
         </div>
       </div>
@@ -147,7 +147,7 @@ $dadosEndereco = $objUsuario->SelectEndereco($usuario['id']);
       </section>
       <?php
       echo '<form method="post" onsubmit="return confirm(\'Tem certeza que deseja excluir sua conta?\');">';
-      echo '<input class="btn btn-primary me-md-2" type="submit" name="excluir" value="Excluir Conta">';
+      echo '<input class="btn-2" type="submit" name="excluir" value="Excluir Conta">';
       echo '</form>';
       if (isset($_POST['excluir'])) {
         // Chame o método deletar para excluir o usuário
@@ -162,8 +162,9 @@ $dadosEndereco = $objUsuario->SelectEndereco($usuario['id']);
       ?>
 
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-primary me-md-2" type="button" href="sair.php">Sair da Conta</href=></a>
+        <a class="btn-3" type="button" href="sair.php">Sair da Conta</href=></a>
       </div>
+     
 
 
 <?php
