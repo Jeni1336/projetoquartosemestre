@@ -1,3 +1,18 @@
+<?php
+require_once '../projetoquartosemestre/classes/usuarios.php';
+session_start();
+if(!isset($_SESSION['id'])){
+  header("location: login2.php"); 
+  exit;
+  }
+
+$objUsuario = new Usuario();
+$objUsuario->conectar("cadastro_cliente", "localhost", "root", "admin");
+
+$usuario = $objUsuario->obterDadosUsuarioLogado();
+
+if ($usuario) { 
+?>
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -38,18 +53,22 @@
           </div>
         </div>
       </nav>
-    <form class="row g-3">
+    <form class="row g-3" method="POST">
         <div class="col-6">
           <label class="form-label">Endereço</label>
-          <input type="text" class="form-control">
+          <input type="text" name="endereco" class="form-control" required>
         </div>
         <div class="col-md-4">
           <label class="form-label">Cidade</label>
-          <input type="text" class="form-control">
+          <input type="text" name="cidade" class="form-control" required>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Bairro</label>
+          <input type="text" name="bairro" class="form-control" required>
         </div>
         <div class="col-md-4">
           <label class="form-label"> Estado</label>
-          <select class="form-select">
+          <select name="estado" class="form-select" required>
             <option selected>Estado</option>
             <option>SP</option>
             <option>RJ</option>
@@ -60,14 +79,48 @@
         </div>
         <div class="col-md-2">
           <label class="form-label">CEP</label>
-          <input type="text" class="form-control">
+          <input type="text" name="cep" class="form-control" required>
         </div>
-        <div class="col-12">
-          <button type="submit" class="btn-1">Adicionar Endereço</button>
-          <button type="submit" class="btn-1">Voltar</button>
+        <input type="hidden" name="idCliente" value="<?php echo $usuario['id']; ?>">
+        <div class="col-12">  
+        <button type="submit" class="btn-1">Adicionar Endereço</button>
+          <a href="suaconta.php" type="submit" class="btn-1">Voltar</a>
         </div>
       </form>
+
+      <?php
+if (isset($_POST['endereco'])) {
+  $idCliente = $usuario['id'];
+  $endereco = $_POST['endereco'];
+  $cidade = $_POST['cidade'];
+  $bairro = $_POST['bairro'];
+  $estado = $_POST['estado'];
+  $cep = $_POST['cep'];
+
+  // Verificar se está preenchido
+  if (!empty($endereco) && !empty($cidade) && !empty($bairro) && !empty($estado) && !empty($cep)) {
+      if ($objUsuario->msgErro == "") { // está tudo certo
+          if ($objUsuario->cadastrarEndereco($idCliente, $endereco, $cidade, $bairro, $estado, $cep)) {
+            
+              header("location: suaconta.php");
+          } else {
+              echo "Erro ao cadastrar o endereço.";
+          }
+      }
+  } else {
+      echo "Erro: Preencha todos os campos!";
+  }
+}
+
+?>
 </body>
 </html>
 
+<?php
+} else {
+    echo "Usuário não está logado. Redirecionando..."; // ou alguma lógica para redirecionar o usuário
+    header("Location: login2.php");
+    exit;
+}
+?>
 

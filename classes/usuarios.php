@@ -173,7 +173,19 @@ Class Usuario{
         }
 
     }
-
+    function EditarEndereco($idCliente, $endereco, $cidade, $bairro, $estado, $cep){
+        global $pdo;
+        $sql = $pdo->prepare("UPDATE endereco SET endereco = :endereco, cidade = :cidade, bairro = :bairro, estado = :estado, cep = :cep WHERE id_cliente = :idCliente");
+        $sql->bindValue(":idCliente", $idCliente, PDO::PARAM_INT);
+        $sql->bindValue(":endereco", $endereco, PDO::PARAM_STR);
+        $sql->bindValue(":cidade", $cidade, PDO::PARAM_STR);
+        $sql->bindValue(":bairro", $bairro, PDO::PARAM_STR);
+        $sql->bindValue(":estado", $estado, PDO::PARAM_STR);
+        $sql->bindValue(":cep", $cep, PDO::PARAM_STR);
+        
+        $sql->execute();
+        return true;
+    }
     //function get_endereco($cep){
 
 

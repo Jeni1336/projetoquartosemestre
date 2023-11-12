@@ -18,7 +18,8 @@ $usuario = $objUsuario->obterDadosUsuarioLogado();
 $dadosEndereco = $objUsuario->SelectEndereco($usuario['id']);
 
 
-
+$dataNascimento = new DateTime($usuario['data_nasc']);
+$dataFormatada = $dataNascimento->format('d/m/Y');
 
 
 ?>
@@ -82,7 +83,7 @@ $dadosEndereco = $objUsuario->SelectEndereco($usuario['id']);
                                   <ul class="list-unstyled mb-1-9">
                                       <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Nome:</span> <?php  echo $usuario['nome'] ." ". $usuario['sobrenome'];?></li>
                                       <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span>  <?php  echo $usuario['email'] . "<br>";?></li>
-                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Data de Nascimento:</span>  <?php  echo $usuario['data_nasc'] . "<br>";?></li>
+                                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Data de Nascimento:</span>  <?php echo $dataFormatada . "<br>";?></li>
                                       <li> <a href="editar.php">Alterar Dados</a> <ion-icon name="create-outline"></ion-icon></li>
                                   </ul>
                               </div>
@@ -116,7 +117,7 @@ $dadosEndereco = $objUsuario->SelectEndereco($usuario['id']);
             echo ' <li><a href="#" onclick="removerEndereco()">Remover Endereço</a> <ion-icon name="create-outline"></ion-icon></li>
             </form>';
         } else {
-            echo '<li>Nenhum endereço cadastrado. <a href="testeEndereco.php">Adicionar Endereço</a> <ion-icon name="add-outline"></ion-icon></li>';
+            echo '<li>Nenhum endereço cadastrado. <a href="endereco.php">Adicionar Endereço</a> <ion-icon name="add-outline"></ion-icon></li>';
         }
     ?>
                                         </ul>
@@ -172,7 +173,7 @@ $dadosEndereco = $objUsuario->SelectEndereco($usuario['id']);
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['removerEndereco'])) {
   // Execute a exclusão do endereço
   if ($objUsuario->DeleteEndereco($usuario['id'])) {
-      echo "Endereço excluído com sucesso!";
+      header("location:suaconta.php");
   } else {
       echo "Erro ao excluir o endereço.";
   }
