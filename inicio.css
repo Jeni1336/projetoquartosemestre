@@ -39,7 +39,7 @@ ul{
 .icon-car{
     margin: 10px;
 }
-.link{
+li{
     color: #963c54;
 }
 .banner{
@@ -105,4 +105,8 @@ footer{
 .cabecalho-item-car{
     color: #770624;
 }
-
+.btn-1{
+    background-color: #770624;
+    border-radius: 10px;
+    color: white;
+}
