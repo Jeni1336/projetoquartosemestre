@@ -16,11 +16,12 @@ $objUsuario-> conectar( "cadastro_cliente", "localhost", "root", "admin");
 
 $usuario = $objUsuario->obterDadosUsuarioLogado();
 $dadosEndereco = $objUsuario->SelectEndereco($usuario['id']);
+$dadosCartao = $objUsuario->SelectCartao($usuario['id']);
+
 
 
 $dataNascimento = new DateTime($usuario['data_nasc']);
 $dataFormatada = $dataNascimento->format('d/m/Y');
-
 
 ?>
 
@@ -137,9 +138,22 @@ $dataFormatada = $dataNascimento->format('d/m/Y');
                                               <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
                                                   <h3 class="h2 text-white mb-0">Cartões</h3>
                                               </div>
-                                              <ul class="list-unstyled mb-1-9">
-                                                <li> <a href="#">Adicionar Cartão</a> <ion-icon name="add-outline"></ion-icon></li>
-                                              </ul>
+                                            <ul class="list-unstyled mb-1-9">
+    <?php
+    // Verificar se há endereço cadastrado
+    if (!empty($dadosCartao)) {
+        echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Nome:</span>' . $dadosCartao['nome'] . '</li>';
+        echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Número Cartão:</span>' . '**** **** **** ' . substr($dadosCartao['numero_cartao'], -4) . '</li>';
+        echo '<form name="cartao" method="POST" id="cartaoForm">';
+        echo ' <li><a href="#" onclick="removerCartao(event)">Remover Cartão</a> <ion-icon name="create-outline"></ion-icon></li>
+            </form>';
+    } else {
+        echo '<li>Nenhum cartão cadastrado. <a href="cartao.php">Adicionar Cartão</a> <ion-icon name="add-outline"></ion-icon></li>';
+    }
+    ?>
+</ul>
+
+
                                           </div>
                                       </div>
                                   </div>
@@ -163,7 +177,7 @@ $dataFormatada = $dataNascimento->format('d/m/Y');
       ?>
 
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn-3" type="button" href="sair.php">Sair da Conta</href=></a>
+        <a class="btn-3" type="button" href="sair.php">Sair da Conta</a>
       </div>
      
 
@@ -182,7 +196,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['removerEndereco'])) {
 <script>
 function removerEndereco() {
     // Confirmar com o usuário antes de excluir
-    if (confirm("Tem certeza que deseja remover o endereço?")) {
+// Confirmar com o usuário antes de excluir
+if (confirm("Tem certeza que deseja remover o endereço?")) {
         // Obter o formulário pelo ID
         var form = document.getElementById('enderecoForm');
 
@@ -197,7 +212,46 @@ function removerEndereco() {
         form.submit();
     }
 }
+function removerCartao(event) {
+  
+    // Confirmar com o usuário antes de excluir
+    if (confirm("Tem certeza que deseja remover o cartão?")) {
+      event.preventDefault()  
+      // Obter o formulário pelo ID
+        var form = document.getElementById('cartaoForm');
+
+        // Adicionar um campo oculto ao formulário para indicar a exclusão
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'removerCartao';
+        input.value = '1'; // Pode ser qualquer valor, apenas para indicar a exclusão
+        form.appendChild(input);
+
+        // Enviar o formulário
+        form.submit();
+    }
+}
 </script>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['removerCartao'])) {
+  // Execute a exclusão do cartão
+  if ($objUsuario->RemoverCartao($usuario['id'])) {
+      header("location:suaconta.php");
+  } else {
+      echo "Erro ao excluir o cartão.";
+  }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['removerEndereco'])) {
+  // Execute a exclusão do endereço
+  if ($objUsuario->DeleteEndereco($usuario['id'])) {
+      // Se a exclusão for bem-sucedida, você pode retornar algo aqui
+      header("location:suaconta.php");
+  } else {
+      echo "Erro ao excluir o endereço.";
+  }
+}
+?>
 
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 

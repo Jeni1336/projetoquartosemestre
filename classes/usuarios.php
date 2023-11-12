@@ -197,6 +197,65 @@ Class Usuario{
      //   return $xml;
      // }
       
+     function AdicionarCartao($idCliente, $nome, $numero_cartao, $cvv, $data_vencimento, $cpf){
+        global $pdo;
+    
+        // Verifica se já existe um cartao cadastrado para o cliente
+        $sqlVerifica = $pdo->prepare("SELECT id FROM cartao WHERE id_cliente = :idCliente");
+        $sqlVerifica->bindValue(":idCliente", $idCliente);
+        $sqlVerifica->execute();
+    
+        if($sqlVerifica->rowCount() > 0){
+            return false; // Já está cadastrado
+        } else {
+            // Insere o novo endereço
+            $sql = $pdo->prepare("INSERT INTO cartao (id_cliente, nome, numero_cartao, cvv, data_vencimento, cpf) VALUES (:idCliente, :n, :nc, :cvv, :d, :cpf)");
+            $sql->bindValue(":idCliente", $idCliente, PDO::PARAM_INT);
+            $sql->bindValue(":n", $nome, PDO::PARAM_STR);
+            $sql->bindValue(":nc", $numero_cartao, PDO::PARAM_STR);
+            $sql->bindValue(":cvv", md5($cvv), PDO::PARAM_STR);
+            $sql->bindValue(":d", $data_vencimento, PDO::PARAM_STR);
+            $sql->bindValue(":cpf", $cpf, PDO::PARAM_STR);
+            
+            $sql->execute();
+            return true;
+        }
+
+     }
+     function SelectCartao($idCliente){
+        global $pdo;
+        // Preparar a consulta SQL
+        $sql = $pdo->prepare("SELECT nome, numero_cartao, cvv, data_vencimento, cpf FROM cartao WHERE id_cliente = :idCliente");
+        $sql->bindValue(":idCliente", $idCliente);
+        $sql->execute();
+    
+        // Verificar se há endereço cadastrado
+        if ($sql->rowCount() > 0) {
+            return $sql->fetch(PDO::FETCH_ASSOC);
+        }
+        else {
+            // Se nenhum endereço for encontrado, retornar array vazio
+            return array();
+        }
+    }
+    function RemoverCartao($idCliente){
+        global $pdo;
+        //VERIFICANDO SE EXISTE ANTES DA EXCLUSAO
+        $cmdVerifica = $pdo->prepare("SELECT id FROM cartao WHERE id_cliente = :idCliente");
+        $cmdVerifica->bindValue(":idCliente", $idCliente);
+        $cmdVerifica->execute();
+            
+        if($cmdVerifica->rowCount() > 0){
+            $cmd = $pdo->prepare("DELETE FROM cartao WHERE id_cliente = :idCliente");
+            $cmd->bindValue(":idCliente", $idCliente, PDO::PARAM_INT);
+            $cmd->execute();
+            $this->pdo = null; // Feche a conexão
+            return true; //exclusão deboa
+        }else{
+            return false; //sem endereço p excluir
+        }
+
+    }
 
 }
 

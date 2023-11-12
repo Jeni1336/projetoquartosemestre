@@ -1,3 +1,20 @@
+<?php
+require_once '../projetoquartosemestre/classes/usuarios.php';
+session_start();
+if(!isset($_SESSION['id'])){
+  header("location: login2.php"); 
+  exit;
+  }
+
+$objUsuario = new Usuario();
+$objUsuario->conectar("cadastro_cliente", "localhost", "root", "admin");
+
+$usuario = $objUsuario->obterDadosUsuarioLogado();
+
+if ($usuario) { 
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -38,33 +55,63 @@
           </div>
         </div>
       </nav>
-    <form class="col-md-6 offset-md-4">
+    <form class="col-md-6 offset-md-4" method="post">
         <div class="col-6">
-          <label class="form-label">Nome</label>
-          <input type="text" class="form-control">
+          <label class="form-label">Nome no Cartão</label>
+          <input type="text" name="nome" class="form-control">
         </div>
         <div class="col-md-6">
           <label  class="form-label">Número do cartão</label>
-          <input type="text" class="form-control">
+          <input type="text" name="numero_cartao" class="form-control">
         </div>
         <div class="col-md-6">
           <label class="form-label">CVV</label>
-          <input type="text" class="form-control">
+          <input type="text" name="cvv" class="form-control">
         </div>
         <div class="col-md-6">
             <label class="form-label">CPF</label>
-            <input type="text" class="form-control">
+            <input type="text" name="cpf" class="form-control">
           </div>
           <div class="col-md-6">
             <label class="form-label">Data de Vencimento</label>
-            <input type="date" class="form-control">
+            <input type="date" name="data_vencimento" class="form-control">
           </div>
         <div class="col-12">
           <button type="submit" class="btn-1">Adicionar Cartão</button>
-          <button type="submit" class="btn-1">Voltar</button>
+          <a type="submit" href="suaconta.php" class="btn-1">Voltar</a>
         </div>
       </form>
+<?php
+ if (isset($_POST['nome'])) {
+     $idCliente = $usuario['id'];
+     $nome = $_POST['nome'];
+     $numero_cartao = $_POST['numero_cartao'];
+     $cvv = $_POST['cvv'];
+     $data_vencimento = $_POST['data_vencimento'];
+     $cpf = $_POST['cpf'];
+
+     // Verificar se está preenchido
+     if (!empty($nome) && !empty($numero_cartao) && !empty($cvv) && !empty($data_vencimento) && !empty($cpf)) {
+         if ($objUsuario->msgErro == "") { // está tudo certo
+             if ($objUsuario->AdicionarCartao($idCliente, $nome, $numero_cartao, $cvv, $data_vencimento, $cpf)) {
+                 header("location: suaconta.php");
+             } else {
+                 echo "Erro ao cadastrar o cartão.";
+             }
+         }
+     } else {
+         echo "Erro: Preencha todos os campos!";
+     }
+ }
+?>
 </body>
 </html>
+<?php
+} else {
+    echo "Usuário não está logado. Redirecionando..."; // ou alguma lógica para redirecionar o usuário
+    header("Location: login2.php");
+    exit;
+}
+?>
 
 
