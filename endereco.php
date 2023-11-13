@@ -35,7 +35,7 @@ if ($usuario) {
                 <a class="cabecalho-item" href="notificacoes.html">Notificações<ion-icon class="icon" name="notifications-outline"></ion-icon></a>
               </li>
               <li class="nav-item">
-                <a class="cabecalho-item" href="telainicial.html">Inicio <ion-icon class="icon" name="home-outline"></ion-icon>
+                <a class="cabecalho-item" href="telainicial.php">Inicio <ion-icon class="icon" name="home-outline"></ion-icon>
               <li class="nav-item">
                 <a class="cabecalho-item" href="salvos.html">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
               </li>

@@ -51,7 +51,7 @@ $dataFormatada = $dataNascimento->format('d/m/Y');
               <a class="cabecalho-item" href="notificacoes.html">Notificações<ion-icon class="icon" name="notifications-outline"></ion-icon></a>
             </li>
             <li class="nav-item">
-              <a class="cabecalho-item" href="telainicial.html">Inicio <ion-icon class="icon" name="home-outline"></ion-icon>
+              <a class="cabecalho-item" href="telainicial.php">Inicio <ion-icon class="icon" name="home-outline"></ion-icon>
             <li class="nav-item">
               <a class="cabecalho-item" href="salvos.html">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
             </li>
@@ -182,14 +182,24 @@ $dataFormatada = $dataNascimento->format('d/m/Y');
      
 
 
-<?php
+      <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['removerCartao'])) {
+  // Execute a exclusão do cartão
+  if ($objUsuario->RemoverCartao($usuario['id'])) {
+    echo '<script>window.location.href = "suaconta.php";</script>';
+    exit(); // Certifique-se de encerrar o script após o redirecionamento
+  } else {
+    echo "Erro ao excluir o cartão.";
+  }
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['removerEndereco'])) {
   // Execute a exclusão do endereço
   if ($objUsuario->DeleteEndereco($usuario['id'])) {
-      header("location:suaconta.php");
+    echo '<script>window.location.href = "suaconta.php";</script>';
+    exit(); // Certifique-se de encerrar o script após o redirecionamento
   } else {
-      echo "Erro ao excluir o endereço.";
+    echo "Erro ao excluir o endereço.";
   }
 }
 ?>
@@ -232,26 +242,6 @@ function removerCartao(event) {
     }
 }
 </script>
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['removerCartao'])) {
-  // Execute a exclusão do cartão
-  if ($objUsuario->RemoverCartao($usuario['id'])) {
-      header("location:suaconta.php");
-  } else {
-      echo "Erro ao excluir o cartão.";
-  }
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['removerEndereco'])) {
-  // Execute a exclusão do endereço
-  if ($objUsuario->DeleteEndereco($usuario['id'])) {
-      // Se a exclusão for bem-sucedida, você pode retornar algo aqui
-      header("location:suaconta.php");
-  } else {
-      echo "Erro ao excluir o endereço.";
-  }
-}
-?>
 
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 
