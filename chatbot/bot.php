@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Chatbot in PHP | CampCodes</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../projetoquartosemestre/chatbot/style1.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
@@ -14,7 +14,8 @@
         <div class="form">
             <div class="bot-inbox inbox">
                 <div class="icon">
-                    <i class="fas fa-user"></i>
+                <img src="https://i.imgur.com/66MLmGG.png" alt="Professor Richardson">
+                    <!---!---<i class="fas fa-user"></i> -->
                 </div>
                 <div class="msg-header">
                     <p>Olá, sou o professor Rika, um bot! Em que posso ser útil?</p>
@@ -51,6 +52,7 @@
                 });
             });
         });
+        $(".form").scrollTop($(".form")[0].scrollHeight);
     </script>
     
 </body>

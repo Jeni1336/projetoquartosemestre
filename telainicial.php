@@ -1,5 +1,8 @@
 <?php
-include('../projetoquartosemestre/chatbot/bot.php');
+require_once '../projetoquartosemestre/chatbot/message.php';
+
+$conn = mysqli_connect("localhost", "root", "admin", "cadastro_cliente");
+
 ?>
 
 <!doctype html>
@@ -14,8 +17,7 @@ include('../projetoquartosemestre/chatbot/bot.php');
 
     <!-- Chatbot -->
     <link rel="stylesheet" href="../projetoquartosemestre/chatbot/style.css">
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -204,6 +206,36 @@ include('../projetoquartosemestre/chatbot/bot.php');
       
       
     </footer>
+
+    <button id="openChatbot">Abrir Chatbot</button>
+    <div id="chatbotContainer" style="display:none;">
+    <?php
+    include('../projetoquartosemestre/chatbot/bot.php');
+    ?>
+     <button id="closeChatbot">Fechar Chatbot</button>
+    <div class="wrapper">
+    </div>
+</div>
+<script>
+
+function scrollToBottom() {
+  $(".form").scrollTop($(".form")[0].scrollHeight);
+}
+
+// Adicione isso ao seu script JavaScript
+$(document).ready(function(){
+    $("#openChatbot").on("click", function(){
+        $("#chatbotContainer").show();
+        $("#openChatbot").hide(); // Oculta o botão de abrir após clicar
+        scrollToBottom();
+    });
+    $("#closeChatbot").on("click", function(){
+        $("#chatbotContainer").hide();
+        $("#openChatbot").show();
+    });
+});
+    
+</script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 
 </body>

@@ -110,3 +110,23 @@ footer{
     border-radius: 10px;
     color: white;
 }
+#chatbotContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 400px; /* Ajuste conforme necessário */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    max-height: 400px; /* Altura máxima do chat */
+    overflow-y: auto;
+}
+
+#openChatbot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}

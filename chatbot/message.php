@@ -3,7 +3,7 @@
 $conn = mysqli_connect("localhost", "root", "admin", "cadastro_cliente") or die("Database Error");
 
 // getting user message through ajax
-$getMesg = mysqli_real_escape_string($conn, $_POST['text']);
+$getMesg = isset($_POST['text']) ? mysqli_real_escape_string($conn, $_POST['text']) : "";
 
 //checking user query to database query
 $check_data = "SELECT replies FROM chatbot WHERE queries LIKE '%$getMesg%'";

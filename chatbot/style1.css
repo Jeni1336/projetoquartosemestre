@@ -31,7 +31,7 @@ html,body{
 }
 
 .wrapper{
-    width: 370px;
+    width: 300px;
     background: #fff;
     border-radius: 5px;
     border: 1px solid lightgrey;
@@ -49,8 +49,8 @@ html,body{
 }
 .wrapper .form{
     padding: 20px 15px;
-    min-height: 400px;
-    max-height: 400px;
+    min-height: 300px;
+    max-height: 300px;
     overflow-y: auto;
 }
 .wrapper .form .inbox{
@@ -62,15 +62,18 @@ html,body{
     justify-content: flex-end;
     margin: 13px 0;
 }
-.wrapper .form .inbox .icon{
+
+.wrapper .form .inbox .icon {
     height: 40px;
     width: 40px;
-    color: #fff;
-    text-align: center;
-    line-height: 40px;
     border-radius: 50%;
-    font-size: 18px;
-    background: #770624;
+    overflow: hidden; /* Garante que a imagem não ultrapasse os limites do círculo */
+}
+
+.wrapper .form .inbox .icon img {
+    width: 100%; /* Faz a imagem preencher completamente a div */
+    height: 100%; /* Faz a imagem preencher completamente a div */
+    object-fit: cover; /* Mantém a proporção da imagem e cobre totalmente a div */
 }
 .wrapper .form .inbox .msg-header{
     max-width: 53%;
@@ -148,4 +151,18 @@ html,body{
 }
 .typing-field .input-data button:hover{
     background: #770624;
+}
+/* Adicione isso ao seu arquivo CSS ou na tag style do head */
+.bot-inbox, .user-inbox {
+    margin-bottom: 10px; /* Adapte conforme necessário */
+    clear: both; /* Certifique-se de que as mensagens não se sobreponham */
+    overflow: auto; /* Lidar com overflow se necessário */
+}
+
+.bot-inbox {
+    text-align: left;
+}
+
+.user-inbox {
+    text-align: right;
 }

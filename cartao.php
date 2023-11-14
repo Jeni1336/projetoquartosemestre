@@ -58,19 +58,19 @@ if ($usuario) {
     <form class="col-md-6 offset-md-4" method="post">
         <div class="col-6">
           <label class="form-label">Nome no Cartão</label>
-          <input type="text" name="nome" class="form-control">
+          <input type="text" name="nome" class="form-control" maxlength="225">
         </div>
         <div class="col-md-6">
           <label  class="form-label">Número do cartão</label>
-          <input type="text" name="numero_cartao" class="form-control">
+          <input type="text" name="numero_cartao" class="form-control" maxlength="16">
         </div>
         <div class="col-md-6">
           <label class="form-label">CVV</label>
-          <input type="text" name="cvv" class="form-control">
+          <input type="text" name="cvv" class="form-control" maxlength="3" >
         </div>
         <div class="col-md-6">
             <label class="form-label">CPF</label>
-            <input type="text" name="cpf" class="form-control">
+            <input type="text" name="cpf" class="form-control" maxlength="11" >
           </div>
           <div class="col-md-6">
             <label class="form-label">Data de Vencimento</label>
