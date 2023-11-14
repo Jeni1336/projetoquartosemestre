@@ -202,7 +202,9 @@
       
     </footer>
 
-    <button id="openChatbot">Abrir Chatbot</button>
+    <div id="openChatbotContainer">
+    <img id="openChatbot" src="../projetoquartosemestre/images/botao-bot.png" alt="Abrir Chatbot">
+  </div>
     <div id="chatbotContainer" style="display:none;">
     <?php
     include('../projetoquartosemestre/chatbot/bot.php');
