@@ -40,11 +40,11 @@
                 
                 // start ajax code
                 $.ajax({
-                    url: 'message.php',
+                    url: '../projetoquartosemestre/chatbot/message.php',
                     type: 'POST',
                     data: 'text='+$value,
                     success: function(result){
-                        $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div>';
+                        $replay = '<div class="bot-inbox inbox"><div class="icon"><img src="https://i.imgur.com/66MLmGG.png" alt="Professor Richardson"></div><div class="msg-header"><p>'+ result +'</p></div></div>';
                         $(".form").append($replay);
                         // when chat goes down the scroll bar automatically comes to the bottom
                         $(".form").scrollTop($(".form")[0].scrollHeight);

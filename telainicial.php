@@ -1,9 +1,4 @@
-<?php
-require_once '../projetoquartosemestre/chatbot/message.php';
 
-$conn = mysqli_connect("localhost", "root", "admin", "cadastro_cliente");
-
-?>
 
 <!doctype html>
 <html lang="pt">
@@ -211,6 +206,10 @@ $conn = mysqli_connect("localhost", "root", "admin", "cadastro_cliente");
     <div id="chatbotContainer" style="display:none;">
     <?php
     include('../projetoquartosemestre/chatbot/bot.php');
+    
+    $conn = mysqli_connect("localhost", "root", "admin", "cadastro_cliente") or die("Database Error");
+    $getMesg = isset($_POST['text']) ? mysqli_real_escape_string($conn, $_POST['text']) : "";
+
     ?>
      <button id="closeChatbot">Fechar Chatbot</button>
     <div class="wrapper">
