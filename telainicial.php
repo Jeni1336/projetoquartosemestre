@@ -1,4 +1,9 @@
-
+<?php
+if (isset($_GET['mensagem_sucesso'])) {
+  $mensagemSucesso = urldecode($_GET['mensagem_sucesso']);
+  echo "<script>alert('$mensagemSucesso');</script>";
+}
+?>
 
 <!doctype html>
 <html lang="pt">
@@ -102,13 +107,13 @@
                 </div>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src="https://i.imgur.com/tU7p9kG.jpg" class="d-block w-100" alt="foto">
+                    <img src="https://i.imgur.com/nc5dc1N.jpg" class="d-block w-100" alt="foto">
                   </div>
                   <div class="carousel-item">
-                    <img src="https://i.imgur.com/rkjPdiN.jpg" class="d-block w-100" alt="...">
+                    <img src="https://i.imgur.com/8H1kicp.jpg" class="d-block w-100" alt="...">
                   </div>
                   <div class="carousel-item">
-                    <img src="https://i.imgur.com/2LI2kL2.jpg" class="d-block w-100" alt="...">
+                    <img src="https://i.imgur.com/39rOr9o.jpg" class="d-block w-100" alt="...">
                   </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -133,7 +138,7 @@
                       <div class="mid">
                       <div class="row">
                         <div class="col-md-3">
-                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://i.imgur.com/VDI3xWZ.jpg" class="img-fluid">
+                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://i.imgur.com/vio01Yo.jpg" class="img-fluid">
                               <br>
                               <h5 class="card-title">Sérum</h5 > 
                               <p class="card-text">R$ 50,00</p>
@@ -141,7 +146,7 @@
                           </div>
                       </div>
                       <div class="col-md-3">
-                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://i.imgur.com/rlYcsIP.jpg" class="img-fluid">
+                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://i.imgur.com/KoReX3t.jpg" class="img-fluid">
                               <br>
                               <h5 class="card-title">Batom</h5 > 
                                 <p class="card-text">R$ 30,00</p>
@@ -149,7 +154,7 @@
                           </div>
                       </div>
                       <div class="col-md-3">
-                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://i.imgur.com/hyg0qS3.jpg" class="img-fluid">
+                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://i.imgur.com/huG12VB.jpg" class="img-fluid">
                               <br>
                               <h5 class="card-titlee">Kit de Mquiagem</h5 > 
                                 <p class="card-textt">R$ 70,00</p>
@@ -157,7 +162,7 @@
                           </div>
                       </div>
                       <div class="col-md-3">
-                        <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://i.imgur.com/iOvRdkU.jpg" class="img-fluid">
+                        <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://i.imgur.com/qAMdoeP.jpg" class="img-fluid">
                             <br>
                             <h5 class="card-titlee">Máscara de Cílios</h5 > 
                               <p class="card-textt">R$ 35,00</p>
@@ -166,7 +171,7 @@
                     </div>
                   </div>
              
-                 <img class="bannerprod" src="https://i.imgur.com/ZnxkvTD.jpg" class="img-fluid" alt="..." style="margin-top: 50px;">
+                 <img class="bannerprod" src="https://i.imgur.com/sL8odLW.jpg" class="img-fluid" alt="..." style="margin-top: 50px;">
                             
                  
                   
@@ -179,13 +184,13 @@
         <div class="card-body">
           <ul>
             <li class="prod1" > 
-              <a class="link" href="# ">Sobre</a>
+              <a class="link" href="sobre.html">Sobre</a>
             </li>
             <li class="prod1"> 
-              <a class="link" href="# ">Contato</a>
+              <a class="link" href="contato.html">Contato</a>
             </li>
             <li class="prod1"> 
-              <a class="link" href="# ">Trabalhe Conosco</a>
+              <a class="link" href="trabalheconosco.html">Trabalhe Conosco</a>
             </li>
           </ul>
         </div>

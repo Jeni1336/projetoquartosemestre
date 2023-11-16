@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <title>Cadastro</title>
+    <link rel="shortcut icon" href="https://i.imgur.com/gBQhCJ6.png" type="x-icon">
     <link rel="stylesheet" type="text/css" href="cadastro.css">
 </head>
 <body>
@@ -58,10 +59,10 @@
               <br>
               <div class="check">
                 <input type="checkbox">
-                <a class="termos" href="termos.html" required>Concordo com os termos de uso</a></div>
+                <a class="termos" href="termos.php" required>Concordo com os termos de uso</a></div>
               <div class="col-md-6 offset-md-3">
                 <button type="submit" class="btn" >Cadastrar </button>
-                  
+                <button type="submit" class="btn"> <a href="telainicial.php"> Cancelar</button>  
           </div>
       </form> 
     </div>
@@ -84,7 +85,7 @@ if($u -> msgErro == "")//esta tudo certo
     if($senha === $confirmar_senha){
     if($u -> cadastrar($nome, $sobrenome, $genero, $data_nasc, $email, $senha)){
     
-      header("location: telainicial.html");
+      header("location: telainicial.php?mensagem_sucesso=Cadastro%20efetuado%20com%20sucesso,%20faça%20o%20login%20para%20continuar");
     }else{
       ?>
     msgErro();

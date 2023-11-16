@@ -1,5 +1,5 @@
 
-function confereSenha()
+function confereSenha2()
 {
     const senha = document.querySelector('input[name=senha]');
     const confirma = document.querySelector('input[name=confirmar_senha]');
@@ -22,4 +22,7 @@ function msgErro(){
 }
 
 
-
+function searchProducts() {
+    var searchTerm = document.getElementById('searchInput').value;
+    
+}

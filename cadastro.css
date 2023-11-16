@@ -26,8 +26,6 @@ img{
 .btn{
     background-color: #770624;
     border-radius: 10px;
-}
-a{
     color: white;
 }
 .caixa{
@@ -45,3 +43,8 @@ a{
 .termos{
     color: #770624;
 }
+
+a{
+    color: white;
+}
+
