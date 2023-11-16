@@ -111,6 +111,12 @@ footer{
     color: white;
 }
 
+
+
+#closeChatbot img {
+    width: 80px; /* Ajuste a largura conforme necessário */
+}
+
 #chatbotContainer {
     cursor: pointer;
     position: fixed;

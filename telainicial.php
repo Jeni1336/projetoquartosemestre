@@ -201,11 +201,13 @@
       
       
     </footer>
+    <div id="closeChatbot" style="display: none; position: fixed; bottom: 400px; right: 20px; z-index: 1000;">
+    <img src="../projetoquartosemestre/images/botao-fechar.png" alt="Fechar Chatbot" style="width: 30px;">
+</div>
 
-    <div id="openChatbotContainer">
-    <img id="openChatbot" src="../projetoquartosemestre/images/botao-bot.png" alt="Abrir Chatbot">
-  </div>
-    <div id="chatbotContainer" style="display:none;">
+    <div id="chatbotContainer" style="display: none;">
+
+    <!-------<div id="chatbotContainer" style="display:none;">-->
     <?php
     include('../projetoquartosemestre/chatbot/bot.php');
     
@@ -213,31 +215,37 @@
     $getMesg = isset($_POST['text']) ? mysqli_real_escape_string($conn, $_POST['text']) : "";
 
     ?>
-     <button id="closeChatbot">Fechar Chatbot</button>
-    <div class="wrapper">
-    </div>
+        </div>
+
+<div id="openChatbotContainer">
+    <img id="openChatbot" src="../projetoquartosemestre/images/botao-bot.png" alt="Abrir Chatbot">
 </div>
-<script>
 
-function scrollToBottom() {
-  $(".form").scrollTop($(".form")[0].scrollHeight);
-}
+</div>
+</div>
 
-// Adicione isso ao seu script JavaScript
-$(document).ready(function(){
-    $("#openChatbot").on("click", function(){
-        $("#chatbotContainer").show();
-        $("#openChatbot").hide(); // Oculta o botão de abrir após clicar
-        scrollToBottom();
-    });
-    $("#closeChatbot").on("click", function(){
-        $("#chatbotContainer").hide();
-        $("#openChatbot").show();
-    });
-});
-    
-</script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 
+    
+    <script>
+        function scrollToBottom() {
+            $(".form").scrollTop($(".form")[0].scrollHeight);
+        }
+
+        $(document).ready(function(){
+            $("#openChatbot").on("click", function(){
+                $("#chatbotContainer").show();
+                $("#openChatbot").hide();
+                $("#closeChatbot").show();
+                scrollToBottom();
+            });
+
+            $("#closeChatbot").on("click", function(){
+                $("#chatbotContainer").hide();
+                $("#openChatbot").show();
+                $("#closeChatbot").hide();
+            });
+        });
+    </script>
 </body>
 </html>
