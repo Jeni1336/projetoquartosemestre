@@ -206,7 +206,7 @@ if (isset($_GET['mensagem_sucesso'])) {
       
       
     </footer>
-    <div id="closeChatbot" style="display: none; position: fixed; bottom: 400px; right: 20px; z-index: 1000;">
+    <div id="closeChatbot" style="display: none; position: fixed; bottom: 400px; right: 80px; z-index: 1000;">
     <img src="../projetoquartosemestre/images/botao-fechar.png" alt="Fechar Chatbot" style="width: 30px;">
 </div>
 
