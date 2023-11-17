@@ -1,12 +1,13 @@
 
 <?php
-class Product {
+class Produto {
+    public $pdo;
     private int $id;
     private string $nome;
     private string $descricao;
     private int $preco;
     private int $quantidade;
-
+    
     public function __construct(int $id, string $nome, string $descricao, int $preco, int $quantidade) {
         $this->id = $id;
         $this->nome = $nome;

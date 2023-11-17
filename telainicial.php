@@ -2,7 +2,7 @@
 if (isset($_GET['mensagem_sucesso'])) {
   $mensagemSucesso = urldecode($_GET['mensagem_sucesso']);
   echo "<script>alert('$mensagemSucesso');</script>";
-}
+}  
 ?>
 
 <!doctype html>
@@ -57,8 +57,8 @@ if (isset($_GET['mensagem_sucesso'])) {
               <a class="cabecalho-item" href="carrinho.html">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
+          <form class="d-flex" method="get" role="search" action="resultados_busca.php">
+            <input class="form-control me-2" type="search" name="nome_produto" placeholder="Pesquisar" aria-label="Search">
             <button type="submit" class="btn-1">Pesquisar</button>
           </form>
         </div>
