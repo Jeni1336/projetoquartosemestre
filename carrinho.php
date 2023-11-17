@@ -49,12 +49,13 @@ if(isset($_GET['id'])){
               <a class="cabecalho-item" href="carrinho.html">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
-            <button class="btn btn-outline-primary" type="submit">Pesquisa</button>
+          <form class="d-flex" method="get" role="search" action="resultados_busca.php">
+            <input class="form-control me-2" type="search" name="nome_produto" placeholder="Pesquisar" aria-label="Search">
+            <button type="submit" class="btn-1">Pesquisar</button>
           </form>
         </div>
       </div>
+    </nav>
     </nav>
 
     <section class="bg-light">

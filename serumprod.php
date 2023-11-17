@@ -18,36 +18,36 @@
     <!-- <div class="cont">
       <img  src="img/20231025_faixa_topo_desk.avif" alt="banner">
     </div>  --->
-      <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-          <a class="logo"> <img class="logo2" src="https://i.imgur.com/gBQhCJ6.png" height="60"></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="cabecalho-item" href="notificacoes.html">Notificações<ion-icon class="icon" name="notifications-outline"></ion-icon></a>
-              </li>
-              <li class="nav-item">
-                <a class="cabecalho-item" href="telainicial.php">Inicio <ion-icon class="icon" name="home-outline"></ion-icon>
-              <li class="nav-item">
-                <a class="cabecalho-item" href="salvos.html">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
-              </li>
-              <li class="nav-item">
-                <a class="cabecalho-item" href="suaconta.html">Minha Conta <ion-icon  class="icon" name="person-outline"></ion-icon></a>
-              </li>
-              <li class="nav-item">
-                <a class="cabecalho-item" href="carrinho.html">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
-              </li>
-            </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
-              <button type="submit" class="btn-1">Pesquisar</button>
-            </form>
-          </div>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="logo"> <img class="logo2" src="https://i.imgur.com/gBQhCJ6.png" height="60"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="cabecalho-item" href="notificacoes.html">Notificações<ion-icon class="icon" name="notifications-outline"></ion-icon></a>
+            </li>
+            <li class="nav-item">
+              <a class="cabecalho-item" href="telainicial.php">Inicio <ion-icon class="icon" name="home-outline"></ion-icon>
+            <li class="nav-item">
+              <a class="cabecalho-item" href="salvos.html">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
+            </li>
+            <li class="nav-item">
+              <a class="cabecalho-item" href="suaconta.php">Minha Conta <ion-icon  class="icon" name="person-outline"></ion-icon></a>
+            </li>
+            <li class="nav-item">
+              <a class="cabecalho-item" href="carrinho.html">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
+            </li>
+          </ul>
+          <form class="d-flex" method="get" role="search" action="resultados_busca.php">
+            <input class="form-control me-2" type="search" name="nome_produto" placeholder="Pesquisar" aria-label="Search">
+            <button type="submit" class="btn-1">Pesquisar</button>
+          </form>
         </div>
-      </nav>
+      </div>
+    </nav>
   
               <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
                 
@@ -93,7 +93,7 @@
                    <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)"> Adicionar aos Salvos <ion-icon name="heart-outline"> </ion-icon></a>
                     <button class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
                   </div>
-                  <img class="imgserum" src="img/serum.jpg" alt="" ">
+                  <img class="imgserum" src="https://i.imgur.com/h7osmiV.jpg" alt="" ">
                </div>
                
                
