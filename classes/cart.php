@@ -1,18 +1,16 @@
 <?php
 require_once '../projetoquartosemestre/classes/produtos.php';
+require_once '../projetoquartosemestre/classes/usuarios.php';
 class Cart {
     private PDO $pdo;
 
     public function __construct(PDO $pdo) {
         $this->pdo = $pdo;
     }
-
     public function addToCart(int $produtoId, int $quantidade) {
         $produto = $this->getProdutoById($produtoId);
-    
+
         if ($produto) {
-            // var_dump("Produto recuperado do banco de dados:", $produto);
-    
             $produtoToAdd = new Produto(
                 $produto['id'],
                 $produto['nome'],
@@ -20,69 +18,79 @@ class Cart {
                 $produto['preco'],
                 $quantidade
             );
-    
-            // var_dump("Produto a ser adicionado à sacola:", $produtoToAdd);
-    
-            // Adicione ou atualize o produto no banco de dados
+
             $this->addOrUpdateProdutoToDatabase($produtoToAdd);
         }
     }
     
 
     private function addOrUpdateProdutoToDatabase(Produto $produto) {
-        // Verifique se o produto já existe no banco de dados
         $existingProduto = $this->getProdutoFromDatabase($produto->getId());
-    
+
         if ($existingProduto) {
-            // Atualize a quantidade do produto se ele já estiver no banco de dados
             $quantidade = $existingProduto['quantidade'] + $produto->getQuantidade();
             $this->updateProdutoInDatabase($produto->getId(), $quantidade);
         } else {
-            // Insira o novo produto no banco de dados
             $this->insertProdutoIntoDatabase($produto);
         }
     }
-    private function getProdutoFromDatabase(int $produtoId) {
-    $dsn = 'mysql:host=localhost;dbname=cadastro_cliente';
-    $username = 'root';
-    $password = 'admin';
 
-    try {
-        $pdo = new PDO($dsn, $username, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-        die('Erro na conexão com o banco de dados: ' . $e->getMessage());
-    }
+     private function getProdutoFromDatabase(int $produtoId) {
+        $query = $this->pdo->prepare("SELECT * FROM produtos WHERE id = :id");
+        $query->bindParam(':id', $produtoId);
+        $query->execute();
 
-    // Consulta SQL para obter o produto com base no ID
-    $query = $pdo->prepare("SELECT * FROM produtos WHERE id = :id");
-    $query->bindParam(':id', $produtoId, PDO::PARAM_INT);
-    $query->execute();
+        $product = $query->fetch(PDO::FETCH_ASSOC);
+        error_log("Produto recuperado do banco de dados: " . print_r($product, true));
 
-    // Retorna os resultados como um array associativo
-    return $query->fetch(PDO::FETCH_ASSOC);
+        return $product;
     }
     
     private function updateProdutoInDatabase(int $produtoId, int $quantidade) {
-        // Conectar ao banco de dados usando o PDO
-        $dsn = 'mysql:host=localhost;dbname=cadastro_cliente';
-        $username = 'root';
-        $password = 'admin';
-    
-        try {
-            $pdo = new PDO($dsn, $username, $password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            die('Erro na conexão com o banco de dados: ' . $e->getMessage());
-        }
-    
-        // Consulta SQL para atualizar a quantidade do produto no banco de dados
-        $query = $pdo->prepare("UPDATE produtos SET quantidade = :quantidade WHERE id = :id");
+        $query = $this->pdo->prepare("UPDATE produtos SET quantidade = :quantidade WHERE id = :id");
         $query->bindParam(':id', $produtoId, PDO::PARAM_INT);
         $query->bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
         $query->execute();
     }
     
+
+    private function getProdutoById(int $produtoId) {
+        $query = $this->pdo->prepare("SELECT * FROM produtos WHERE id = :id");
+        $query->bindParam(':id', $produtoId);
+        $query->execute();
+
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+    private function addProdutoToCart(Produto $produto) {
+        $cart = $this->getCart();
+    
+        // Inicialize $cart['produtos'] se ainda não existir
+        if (!isset($cart['produtos'])) {
+            $cart['produtos'] = array();
+        }
+    
+        $cart['produtos'][] = array(
+            'id' => $produto->getId(),
+            'nome' => $produto->getNome(),
+            'descricao' => $produto->getDescricao(),
+            'preco' => $produto->getPreco(),
+            'quantidade' => $produto->getQuantidade()
+        );
+    
+        $this->updateTotal($cart, $produto);
+        $this->saveCartToSession($cart);
+    }
+    
+    private function saveCartToSession(array $cart) {
+        // Inicie a sessão se ainda não estiver iniciada
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+    
+        // Armazene os dados do carrinho na sessão
+        $_SESSION['cart'] = $cart;
+    }
     private function insertProdutoIntoDatabase(Produto $produto) {
         $dsn = 'mysql:host=localhost;dbname=cadastro_cliente';
         $username = 'root';
@@ -112,27 +120,15 @@ class Cart {
         $query->execute();
     }
     
-
-    private function getProdutoById(int $produtoId) {
-        $query = $this->pdo->prepare("SELECT * FROM produtos WHERE id = :id");
-        $query->bindParam(':id', $produtoId);
-        $query->execute();
-    
-        return $query->fetch(PDO::FETCH_ASSOC);
-    }
-    private function addProdutoToCart(Produto $produto) {
-        $cart = $this->getCart();
-        $cart['produto'][] = $produto;
-    
-        $this->updateTotal($cart, $produto);
-        $this->saveCartToCookie($cart);
-    
-    }
     
     private function updateTotal(array &$cart, Produto $produto) {
+        // Inicialize $cart['total'] se ainda não existir
+        if (!isset($cart['total'])) {
+            $cart['total'] = 0;
+        }
+    
         $cart['total'] += $produto->getPreco() * $produto->getQuantidade();
     }
-
     public function removeProduto(int $produtoId) {
         $produto = $this->getProdutoById($produtoId);
     
@@ -144,7 +140,7 @@ class Cart {
             $this->removeProdutoFromDatabase($produtoId);
     
             // Remove o produto do carrinho
-            unset($this->getCart()['produto'][$produtoId]);
+            unset($this->getCart()['produtos'][$produtoId]);
         }
     }
     
@@ -160,26 +156,25 @@ class Cart {
     }
 
     public function getCart() {
-        $cartData = $_COOKIE['cart'] ?? null;
-        $cart = json_decode($cartData, true) ?? ['produto' => [], 'total' => 0];
-    
+        session_start(); // Inicie a sessão se ainda não estiver iniciada
+
+        $cartData = $_SESSION['cart'] ?? null;
+        $cart = json_decode($cartData, true) ?? ['produtos' => [], 'total' => 0];
+
         // Loop através dos produtos e recuperar detalhes do banco de dados
-        foreach ($cart['produto'] as &$produtoInCart) {
-            $produtoDetails = $this->getProdutoFromDatabase($produtoInCart->getId());
+        foreach ($cart['produtos'] as &$produtoInCart) {
+            $produtoDetails = $this->getProdutoFromDatabase($produtoInCart['id']);
             if ($produtoDetails) {
-                $produtoInCart->setNome($produtoDetails['nome']);
-                $produtoInCart->setDescricao($produtoDetails['descricao']);
-                $produtoInCart->setPreco($produtoDetails['preco']);
+                $produtoInCart['nome'] = $produtoDetails['nome'];
+                $produtoInCart['descricao'] = $produtoDetails['descricao'];
+                $produtoInCart['preco'] = $produtoDetails['preco'];
             }
         }
-    
+
         return $cart;
     }
+
     
 
-    private function saveCartToCookie(array $cart) {
-        $cartData = json_encode($cart);
-        setcookie('cart', $cartData, time() + (86400 * 30), "/"); // cookie válido por 30 dias
-    }
 }
 ?>

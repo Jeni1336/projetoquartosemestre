@@ -2,32 +2,47 @@
 require_once '../projetoquartosemestre/classes/usuarios.php';
 require_once '../projetoquartosemestre/classes/cart.php';
 
-$objUsuario = new Usuario();
-$objUsuario->conectar("cadastro_cliente", "localhost", "root", "admin");
-
+// Inicie a sessão
 session_start();
 
 // Verifique se o usuário está logado
-$usuario = $objUsuario->obterDadosUsuarioLogado();
+$objUsuario = new Usuario();
+$objUsuario->conectar("cadastro_cliente", "localhost", "root", "admin");
+
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    echo json_encode(["status" => "error", "message" => "Você precisa estar logado para adicionar produtos ao carrinho."]);
+    header('Content-Type: application/json');
+    echo json_encode(["status" => "error", "message" => "Usuário não está logado"]);
     exit;
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtenha os dados da solicitação
-    $produtoId = $_POST["produtoId"];
-    $quantidade = $_POST["quantidade"];
-
-    // Adicione a lógica para adicionar o produto ao carrinho (usando a classe Cart)
-    $pdo = new PDO('mysql:host=localhost;dbname=cadastro_cliente', 'root', 'admin'); // Certifique-se de ajustar as credenciais
-    $cart = new Cart($pdo);
-    $cart->addToCart($produtoId, $quantidade);
-
-    // Retorne uma resposta (pode ser um JSON)
-    echo json_encode(["status" => "success", "message" => "Produto adicionado ao carrinho com sucesso!", "cart" => $cart->getCart()]);
-} else {
-    // Se a solicitação não for POST, retorne um erro
+// Verifique se a solicitação é do tipo POST
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    header('Content-Type: application/json');
     echo json_encode(["status" => "error", "message" => "Método não permitido"]);
+    exit;
 }
+
+// Obtenha os dados da solicitação
+$produtoId = $_POST["produtoId"];
+$quantidade = $_POST["quantidade"];
+
+// Conecte-se ao banco de dados
+try {
+    $pdo = new PDO('mysql:host=localhost;dbname=cadastro_cliente', 'root', 'admin');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    header('Content-Type: application/json');
+    echo json_encode(["status" => "error", "message" => "Erro na conexão com o banco de dados: " . $e->getMessage()]);
+    exit;
+}
+
+// Crie uma instância da classe Cart
+$cart = new Cart($pdo);
+
+// Adicione o produto ao carrinho
+$cart->addToCart($produtoId, $quantidade);
+
+// Retorne uma resposta JSON
+header('Content-Type: application/json');
+echo json_encode(["status" => "success", "message" => "Produto adicionado ao carrinho com sucesso!", "cart" => $cart->getCart()]);
 ?>
