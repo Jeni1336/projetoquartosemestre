@@ -54,7 +54,7 @@ if (isset($_GET['mensagem_sucesso'])) {
               <a class="cabecalho-item" href="suaconta.php">Minha Conta <ion-icon  class="icon" name="person-outline"></ion-icon></a>
             </li>
             <li class="nav-item">
-              <a class="cabecalho-item" href="carrinho.html">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
+              <a class="cabecalho-item" href="carrinho.php">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
             </li>
           </ul>
           <form class="d-flex" method="get" role="search" action="resultados_busca.php">
@@ -142,7 +142,7 @@ if (isset($_GET['mensagem_sucesso'])) {
                               <br>
                               <h5 class="card-title">Sérum</h5 > 
                               <p class="card-text">R$ 50,00</p>
-                              <a href="serumprod.html" class="btn btn-primary">Saiba mais</a> 
+                              <a href="serumprod.php" class="btn btn-primary">Saiba mais</a> 
                           </div>
                       </div>
                       <div class="col-md-3">
@@ -150,7 +150,7 @@ if (isset($_GET['mensagem_sucesso'])) {
                               <br>
                               <h5 class="card-title">Batom</h5 > 
                                 <p class="card-text">R$ 30,00</p>
-                                <a href="#" class="btn btn-primary">Saiba mais</a>
+                                <a href="batom.php" class="btn btn-primary">Saiba mais</a>
                           </div>
                       </div>
                       <div class="col-md-3">
@@ -158,7 +158,7 @@ if (isset($_GET['mensagem_sucesso'])) {
                               <br>
                               <h5 class="card-titlee">Kit de Mquiagem</h5 > 
                                 <p class="card-textt">R$ 70,00</p>
-                                <a href="#" class="btn btn-primary">Saiba mais</a>
+                                <a href="maquiagem.php" class="btn btn-primary">Saiba mais</a>
                           </div>
                       </div>
                       <div class="col-md-3">
@@ -166,7 +166,7 @@ if (isset($_GET['mensagem_sucesso'])) {
                             <br>
                             <h5 class="card-titlee">Máscara de Cílios</h5 > 
                               <p class="card-textt">R$ 35,00</p>
-                              <a href="#" class="btn btn-primary">Saiba mais</a>
+                              <a href="cilios.php" class="btn btn-primary">Saiba mais</a>
                         </div>
                     </div>
                   </div>
@@ -206,8 +206,8 @@ if (isset($_GET['mensagem_sucesso'])) {
       
       
     </footer>
-    <div id="closeChatbot" style="display: none; position: fixed; bottom: 400px; right: 80px; z-index: 1000;">
-    <img src="../projetoquartosemestre/images/botao-fechar.png" alt="Fechar Chatbot" style="width: 30px;">
+    <div id="closeChatbot" style="display: none; position: fixed; bottom: 400px; right: 30px; z-index: 1000;">
+    <img src="../projetoquartosemestre/images/botao-fechar.png" alt="Fechar Chatbot" style="width: 80px;">
 </div>
 
     <div id="chatbotContainer" style="display: none;">

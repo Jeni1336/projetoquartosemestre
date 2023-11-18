@@ -1,5 +1,7 @@
 <?php
 require_once '../projetoquartosemestre/classes/usuarios.php';
+
+session_start();
 $u = new Usuario;
 
 ?>
@@ -48,6 +50,7 @@ if(isset($_POST['email'])){
     $u-> conectar( "cadastro_cliente", "localhost", "root", "admin");
     if ($u -> msgErro == ""){
     if($u->logar($email, $senha)){
+      $_SESSION['logged_in'] = true;
       header("location: suaconta.php");
 
     }else{

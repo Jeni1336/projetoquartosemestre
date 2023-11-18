@@ -1,12 +1,15 @@
 <?php
-session_start();
-require_once("cart.php");
-require_once("product.php");
+require_once '../projetoquartosemestre/classes/cart.php';
+require_once '../projetoquartosemestre/classes/produtos.php';
+$pdo = new PDO('mysql:host=localhost;dbname=cadastro_cliente', 'root', 'admin');
+
+// Agora você pode passar a instância do PDO ao criar um objeto Cart
+$cart = new Cart($pdo);
 
 if(isset($_GET['id'])){
   $id = strip_tags($_GET['id']);
-  $product = new Product;
-  $product->setName('');
+  $produto = new Produto;
+  $produto->setNome('');
 }
 
 
@@ -69,10 +72,30 @@ if(isset($_GET['id'])){
                                   <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
                                       <h3 class="h2 text-white mb-0">Sacola</h3>
                                   </div>
-                                  <p> Sua sacola está vazia</p>
+                                  <?php
+                                  $cart = new Cart($pdo);
+                                  $cartContent = $cart->getCart();
+
+                                  if (empty($cartContent['produto'])) {
+                                      echo '<p>Sua sacola está vazia</p>';
+                                  } else {
+                                    var_dump($cartContent['produto']);
+                                    foreach ($cartContent['produto'] as $produto) {
+                                      echo '<div class="product-details">';
+                                      echo '<img src="' . $produto->getImagem() . '" alt="' . $produto->getNome() . '">';
+                                      echo '<p class="product-name">' . $produto->getNome() . '</p>';
+                                      echo '<p class="product-price">Preço: R$' . number_format($produto->getPreco(), 2, ',', '.') . '</p>';
+                                      echo '<p class="product-quantity">Quantidade: ' . $produto->getQuantidade() . '</p>';
+                                      echo '</div>';
+                                  }
+                                  }
+                                  echo '<p>Total: R$' . number_format($cartContent['total'], 2, ',', '.') . '</p>';
+                                
+                                  ?>
+                                
                                 </div>
                                 <ul class="list-unstyled mb-1-9">
-                                  <li> <a href="telainicial.html">Continuar Comprando</a> <ion-icon name="chevron-forward-outline"></ion-icon></li>
+                                  <li> <a href="telainicial.php">Continuar Comprando</a> <ion-icon name="chevron-forward-outline"></ion-icon></li>
                                 </ul>
                             </div>
 

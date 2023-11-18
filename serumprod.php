@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serúm</title>
     <link rel="stylesheet" type="text/css" href="serum.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -38,7 +39,7 @@
               <a class="cabecalho-item" href="suaconta.php">Minha Conta <ion-icon  class="icon" name="person-outline"></ion-icon></a>
             </li>
             <li class="nav-item">
-              <a class="cabecalho-item" href="carrinho.html">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
+              <a class="cabecalho-item" href="carrinho.php">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
             </li>
           </ul>
           <form class="d-flex" method="get" role="search" action="resultados_busca.php">
@@ -91,13 +92,52 @@
                   <h3> R$ 50,00</h3>
                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                    <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)"> Adicionar aos Salvos <ion-icon name="heart-outline"> </ion-icon></a>
-                    <button class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
+                   <button id="addToCartButton" class="btn-2 me-md-2" type="button">Adicionar à Sacola</button>
                   </div>
                   <img class="imgserum" src="https://i.imgur.com/h7osmiV.jpg" alt="" ">
                </div>
-               
-               
-           
+               <script>
+            $(document).ready(function() {
+    $("#addToCartButton").on("click", function() {
+        var produtoId = 1; // Substitua pelo ID real do produto
+        var quantidade = 1; // Substitua pela quantidade desejada
+
+        $.ajax({
+            url: "../projetoquartosemestre/adicionar_ao_carrinho.php",
+            method: "POST",
+            data: { produtoId: produtoId, quantidade: quantidade },
+            dataType: "json", // Defina o tipo de dados esperado como JSON
+            success: function(result) {
+                console.log(result);
+                if (result.status === "success") {
+                    alert("Produto adicionado ao carrinho com sucesso!");
+                    
+                    // Atualize a visualização da sacola com os dados recebidos
+                    updateCartView(result.cart);
+                } else if (result.status === "error") {
+                    alert(result.message);
+                    console.log("Redirecionando para a página de login...");
+                    window.location.replace("../projetoquartosemestre/login2.php");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+
+    // Função para atualizar a visualização da sacola na página
+    function updateCartView(cartData) {
+    // Exemplo de como você pode exibir os dados da sacola
+    console.log("Itens da Sacola:");
+    cartData.produto.forEach(function (produto) {
+        console.log(`Nome: ${produto.nome}, Preço: ${produto.preco}, Quantidade: ${produto.quantidade}`);
+    });
+    console.log(`Total: R$${cartData.total.toFixed(2)}`);
+            }
+            })
+              </script>
+        
 
                <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
               <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 
