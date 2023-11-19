@@ -25,13 +25,6 @@ Class Usuario{
             return false; //ja esta cadastrado
     }
     else{
-        //$nome = $_POST ['nome'];
-        //$sobrenome = $_POST ['sobrenome'];
-        //$genero = $_POST ['genero'];
-        //$data_nasc = $_POST ['data_nasc'];
-        //$email = $_POST ['email'];
-        //$senha = $_POST ['senha'];
-        //$strcon = mysqli_connect ("localhost", "root", "admin", "cadastro_cliente") or die("Erro ao conectar com o banco");
         global $pdo;
         $sql = $pdo-> prepare ("INSERT INTO cliente (nome, sobrenome, genero, data_nasc, email, senha) VALUES (:n, :sn, :g, :d, :e, :s)");
         $sql-> bindValue(":n", $nome, PDO::PARAM_STR); 
@@ -41,8 +34,7 @@ Class Usuario{
         $sql-> bindValue(":e", $email, PDO::PARAM_STR); 
         $sql-> bindValue(":s", md5($senha), PDO::PARAM_STR); 
 
-        //$sql = $pdo-> prepare ("INSERT INTO cliente ('".$nome."' , '".$sobrenome."','".$genero."' ,'".$data_nasc."' , '".$email."' , '".$senha."' );"); 
-        //mysqli_query($strcon, $sql) or die ('Erro ao tentar cadastrar registro');
+        
         $sql->execute();
         return true;
         
@@ -256,6 +248,7 @@ Class Usuario{
         }
 
     }
+    
 
 }
 

@@ -3,7 +3,8 @@ require_once '../projetoquartosemestre/classes/usuarios.php';
 require_once '../projetoquartosemestre/classes/cart.php';
 
 // Inicie a sessão
-session_start();
+if (empty($_SESSION)) {
+    session_start();}
 
 // Verifique se o usuário está logado
 $objUsuario = new Usuario();

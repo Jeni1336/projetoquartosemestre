@@ -5,7 +5,8 @@ require_once '../projetoquartosemestre/classes/cart.php';
 $objUsuario = new Usuario();
 $objUsuario->conectar("cadastro_cliente", "localhost", "root", "admin");
 
-session_start();
+if (empty($_SESSION)) {
+  session_start();}
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -99,66 +100,17 @@ session_start();
                   <p>SÉRUM ANTIACNE E ANTIOLEOSIDADE</p>
                   <p class="serumtexto"> Serúm com ativos para a pele, hidratação profundo e rejuvenescimento da pele </p>
                   <h3> R$ 50,00</h3>
+                  <form method="get" action="carrinho.php">
                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                    <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)"> Adicionar aos Salvos <ion-icon name="heart-outline"> </ion-icon></a>
-                   <button id="addToCartButton" class="btn-2 me-md-2" type="button">Adicionar à Sacola</button>
+                   <button id="addToCartButton" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
+                  <input type="hidden" name="add_to_cart" value="<?php echo $produto->getId(); ?>">
+                   </div>
+                    </form>
                   </div>
                   <img class="imgserum" src="https://i.imgur.com/h7osmiV.jpg" alt="" ">
                </div>
-               <script>
-            $(document).ready(function() {
-            $("#addToCartButton").on("click", function() {
-              var produtoId = 1; // Substitua pelo ID real do produto
-              var quantidade = 1; // Substitua pela quantidade desejada
-
-              $.ajax({
-             url: "../projetoquartosemestre/adicionar_ao_carrinho.php",
-            method: "POST",
-            data: { produtoId: produtoId, quantidade: quantidade },
-            dataType: "json",
-          success: function(result) {
-            console.log(result);
-           if (result.status === "success") {
-            alert("Produto adicionado ao carrinho com sucesso!");
-
-            // Atualize a visualização da sacola com os dados recebidos
-            updateCartView(result.cart);
-           } else if (result.status === "error") {
-            alert(result.message);
-            console.log("Redirecionando para a página de login...");
-            window.location.replace("../projetoquartosemestre/login2.php");
-            } else if (result.status === "warning") {
-             alert(result.message);
-             console.log("Aviso: " + result.message);
-          }
-    },
-    error: function(xhr, status, error) {
-        console.log("XHR response:", xhr.responseText);
-        console.error("Status:", status);
-        console.error("Error:", error);
-    }
-})
-        });
-    });
-
-
-// Função para atualizar a visualização da sacola na página
-function updateCartView(cartData) {
-    console.log("Itens da Sacola:");
-
-    // Verifica se cartData.produtos é definido e é um array
-    if (Array.isArray(cartData.produtos)) {
-        cartData.produtos.forEach(function(produto) {
-            console.log(`Nome: ${produto.nome}, Preço: ${produto.preco}, Quantidade: ${produto.quantidade}`);
-        });
-    } else {
-        console.log("Nenhum item na sacola.");
-    }
-
-    console.log(`Total: R$${cartData.total.toFixed(2)}`);
-}
-
-</script>
+              
  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 
 </body>
