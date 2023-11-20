@@ -86,18 +86,6 @@ class Cart {
     
         $cart['total'] += $produto->getPreco() * $produto->getQuantidade();
     }
-    public function removeProduto(int $produtoId) {
-        $produto = $this->getProdutoById($produtoId);
-    
-        if ($produto) {
-            // Subtrai o preço do produto do total
-            $this->getCart()['total'] -= $produto['preco'] * $produto['quantidade'];
-    
-    
-            // Remove o produto do carrinho
-            unset($this->getCart()['produtos'][$produtoId]);
-        }
-    }
     
 
     public function getCart() {
@@ -117,13 +105,41 @@ class Cart {
     }
     
 
-    public function ContarItensCarrinho($idCliente) {
-        $query = $this->pdo->prepare("SELECT COUNT(*) as total FROM carrinho WHERE id_cliente = :idCliente");
-        $query->bindParam(":idCliente", $idCliente);
-        $query->execute();
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-        $totalItensCarrinho = $result['total'];
-        return $totalItensCarrinho;
+    function adicionarAoCarrinho( $id_cliente, $id_produto, $quantidade) {
+       global $pdo;
+        try {
+            // Verificar se o produto já está no carrinho
+            $verify_cart = $pdo->prepare("SELECT * FROM `carrinho` WHERE id_cliente = :id_Cliente AND id_produto = :id_produto");
+            $verify_cart->bindValue(":id_cliente", $id_cliente, PDO::PARAM_INT); // Certifique-se de vincular como um parâmetro inteiro
+            $verify_cart->bindValue(":id_produto", $id_produto, PDO::PARAM_INT); // Certifique-se de vincular como um parâmetro inteiro
+            $verify_cart->execute([$id_cliente, $id_produto]);
+    
+            // Verificar se o carrinho já está cheio
+            $max_cart_items = $pdo->prepare("SELECT COUNT(*) as count FROM `carrinho` WHERE id_cliente = :id_cliente");
+            $max_cart_items->bindValue(":id_cliente", $id_cliente, PDO::PARAM_INT); // Certifique-se de vincular como um parâmetro inteiro
+            $max_cart_items->execute([$id_cliente]);
+            $cart_count = $max_cart_items->fetchColumn();
+    
+            if ($verify_cart->rowCount() > 0) {
+                return 'Já adicionado ao carrinho!';
+            } elseif ($cart_count == 10) {
+                return 'Carrinho está cheio!';
+            } else {
+                // Obter o preço do produto
+                $select_price = $pdo->prepare("SELECT preco FROM `produtos` WHERE id = :id_produto LIMIT 1");
+                $select_price -> bindValue(":id", $id_produto, PDO::PARAM_INT);
+                $select_price->execute([$id_produto]);
+                $preco = $select_price->fetchColumn();
+    
+                // Inserir no carrinho
+                $insert_cart = $pdo->prepare("INSERT INTO `carrinho` (id_cliente, id_produto, preco, quantidade) VALUES (?, ?, ?, ?)");
+                $insert_cart->execute([$id_cliente, $id_produto, $preco, $quantidade]);
+                return 'Adicionado ao carrinho!';
+            }
+        } catch (PDOException $e) {
+            // Lidar com exceções do PDO aqui
+            return 'Erro: ' . $e->getMessage();
+        }
     }
     
     

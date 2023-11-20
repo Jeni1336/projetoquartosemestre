@@ -87,9 +87,7 @@ if($u -> msgErro == "")//esta tudo certo
     
       header("location: telainicial.php?mensagem_sucesso=Cadastro%20efetuado%20com%20sucesso,%20faça%20o%20login%20para%20continuar");
     }else{
-      ?>
-    msgErro();
-      <?php
+    echo "Não foi possível cadastrar";  
     }
   
     }

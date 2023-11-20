@@ -14,7 +14,7 @@ if (!isset($_SESSION['id']) || $_SESSION['id'] != $idEspecifico) {
 
 require_once '../projetoquartosemestre/classes/produtos.php';
 require_once '../projetoquartosemestre/classes/usuarios.php';
-require_once '../projetoquartosemestre/classes/cart.php';
+
 
 $produto = new Produto(); // Create an instance of the Produto class
 $u = new Usuario();
@@ -29,7 +29,7 @@ $u-> conectar("cadastro_cliente", "localhost", "root", "admin");
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <title>Adicionar Produto</title>
     <link rel="shortcut icon" href="https://i.imgur.com/gBQhCJ6.png" type="x-icon">
-    <link rel="stylesheet" type="text/css" href="cadastrarProduto.css">
+    <link rel="stylesheet" type="text/css" href="cadastrarProduto1.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-light">

@@ -91,8 +91,15 @@
                     <h2>Kit de Maquiagem</h2>
             <p> Kit de Maquiagem com cores neutras.</p>
                     <p>R$ 70,00</p>
-                    <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)"> Adicionar aos Salvos <ion-icon name="heart-outline"> </ion-icon></a>
-                    <button class="btn-" type="submit">Comprar</button>
+                    <form method="post" action="carrinho.php">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)">
+            Adicionar aos Salvos <ion-icon name="heart-outline"> </ion-icon>
+        </a>
+        <button name="add_to_cart" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
+        <input type="hidden" name="produto_id" value="4"> <!-- Defina o ID do sérum aqui -->
+    </div>
+</form>
                 </div>
             </div>
 

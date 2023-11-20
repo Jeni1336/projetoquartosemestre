@@ -4,6 +4,9 @@ require_once '../projetoquartosemestre/classes/cart.php';
 
 $objUsuario = new Usuario();
 $objUsuario->conectar("cadastro_cliente", "localhost", "root", "admin");
+$usuario = $objUsuario->obterDadosUsuarioLogado();
+
+$u = new Cart($pdo);
 
 if (empty($_SESSION)) {
   session_start();}
@@ -101,26 +104,30 @@ if (empty($_SESSION)) {
                   <p>SÉRUM ANTIACNE E ANTIOLEOSIDADE</p>
                   <p class="serumtexto"> Serúm com ativos para a pele, hidratação profundo e rejuvenescimento da pele </p>
                   <h3> R$ 50,00</h3>
-                  <form method="get" action="carrinho.php">
-                  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                   <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)"> Adicionar aos Salvos <ion-icon name="heart-outline"> </ion-icon></a>
-                   <button id="addToCartButton" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
-                  <input type="hidden" name="add_to_cart" value="<?php echo $produto->getId(); ?>">
-                   </div>
-                    </form>
-=======
-                <div class="produto-container">
-                  <img src="https://imgur.com/vio01Yo" alt="Produto">
-                  <div class="descricao-produto">
-                      <h2>Sérum </h2>
-                      <p> Sérum</p>
-                      <p>R$ 50,00</p>
-                      <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)"> Adicionar aos Salvos <ion-icon name="heart-outline"> </ion-icon></a>
-                      <button class="btn-" type="submit">Comprar</button>
->>>>>>> Stashed changes
+                  <form method="post">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)">
+            Adicionar aos Salvos <ion-icon name="heart-outline"> </ion-icon>
+        </a>
+        <button name="add_to_cart" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
+        <input type="hidden" name="id_produto" value="1"> <!-- Defina o ID do sérum aqui -->
+    </div>
+</form>
+
                   </div>
 
                </div>
+<?php
+ if (isset($_POST['add_to_cart'])) {
+  $id_produto = filter_input(INPUT_POST, 'id_produto', FILTER_SANITIZE_STRING);
+  $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_STRING);
+
+  $id_cliente = $usuario['id']; // Certifique-se de ter o ID do cliente de alguma forma.
+
+  $resultado = $u->adicionarAoCarrinho($pdo, $id_cliente, $id_produto, $quantidade);
+  echo $resultado;
+}
+?>
               
  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 

@@ -50,31 +50,31 @@ class Produto {
             }
         }
     }
-public function obterDadosProduto() {
-    global $pdo;
- $sql = $pdo->prepare("SELECT * FROM produtos WHERE id = :id");
-        $sql->bindValue(":id", $idProduto);
+    public function obterDadosProduto($idProduto) {
+        global $pdo;
+        $sql = $pdo->prepare("SELECT * FROM produtos WHERE id = :id");
+        $sql->bindValue(":id", $idProduto, PDO::PARAM_INT); // Certifique-se de vincular como um parâmetro inteiro
         $sql->execute();
-
+    
         if ($sql->rowCount() > 0) {
             return $sql->fetch(PDO::FETCH_ASSOC);
         } else {
-            return false; // Usuário não encontrado
+            return false; // Produto não encontrado
         }
-    } 
-    public function CreateUniqueId(){
-        $charecters =
-        '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRSTUVWXYZ';
-        $charecters_lenght = strlen($charecters);
-        $random = '';
-        for($i = 0;$i<20; $i++){
-            $random .= $charecters[mt_rand(0, $charecters_lenght - 1)];
-
-        }
-        return $random;
-
     }
 
+    function obterTodosProdutos() {
+        global $pdo;
+        $sql = $pdo->prepare("SELECT * FROM produtos");
+        $sql->execute();
+    
+        if ($sql->rowCount() > 0) {
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return false; // Nenhum produto encontrado
+        }
+    }
+    
 
     // Getter methods
     public function getId(): int {
