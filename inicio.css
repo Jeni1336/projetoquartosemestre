@@ -92,6 +92,7 @@ img{
     background-color: #963c54;
     height: 100%;
 }
+
 footer{
     margin: 10px;
     padding: 20px;
@@ -110,7 +111,10 @@ footer{
     border-radius: 10px;
     color: white;
 }
-
+.link
+{
+    color: #770624;
+}
 
 
 #closeChatbot img {
@@ -138,4 +142,7 @@ footer{
     right: 20px;
     width: 300px;
     z-index: 9999;
+}
+.col-md-3 :hover{
+    transform: scale(1.1);
 }

@@ -60,10 +60,58 @@ h3{
     color: white;
     width: 15%;
     justify-content: end;
-   
+}
 
+ footer{
+     margin: 10px;
+     padding: 20px;
+ }
+ .icon1{
+     margin: 10px;
+     display: flexbox;
+     flex-direction: row;
+     align-items: center;
+ }
+ .cabecalho-item-car{
+     color: #770624;
+ }
+ .btn-{
+     background-color: #770624;
+     border-radius: 10px;
+     color: white;
+ }
+ .produto-container {
+    display: flex;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-    
+.produto-container img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.descricao-produto {
+    padding: 0 20px;
+    text-align: center;
+}
+
+.descricao-produto h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.descricao-produto p {
+     font-size: 1em;
+    color: #555;
+    white-space: nowrap;
     
 }
+
+
+
 

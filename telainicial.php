@@ -156,13 +156,13 @@ if (isset($_GET['mensagem_sucesso'])) {
                       <div class="col-md-3">
                           <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://i.imgur.com/huG12VB.jpg" class="img-fluid">
                               <br>
-                              <h5 class="card-titlee">Kit de Mquiagem</h5 > 
+                              <h5 class="card-titlee">Kit de Maquiagem</h5 > 
                                 <p class="card-textt">R$ 70,00</p>
                                 <a href="maquiagem.php" class="btn btn-primary">Saiba mais</a>
                           </div>
                       </div>
                       <div class="col-md-3">
-                        <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://i.imgur.com/qAMdoeP.jpg" class="img-fluid">
+                        <div class="card wow  zoomIn animated" style="visibility: visible; zoomIn; align-items: center;"> <img src="https://i.imgur.com/qAMdoeP.jpg" class="img-fluid">
                             <br>
                             <h5 class="card-titlee">Máscara de Cílios</h5 > 
                               <p class="card-textt">R$ 35,00</p>
@@ -171,9 +171,9 @@ if (isset($_GET['mensagem_sucesso'])) {
                     </div>
                   </div>
              
-                 <img class="bannerprod" src="https://i.imgur.com/sL8odLW.jpg" class="img-fluid" alt="..." style="margin-top: 50px;">
+              <img class="bannerprod" src="https://i.imgur.com/sL8odLW.jpg" class="img-fluid" alt="..." style="margin-top: 50px;">
                             
-                 
+                
                   
             
     <footer>
@@ -199,10 +199,14 @@ if (isset($_GET['mensagem_sucesso'])) {
         <ion-icon class="icon1" name="logo-twitter">x</ion-icon>
         <ion-icon class="icon1" name="logo-tiktok">tik tok</ion-icon>
       </div>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit consectetur iure sunt saepe voluptates ad ipsum tenetur molestiae. Non veritatis, asperiores expedita voluptate dolores blanditiis minus aliquid natus provident voluptatem?
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, beatae ullam, quisquam atque quam quibusdam, praesentium consectetur explicabo rerum velit rem. Eveniet quaerat esse, vel voluptatem provident incidunt impedit assumenda.
+        <p>
+        Na Tons de Beleza, acreditamos que a maquiagem é uma forma de expressão, é pra quem quiser pra quem sonha, quem tem luta e quem tem fé, e pra quem tem empoderamento. Oferecemos uma ampla gama de produtos de beleza de alta qualidade para realçar sua beleza única. Nossa missão é ajudar você a se sentir confiante e deslumbrante todos os dias.
         </p>
       </div>
+
+      
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 
       
       
     </footer>

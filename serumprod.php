@@ -95,6 +95,7 @@ if (empty($_SESSION)) {
                     <a class="link" href="# ">Ofertas</a>
                   </li>
                 </ul>
+<<<<<<< Updated upstream
                 <div>
                   <h1> Serúm Facial</h1>
                   <p>SÉRUM ANTIACNE E ANTIOLEOSIDADE</p>
@@ -107,8 +108,18 @@ if (empty($_SESSION)) {
                   <input type="hidden" name="add_to_cart" value="<?php echo $produto->getId(); ?>">
                    </div>
                     </form>
+=======
+                <div class="produto-container">
+                  <img src="https://imgur.com/vio01Yo" alt="Produto">
+                  <div class="descricao-produto">
+                      <h2>Sérum </h2>
+                      <p> Sérum</p>
+                      <p>R$ 50,00</p>
+                      <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)"> Adicionar aos Salvos <ion-icon name="heart-outline"> </ion-icon></a>
+                      <button class="btn-" type="submit">Comprar</button>
+>>>>>>> Stashed changes
                   </div>
-                  <img class="imgserum" src="https://i.imgur.com/h7osmiV.jpg" alt="" ">
+
                </div>
               
  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

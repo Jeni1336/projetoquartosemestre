@@ -7,7 +7,10 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
+    backdrop-filter: blur(10px); /* Ajuste o valor conforme necessário para o nível de desfoque desejado */
+    background-color: rgba(230, 61, 61, 0.8); /* Define um fundo com transparência para destacar o efeito de desfoque */
 }
+
 .form-control{
     border-radius: 20px;
     width: 90%;
@@ -34,7 +37,7 @@ img{
     padding: 45px;
     border-radius: 8px;
     height: 120%;
-    width: 50%;   
+    width: 50%;
 }
 .check{
     color:#770624;
