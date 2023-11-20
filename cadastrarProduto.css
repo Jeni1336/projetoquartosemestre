@@ -1,0 +1,59 @@
+body {
+    margin: 0%;
+    padding: 0%;
+    background-color: white;
+    font-family: Arial, sans-serif;
+}
+
+.cabecalho {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #fff; /* Add a background color for the navbar */
+    padding: 10px; /* Add padding to the navbar */
+    border-bottom: 1px solid #ccc; /* Add a border at the bottom of the navbar */
+}
+
+.cabecalho-item {
+    color: #963c54;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    margin-right: 20px; /* Add margin between navbar items */
+}
+
+.form-control {
+    border-radius: 20px;
+    width: 90%;
+}
+
+.logo {
+    margin-right: 40px;
+    margin-left: 10px;
+}
+
+select {
+    border-radius: 10px;
+}
+
+img {
+    margin: 25px;
+}
+
+.btn {
+    background-color: #770624;
+    border-radius: 10px;
+    color: white;
+}
+
+.caixa {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 45px;
+    border-radius: 8px;
+    width: 50%;
+    margin: 20px auto; /* Center the box horizontally */
+}
+
+.check {
+    color: #770624;
+    margin-left: 125

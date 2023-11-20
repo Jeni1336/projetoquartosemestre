@@ -1,18 +1,45 @@
 <?php
+// carrinho.php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require_once '../projetoquartosemestre/classes/usuarios.php';
 require_once '../projetoquartosemestre/classes/cart.php';
-require_once '../projetoquartosemestre/classes/produtos.php';
-$pdo = new PDO('mysql:host=localhost;dbname=cadastro_cliente', 'root', 'admin');
 
-// Agora você pode passar a instância do PDO ao criar um objeto Cart
-$cart = new Cart($pdo);
-
-if (isset($_GET['id'])) {
-    $id = strip_tags($_GET['id']);
-    $produto = new Produto;
-    $produto->setNome('');
+// Inicia a sessão
+if (empty($_SESSION)) {
+    session_start();
 }
-?>
 
+// Define your PDO connection parameters
+$host = "localhost";
+$dbname = "cadastro_cliente";
+$user = "root";
+$pass = "admin";
+
+// Attempt to create a PDO connection
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+} catch (PDOException $e) {
+    die("Error: " . $e->getMessage());
+}
+
+// Cria uma instância da classe Cart passando o objeto PDO
+$carrinho = new Cart($pdo);
+
+// Verifica se a ação de adicionar ao carrinho está presente
+if (isset($_GET['add_to_cart'])) {
+    // Obtém o ID do produto
+    $produtoId = $_GET['add_to_cart'];
+
+    // Adiciona o produto ao carrinho
+    $carrinho->addToCart($produtoId, 1); // 1 representa a quantidade, você pode ajustar conforme necessário
+}
+
+// Redireciona para onde você desejar após a adição ao carrinho
+header('Location: ' . $_SERVER['HTTP_REFERER']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,13 +100,12 @@ if (isset($_GET['id'])) {
                     <div class="card card-style1 border-0">
                         <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
                             <div class="row align-items-center">
-                                <div class="col-lg-6 px-xl-10">
-                                    <div
-                                        class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
-                                        <h3 class="h2 text-white mb-0">Sacola</h3>
-                                    </div>
-                                    <?php
-        $cartContent = $cart->getCart();
+                            <div class="col-lg-6 px-xl-10">
+        <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+            <h3 class="h2 text-white mb-0">Sacola</h3>
+        </div>
+        <?php
+        $cartContent = $carrinho->getCart(); // Corrigido para usar $carrinho
 
         if (empty($cartContent['produtos'])) {
             echo '<p>Sua sacola está vazia</p>';
