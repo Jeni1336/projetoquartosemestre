@@ -108,10 +108,10 @@ $produtos = $produto->obterTodosProdutos();
             <thead>
                 <tr>
                     <th>Código do Produto</th>
+                    <th>Nome</th>
                     <th>Descrição</th>
                     <th>Preço</th>
-                    <th>Quantidade</th>
-                    <th>Valor do Produto</th>
+                    <th>Estoque</th>
                     <th>Imagem</th>
                 </tr>
             </thead>
@@ -136,9 +136,9 @@ $produtos = $produto->obterTodosProdutos();
             ?>
         </tbody>
     </table>
-    <div class="form-group">
-                <button type="submit" class="btn"> <a href="adicionar_produto.php"> Cadastrar Novo </button>  
-                <button type="submit" class="btn"> <a href="telainicial.php">Voltar</button>  
+    <div class="col-md-6 offset-md-3">
+                <button type="button" class="btn"> <a href="adicionar_produto.php"> Cadastrar Novo </a></button>  
+                <button type="button" class="btn"> <a href="telainicial.php"> Voltar </a></button>  
             </div>
 </body>
 </html>

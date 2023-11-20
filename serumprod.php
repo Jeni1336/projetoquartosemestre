@@ -2,14 +2,17 @@
 require_once '../projetoquartosemestre/classes/usuarios.php';
 require_once '../projetoquartosemestre/classes/cart.php';
 
+if (empty($_SESSION)) {
+  session_start();
+}
+
 $objUsuario = new Usuario();
 $objUsuario->conectar("cadastro_cliente", "localhost", "root", "admin");
 $usuario = $objUsuario->obterDadosUsuarioLogado();
 
 $u = new Cart($pdo);
 
-if (empty($_SESSION)) {
-  session_start();}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -98,20 +101,21 @@ if (empty($_SESSION)) {
                     <a class="link" href="# ">Ofertas</a>
                   </li>
                 </ul>
-<<<<<<< Updated upstream
+
                 <div>
                   <h1> Serúm Facial</h1>
                   <p>SÉRUM ANTIACNE E ANTIOLEOSIDADE</p>
                   <p class="serumtexto"> Serúm com ativos para a pele, hidratação profundo e rejuvenescimento da pele </p>
                   <h3> R$ 50,00</h3>
                   <form method="post">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)">
-            Adicionar aos Salvos <ion-icon name="heart-outline"> </ion-icon>
-        </a>
-        <button name="add_to_cart" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
-        <input type="hidden" name="id_produto" value="1"> <!-- Defina o ID do sérum aqui -->
-    </div>
+   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)">
+         Adicionar aos Salvos <ion-icon name="heart-outline"></ion-icon>
+      </a>
+      <input type="number" name="quantidade" value="1" min="1"> <!-- Campo de entrada da quantidade -->
+      <button name="add_to_cart" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
+      <input type="hidden" name="id_produto" value="1"> <!-- Defina o ID do sérum aqui -->
+   </div>
 </form>
 
                   </div>
@@ -119,14 +123,18 @@ if (empty($_SESSION)) {
                </div>
 <?php
  if (isset($_POST['add_to_cart'])) {
-  $id_produto = filter_input(INPUT_POST, 'id_produto', FILTER_SANITIZE_STRING);
-  $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_STRING);
+  if ($usuario && isset($usuario['id'])) {
+      $id_produto = filter_input(INPUT_POST, 'id_produto', FILTER_SANITIZE_STRING);
+      $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_STRING);
+      $id_cliente = $usuario['id'];
 
-  $id_cliente = $usuario['id']; // Certifique-se de ter o ID do cliente de alguma forma.
-
-  $resultado = $u->adicionarAoCarrinho($pdo, $id_cliente, $id_produto, $quantidade);
-  echo $resultado;
+      $resultado = $u->adicionarAoCarrinho($pdo, $id_cliente, $id_produto, $quantidade);
+      echo $resultado;
+  } else {
+      echo "Erro: ID do cliente não encontrado. Usuário: " . print_r($usuario, true);
+  }
 }
+
 ?>
               
  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

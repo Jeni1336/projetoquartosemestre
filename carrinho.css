@@ -1,0 +1,165 @@
+/* Estilo Geral */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bg-light {
+    width: 100%; /* ou outro valor que você preferir, como 80%, por exemplo */
+    /* Adicione mais estilos conforme necessário */
+}
+.container {
+    max-width: 2000px; /* Ajuste a largura máxima conforme necessário */
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Cabeçalho */
+.navbar {
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+}
+
+.logo img {
+    height: 60px;
+}
+
+.cabecalho-item {
+    color: #333;
+    margin-left: 20px;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+/* Seção de Sacola */
+.products {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width:  1200px;
+    box-sizing: border-box;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+
+.image {
+    width: 150px;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.name {
+    font-size: 16px; /* Reduzir o tamanho da fonte para um estilo mais compacto */
+    color: #000; /* Cor mais escura para o nome do produto */
+}
+
+.price {
+    font-size: 14px; /* Reduzir o tamanho da fonte para um estilo mais compacto */
+    color: #770624;
+}
+
+.sub-total {
+    font-size: 12px; /* Reduzir o tamanho da fonte para um estilo mais compacto */
+    color: #555;
+}
+
+/* Total da Sacola */
+.cart-total {
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    
+}
+
+.cart-total p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000; /* Cor mais escura para o total */
+}
+.text-details {
+    margin-left: 15px; /* Adicione margem entre a imagem e os detalhes do texto */
+}
+
+.text-details h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 5px; /* Adicione espaçamento entre o nome e o preço */
+}
+
+.text-details p {
+    font-size: 18px;
+    color: #770624;
+}
+.quantidade {
+    margin-top: 10px; /* Adicionar margem acima do input de quantidade */
+    margin-left: 10px; /* Adicionar margem à esquerda do input de quantidade */
+    margin-right: 10px; /* Adicionar margem à direita do input de quantidade */
+}
+
+.fas.fa-minus {
+    margin-top: 10px; /* Adicionar margem acima do botão de diminuir */
+}
+
+.sub-total {
+    margin-top: 10px; /* Adicionar margem acima do subtotal */
+    margin-left: 80px;
+}
+
+
+/* Botões */
+.btn {
+    background-color: #963c54;
+    color: #b2a9a9fb;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+
+.btn:hover {
+    background-color: #aa4d66;
+}
+
+.delete-btn {
+    /*background-color: #770624;*/
+    margin-left: 600px;
+    background-color: #ccc;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #710421;
+}

@@ -1,3 +1,19 @@
+<?php
+require_once '../projetoquartosemestre/classes/usuarios.php';
+require_once '../projetoquartosemestre/classes/cart.php';
+
+if (empty($_SESSION)) {
+  session_start();
+}
+
+$objUsuario = new Usuario();
+$objUsuario->conectar("cadastro_cliente", "localhost", "root", "admin");
+$usuario = $objUsuario->obterDadosUsuarioLogado();
+
+$u = new Cart($pdo);
+
+
+?>
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -91,18 +107,35 @@
                       <h2>Batom</h2>
                       <p> Batom Matte.</p>
                       <p>R$ 30,00</p>
-                      <form method="post" action="carrinho.php">
-               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)">
-                  Adicionar aos Salvos <ion-icon name="heart-outline"> </ion-icon>
-               </a>
-        <button name="add_to_cart" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
-        <input type="hidden" name="produto_id" value="2"> <!-- Defina o ID do item aqui -->
-    </div>
+                      <form method="post">
+   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)">
+         Adicionar aos Salvos <ion-icon name="heart-outline"></ion-icon>
+      </a>
+      <input type="number" name="quantidade" value="1" min="1"> <!-- Campo de entrada da quantidade -->
+      <button name="add_to_cart" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
+      <input type="hidden" name="id_produto" value="2"> <!-- Defina o ID do sérum aqui -->
+   </div>
 </form>
+
                   </div>
-              </div>
-   
+
+               </div>
+<?php
+ if (isset($_POST['add_to_cart'])) {
+  if ($usuario && isset($usuario['id'])) {
+      $id_produto = filter_input(INPUT_POST, 'id_produto', FILTER_SANITIZE_STRING);
+      $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_STRING);
+      $id_cliente = $usuario['id'];
+
+      $resultado = $u->adicionarAoCarrinho($pdo, $id_cliente, $id_produto, $quantidade);
+      echo $resultado;
+  } else {
+      echo "Erro: ID do cliente não encontrado. Usuário: " . print_r($usuario, true);
+  }
+}
+
+?>
                
                <footer>
                 <div class="card text-center">
