@@ -51,8 +51,13 @@ if (isset($_GET['mensagem_sucesso'])) {
               <a class="cabecalho-item" href="salvos.html">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
             </li>
             <li class="nav-item">
-              <a class="cabecalho-item" href="suaconta.php">Minha Conta <ion-icon  class="icon" name="person-outline"></ion-icon></a>
-            </li>
+          <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Minha Conta </a>
+          <ul class="dropdown-menu">
+            <li><a class="cabecalho-item" href="#">Cadastra-se</a></li>
+            <li><a class="cabecalho-item" href="#">Login</a></li>
+            <li><a class="cabecalho-item" href="#">Sair da conta </a></li>
+          </ul>
+        </li>
             <li class="nav-item">
               <a class="cabecalho-item" href="carrinho.php">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
             </li>

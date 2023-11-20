@@ -53,7 +53,7 @@ li{
 }
 #navbarSupportedContent
 {
-    background-color: #f3f0f0;
+    background-color: #ffffff;
     margin: 10px;
 }
 .card3{
@@ -145,4 +145,7 @@ footer{
 }
 .col-md-3 :hover{
     transform: scale(1.1);
+}
+.dropdown-toggle{
+    color: #770624;
 }

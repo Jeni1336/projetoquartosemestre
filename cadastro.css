@@ -7,8 +7,8 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    backdrop-filter: blur(10px); /* Ajuste o valor conforme necessário para o nível de desfoque desejado */
-    background-color: rgba(230, 61, 61, 0.8); /* Define um fundo com transparência para destacar o efeito de desfoque */
+    backdrop-filter: blur(30px); /* Ajuste o valor conforme necessário para o nível de desfoque desejado */
+    background-color:#ac546b; /* Define um fundo com transparência para destacar o efeito de desfoque */
 }
 
 .form-control{
