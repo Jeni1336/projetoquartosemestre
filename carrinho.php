@@ -161,7 +161,7 @@ if (empty($_SESSION)) {
       </div>
       <div class="flex">
          <input type="number" name="quantidade" required min="1" value="<?= $fetch_cart['quantidade']; ?>" max="99" maxlength="2" class="quantidade">
-         <button type="submit" name="update_cart" class="fas fa-minus"></button>
+         <button type="submit" name="update_cart" class="fa fa-minus"></button>
       </div>
       <p class="sub-total">Subtotal: R$<span><i class="fas fa-indian-rupee-sign"></i> <?= $sub_total = ($fetch_cart['quantidade'] * $fetch_cart['preco']); ?></span></p>
       <input type="submit" value="Deletar" name="delete_item" class="delete-btn" onclick="return confirm('Deletar esse item?');">

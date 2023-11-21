@@ -1,8 +1,34 @@
 <?php
+session_start();
 if (isset($_GET['mensagem_sucesso'])) {
   $mensagemSucesso = urldecode($_GET['mensagem_sucesso']);
   echo "<script>alert('$mensagemSucesso');</script>";
 }  
+require_once '../projetoquartosemestre/classes/usuarios.php';
+
+
+$objUsuario = new Usuario();
+$objUsuario-> conectar( "cadastro_cliente", "localhost", "root", "admin");
+$usuario = $objUsuario->obterDadosUsuarioLogado();
+
+
+if(isset($_SESSION['id'])){
+  $saudacao = '
+  <li class="nav-item dropdown">
+      <a class="cabecalho-item nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Olá, ' . $usuario['nome'] . '!
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="suaconta.php">Perfil</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="sair.php">Sair</a></li>
+      </ul>
+  </li>
+';
+} else {
+  $saudacao = "Login/Cadastrar";
+}
+
 ?>
 
 <!doctype html>
@@ -51,15 +77,14 @@ if (isset($_GET['mensagem_sucesso'])) {
               <a class="cabecalho-item" href="salvos.html">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
             </li>
             <li class="nav-item">
-          <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Minha Conta </a>
-          <ul class="dropdown-menu">
-            <li><a class="cabecalho-item" href="#">Cadastra-se</a></li>
-            <li><a class="cabecalho-item" href="#">Login</a></li>
-            <li><a class="cabecalho-item" href="#">Sair da conta </a></li>
-          </ul>
+            <a class="cabecalho-item" href="suaconta.php">Minha Conta <ion-icon  class="icon" name="person-outline"></ion-icon></a> 
+
         </li>
             <li class="nav-item">
               <a class="cabecalho-item" href="carrinho.php">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
+            </li>
+            <li class="nav-item">
+                <a class="cabecalho-item" href="login2.php"><?= $saudacao; ?> <ion-icon name="heart-outline"></ion-icon></a>
             </li>
           </ul>
           <form class="d-flex" method="get" role="search" action="resultados_busca.php">
