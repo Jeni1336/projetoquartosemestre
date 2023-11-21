@@ -5,6 +5,7 @@ if (isset($_GET['mensagem_sucesso'])) {
   echo "<script>alert('$mensagemSucesso');</script>";
 }  
 require_once '../projetoquartosemestre/classes/usuarios.php';
+$idEspecifico = 34;
 
 
 $objUsuario = new Usuario();
@@ -21,10 +22,19 @@ if(isset($_SESSION['id'])){
       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <li><a class="dropdown-item" href="suaconta.php">Perfil</a></li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="sair.php">Sair</a></li>
-      </ul>
-  </li>
-';
+          ';
+          
+          if (($usuario['id']) == $idEspecifico) {
+            $saudacao .= '<li><a class="dropdown-item" href="visualizar_produtos.php">Área Restrita</a></li>
+            <li><hr class="dropdown-divider"></li>
+            ';
+        }
+    
+        $saudacao .= '
+                    <li><a class="dropdown-item" href="sair.php">Sair</a></li>
+                </ul>
+            </li>
+        ';
 } else {
   $saudacao = "Login/Cadastrar";
 }
