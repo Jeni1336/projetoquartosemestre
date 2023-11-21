@@ -49,7 +49,7 @@ $u = new Cart($pdo);
             <li class="nav-item">
               <a class="cabecalho-item" href="telainicial.php">Inicio <ion-icon class="icon" name="home-outline"></ion-icon>
             <li class="nav-item">
-              <a class="cabecalho-item" href="salvos.html">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
+              <a class="cabecalho-item" href="salvos.php">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
             </li>
             <li class="nav-item">
               <a class="cabecalho-item" href="suaconta.php">Minha Conta <ion-icon  class="icon" name="person-outline"></ion-icon></a>
@@ -109,9 +109,37 @@ $u = new Cart($pdo);
                   <h3> R$ 50,00</h3>
                   <form method="post">
    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)">
-         Adicionar aos Salvos <ion-icon name="heart-outline"></ion-icon>
-      </a>
+   <button name="add_to_saved" class="btn-2 me-md-2" type="submit">Adicionar aos Salvos</button>
+            <input type="hidden" name="id_produto" value="1"> <!-- Defina o ID do sérum aqui -->
+      <?php
+      if (isset($_POST['add_to_saved'])) {
+      if ($usuario && isset($usuario['id'])) {
+      $id_produto = filter_input(INPUT_POST, 'id_produto', FILTER_SANITIZE_STRING);
+
+      // Consulta ao banco de dados para obter informações do produto
+      $select_produto = $pdo->prepare("SELECT * FROM `produtos` WHERE id = ?");
+        $select_produto->execute([$id_produto]);
+
+        if ($select_produto->rowCount() > 0) {
+            $fetch_produto = $select_produto->fetch(PDO::FETCH_ASSOC);
+
+            // Adicione os dados à sessão de "Salvos"
+            $_SESSION['salvos'][] = [
+                'id_produto' => $id_produto,
+                'nome' => $fetch_produto['nome'],
+                'preco' => $fetch_produto['preco'],
+                'imagem' => $fetch_produto['imagem'],
+            ];
+
+            echo "Produto adicionado aos Salvos!";
+        } else {
+            echo "Erro: Produto não encontrado no banco de dados.";
+        }
+    } else {
+        echo "Erro: ID do cliente não encontrado. Usuário: " . print_r($usuario, true);
+    }
+}
+?>
       <input type="number" name="quantidade" value="1" min="1"> <!-- Campo de entrada da quantidade -->
       <button name="add_to_cart" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
       <input type="hidden" name="id_produto" value="1"> <!-- Defina o ID do sérum aqui -->

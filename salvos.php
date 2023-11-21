@@ -1,10 +1,25 @@
+<?php
+require_once '../projetoquartosemestre/classes/usuarios.php';
+require_once '../projetoquartosemestre/classes/cart.php';
+
+if (empty($_SESSION)) {
+  session_start();
+}
+
+$objUsuario = new Usuario();
+$objUsuario->conectar("cadastro_cliente", "localhost", "root", "admin");
+$usuario = $objUsuario->obterDadosUsuarioLogado();
+
+$u = new Cart($pdo);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salvos</title>
-    <link rel="stylesheet" type="text/css" href="suaconta.css">
+    <link rel="stylesheet" type="text/css" href="salvos.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     
@@ -54,8 +69,23 @@
                                   <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
                                       <h3 class="h2 text-white mb-0">Salvos</h3>
                                   </div>
-                                  <p> Você não possui produtos na lista de salvos</p>
-                                </div>
+                                  <div class="box-container">
+                                  <?php
+if (isset($_SESSION['salvos'])) {
+  foreach ($_SESSION['salvos'] as $itemSalvo) {
+      echo '<div class="box-container">';
+      echo '<img src="' . $itemSalvo['imagem'] . '" alt="Miniatura do item">';
+      echo '<p>Nome: ' . $itemSalvo['nome'] . '</p>';
+      echo '<p>Preço: R$' . $itemSalvo['preco'] . '</p>';
+      echo '</div>';
+  }
+    
+  }else{
+    echo'<p> Você não possui produtos na lista de salvos</p>';
+   echo'</div>';
+  }
+    ?>
+                                
                                 <ul class="list-unstyled mb-1-9">
                                   <li> <a href="telainicial.html">Adicionar Produtos</a> <ion-icon name="add-outline"></ion-icon></li>
                                 </ul>
