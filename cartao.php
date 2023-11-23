@@ -57,7 +57,7 @@ if ($usuario) {
     </nav>
     <form class="col-md-6 offset-md-4" method="post">
         <div class="col-6">
-          <label class="form-label">Nome no Cartão</label>
+          <label class="form-label">Nome do Titular</label>
           <input type="text" name="nome" class="form-control" maxlength="225">
         </div>
         <div class="col-md-6">
@@ -69,7 +69,7 @@ if ($usuario) {
           <input type="text" name="cvv" class="form-control" maxlength="3" >
         </div>
         <div class="col-md-6">
-            <label class="form-label">CPF</label>
+            <label class="form-label">CPF do Titular</label>
             <input type="text" name="cpf" class="form-control" maxlength="11" >
           </div>
           <div class="col-md-6">
