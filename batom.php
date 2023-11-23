@@ -116,11 +116,17 @@ $u = new Cart($pdo);
       <button name="add_to_cart" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
       <input type="hidden" name="id_produto" value="2"> <!-- Defina o ID do sérum aqui -->
    </div>
+   Avaliações
+   <ion-icon name="star"></ion-icon>
+   <ion-icon name="star"></ion-icon>
+   <ion-icon name="star"></ion-icon>
+   <ion-icon name="star"></ion-icon>
+   <ion-icon name="star"></ion-icon>
 </form>
 
-                  </div>
+</div>
 
-               </div>
+ </div>
 <?php
  if (isset($_POST['add_to_cart'])) {
   if ($usuario && isset($usuario['id'])) {
@@ -136,7 +142,30 @@ $u = new Cart($pdo);
 }
 
 ?>
-               
+
+<div class="feedback"> 
+  <ion-icon name="star"></ion-icon>
+  <ion-icon name="star"></ion-icon>
+  <ion-icon name="star"></ion-icon>
+  <ion-icon name="star"></ion-icon>
+  <ion-icon name="star"></ion-icon>
+</div>
+<a style="color:#770624;" href="avaliacoes.php"> <h2 style="color: #770624;"> Avaliar Produto</h2></a>
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <br>
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <br>
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <br>
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
                <footer>
                 <div class="card text-center">
                   <div class="card-header">

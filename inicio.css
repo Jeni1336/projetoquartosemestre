@@ -36,20 +36,18 @@ ul{
    justify-content: center;
    margin: 10px;
 }
-.icon-car{
-    margin: 10px;
-}
+
 li{
     color: #963c54;
 }
 .banner{
-
     justify-content: center;
 }
 .promo{
     width: 40%;
     height: 40%;
     margin: 10px;
+
 }
 #navbarSupportedContent
 {
@@ -146,6 +144,10 @@ footer{
 .col-md-3 :hover{
     transform: scale(1.1);
 }
-.dropdown-toggle{
-    color: #770624;
+.icon{
+    padding: 10px;
+}
+.progress{
+    padding: 10px;
+    margin: 50px;
 }

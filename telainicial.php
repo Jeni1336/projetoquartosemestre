@@ -213,7 +213,46 @@ if(isset($_SESSION['id'])){
              
               <img class="bannerprod" src="https://i.imgur.com/sL8odLW.jpg" class="img-fluid" alt="..." style="margin-top: 50px;">
                             
-                
+              <h3>Favoritos do Site</h3>
+                    <header class="presentation">
+                      <div class="mid">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://imgur.com/VDI3xWZ" class="img-fluid">
+                              <br>
+                              <h5 class="card-title">Sérum</h5 > 
+                              <p class="card-text">R$ 50,00</p>
+                              <a href="serumprod.php" class="btn btn-primary">Saiba mais</a> 
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://imgur.com/rlYcsIP" class="img-fluid">
+                              <br>
+                              <h5 class="card-title">Batom</h5 > 
+                                <p class="card-text">R$ 30,00</p>
+                                <a href="batom.php" class="btn btn-primary">Saiba mais</a>
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://imgur.com/hyg0qS3" class="img-fluid">
+                              <br>
+                              <h5 class="card-titlee">Kit de Maquiagem</h5 > 
+                                <p class="card-textt">R$ 70,00</p>
+                                <a href="maquiagem.php" class="btn btn-primary">Saiba mais</a>
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="card wow  zoomIn animated" style="visibility: visible; zoomIn; align-items: center;"> <img src="https://imgur.com/iOvRdkU" class="img-fluid">
+                            <br>
+                            <h5 class="card-titlee">Máscara de Cílios</h5 > 
+                              <p class="card-textt">R$ 35,00</p>
+                              <a href="cilios.php" class="btn btn-primary">Saiba mais</a>
+                        </div>
+                    </div>
+                  </div>
+             
+              <img class="bannerprod" src="https://imgur.com/2LI2kL2" class="img-fluid" alt="..." style="margin-top: 50px;">
+                            
                   
             
     <footer>
