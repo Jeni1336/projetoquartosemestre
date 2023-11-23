@@ -115,7 +115,7 @@ Class Usuario{
         $sqlVerifica->bindValue(":idCliente", $idCliente);
         $sqlVerifica->execute();
     
-        if($sqlVerifica->rowCount() > 0){
+        if($sqlVerifica->rowCount() >= 3){
             return false; // Já está cadastrado
         } else {
             // Insere o novo endereço
@@ -131,44 +131,65 @@ Class Usuario{
             return true;
         }
     }
+    
     function SelectEndereco($idCliente){
         global $pdo;
+        
         // Preparar a consulta SQL
-        $sql = $pdo->prepare("SELECT endereco, cidade, bairro, estado, cep FROM endereco WHERE id_cliente = :idCliente");
+        $sql = $pdo->prepare("SELECT id, endereco, cidade, bairro, estado, cep FROM endereco WHERE id_cliente = :idCliente");
         $sql->bindValue(":idCliente", $idCliente);
         $sql->execute();
     
-        // Verificar se há endereço cadastrado
+        // Verificar se há endereços cadastrados
         if ($sql->rowCount() > 0) {
-            return $sql->fetch(PDO::FETCH_ASSOC);
-        }
-        else {
+            // Retornar todos os endereços em um array
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
+        } else {
             // Se nenhum endereço for encontrado, retornar array vazio
             return array();
         }
     }
-    function DeleteEndereco($idCliente){
-        global $pdo;
-        //VERIFICANDO SE EXISTE ANTES DA EXCLUSAO
-        $cmdVerifica = $pdo->prepare("SELECT id FROM endereco WHERE id_cliente = :idCliente");
-        $cmdVerifica->bindValue(":idCliente", $idCliente);
-        $cmdVerifica->execute();
-            
-        if($cmdVerifica->rowCount() > 0){
-            $cmd = $pdo->prepare("DELETE FROM endereco WHERE id_cliente = :idCliente");
-            $cmd->bindValue(":idCliente", $idCliente, PDO::PARAM_INT);
-            $cmd->execute();
-            $this->pdo = null; // Feche a conexão
-            return true; //exclusão deboa
-        }else{
-            return false; //sem endereço p excluir
-        }
 
-    }
-    function EditarEndereco($idCliente, $endereco, $cidade, $bairro, $estado, $cep){
+    function SelectMultiplosEnderecos($idEndereco){
         global $pdo;
-        $sql = $pdo->prepare("UPDATE endereco SET endereco = :endereco, cidade = :cidade, bairro = :bairro, estado = :estado, cep = :cep WHERE id_cliente = :idCliente");
-        $sql->bindValue(":idCliente", $idCliente, PDO::PARAM_INT);
+        $sql = $pdo->prepare("SELECT id, endereco, cidade, bairro, estado, cep FROM endereco WHERE id = :idEndereco");
+        $sql->bindValue(":idEndereco", $idEndereco);
+        $sql->execute();
+    
+        // Verificar se há endereço cadastrado
+        if ($sql->rowCount() > 0) {
+            // Retornar o endereço como um array associativo
+            return $sql->fetch(PDO::FETCH_ASSOC);
+        } else {
+            // Se nenhum endereço for encontrado, retornar array vazio
+            return array();
+        }
+    }
+    
+
+   function DeleteEndereco($idEndereco){
+    global $pdo;
+
+    // Verificar se o endereço existe antes da exclusão
+    $cmdVerifica = $pdo->prepare("SELECT id FROM endereco WHERE id = :idEndereco");
+    $cmdVerifica->bindValue(":idEndereco", $idEndereco);
+    $cmdVerifica->execute();
+
+    if($cmdVerifica->rowCount() > 0){
+        $cmd = $pdo->prepare("DELETE FROM endereco WHERE id = :idEndereco");
+        $cmd->bindValue(":idEndereco", $idEndereco, PDO::PARAM_INT);
+        $cmd->execute();
+        $this->pdo = null; // Feche a conexão
+        return true; // Exclusão bem-sucedida
+    } else {
+        return false; // Endereço não encontrado para exclusão
+    }
+}
+   
+    function EditarEndereco($idEndereco, $endereco, $cidade, $bairro, $estado, $cep){
+        global $pdo;
+        $sql = $pdo->prepare("UPDATE endereco SET endereco = :endereco, cidade = :cidade, bairro = :bairro, estado = :estado, cep = :cep WHERE id = :idEndereco");
+        $sql->bindValue(":idEndereco", $idEndereco, PDO::PARAM_INT);
         $sql->bindValue(":endereco", $endereco, PDO::PARAM_STR);
         $sql->bindValue(":cidade", $cidade, PDO::PARAM_STR);
         $sql->bindValue(":bairro", $bairro, PDO::PARAM_STR);
@@ -221,15 +242,15 @@ Class Usuario{
         $sql->bindValue(":idCliente", $idCliente);
         $sql->execute();
     
-        // Verificar se há endereço cadastrado
+        // Verificar se há cartão cadastrado
         if ($sql->rowCount() > 0) {
             return $sql->fetch(PDO::FETCH_ASSOC);
-        }
-        else {
-            // Se nenhum endereço for encontrado, retornar array vazio
+        } else {
+            // Se nenhum cartão for encontrado, retornar array vazio
             return array();
         }
     }
+    
     function RemoverCartao($idCliente){
         global $pdo;
         //VERIFICANDO SE EXISTE ANTES DA EXCLUSAO
@@ -251,5 +272,4 @@ Class Usuario{
     
 
 }
-
 ?>

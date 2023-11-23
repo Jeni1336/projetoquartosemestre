@@ -16,8 +16,9 @@ $objUsuario-> conectar( "cadastro_cliente", "localhost", "root", "admin");
 
 $usuario = $objUsuario->obterDadosUsuarioLogado();
 $dadosEndereco = $objUsuario->SelectEndereco($usuario['id']);
-$dadosCartao = $objUsuario->SelectCartao($usuario['id']);
 
+$dadosCartao = $objUsuario->SelectCartao($usuario['id']);
+$enderecoId = $objUsuario->SelectEndereco('id');
 
 
 $dataNascimento = new DateTime($usuario['data_nasc']);
@@ -108,15 +109,18 @@ $dataFormatada = $dataNascimento->format('d/m/Y');
     <?php
         // Verificar se há endereço cadastrado
         if (!empty($dadosEndereco)) {
-            echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Endereço:</span>' . $dadosEndereco['endereco'] . '</li>';
-            echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Cidade:</span>' . $dadosEndereco['cidade'] . '</li>';
-            echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Bairro:</span>' . $dadosEndereco['bairro'] . '</li>';
-            echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Estado:</span>' . $dadosEndereco['estado'] . '</li>';
-            echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">CEP:</span>' . $dadosEndereco['cep'] . '</li>';
-            echo '<li><a href="editarEndereco.php">Editar Endereço</a> <ion-icon name="create-outline"></ion-icon></li>';
+          foreach ($dadosEndereco as $endereco) {
+            echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Endereço:</span>' . $endereco['endereco'] . '</li>';
+            echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Cidade:</span>' . $endereco['cidade'] . '</li>';
+            echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Bairro:</span>' . $endereco['bairro'] . '</li>';
+            echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Estado:</span>' . $endereco['estado'] . '</li>';
+            echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">CEP:</span>' . $endereco['cep'] . '</li>';
             echo '<form name="Endereco" method="POST" id="enderecoForm">';
-            echo ' <li><a href="#" onclick="removerEndereco()">Remover Endereço</a> <ion-icon name="create-outline"></ion-icon></li>
+            echo '<li><a href="editarEndereco.php?id=' . $endereco['id'] . '">Editar Endereço</a> <ion-icon name="create-outline"></ion-icon></li>';
+            echo '<a href="#" onclick="removerEndereco(' . $endereco['id'] . ')">Remover Endereço</a>';
+            echo '<a href="endereco.php">Adicionar Mais Um Endereço</a> <ion-icon name="add-outline"></ion-icon></li>
             </form>';
+          }
         } else {
             echo '<li>Nenhum endereço cadastrado. <a href="endereco.php">Adicionar Endereço</a> <ion-icon name="add-outline"></ion-icon></li>';
         }
@@ -194,32 +198,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['removerCartao'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['removerEndereco'])) {
+  // Obter o ID do endereço a ser removido
+  $idEndereco = $_POST['idEndereco'];
+
   // Execute a exclusão do endereço
-  if ($objUsuario->DeleteEndereco($usuario['id'])) {
-    echo '<script>window.location.href = "suaconta.php";</script>';
-    exit(); // Certifique-se de encerrar o script após o redirecionamento
+  if ($objUsuario->DeleteEndereco($idEndereco)) {
+      // A exclusão foi bem-sucedida, não é necessário redirecionar via JavaScript
+      // O JavaScript já recarregará a página automaticamente
+      exit();
   } else {
-    echo "Erro ao excluir o endereço.";
+      echo "Erro ao excluir o endereço.";
   }
 }
 ?>
 <script>
-function removerEndereco() {
+function removerEndereco(idEndereco) {
     // Confirmar com o usuário antes de excluir
-// Confirmar com o usuário antes de excluir
-if (confirm("Tem certeza que deseja remover o endereço?")) {
-        // Obter o formulário pelo ID
-        var form = document.getElementById('enderecoForm');
+    if (confirm("Tem certeza que deseja remover o endereço?")) {
+        // Criar um objeto FormData para enviar dados via POST
+        var formData = new FormData();
+        formData.append('removerEndereco', '1');
+        formData.append('idEndereco', idEndereco);
 
-        // Adicionar um campo oculto ao formulário para indicar a exclusão
-        var input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'removerEndereco';
-        input.value = '1'; // Pode ser qualquer valor, apenas para indicar a exclusão
-        form.appendChild(input);
+        // Enviar uma requisição AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'suaconta.php', true);
+        xhr.onload = function() {
+            // Verificar se a exclusão foi bem-sucedida
+            if (xhr.status === 200) {
+                // Recarregar a página após a exclusão
+                window.location.reload();
+            } else {
+                // Exibir uma mensagem de erro, se necessário
+                console.error("Erro ao excluir o endereço.");
+            }
+        };
 
-        // Enviar o formulário
-        form.submit();
+        // Enviar a requisição com o FormData
+        xhr.send(formData);
     }
 }
 function removerCartao(event) {

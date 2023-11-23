@@ -1,5 +1,7 @@
 <?php
 require_once '../projetoquartosemestre/classes/usuarios.php';
+
+
 session_start();
 if(!isset($_SESSION['id'])){
   header("location: login2.php"); 
@@ -10,7 +12,13 @@ $objUsuario = new Usuario();
 $objUsuario->conectar("cadastro_cliente", "localhost", "root", "admin");
 
 $usuario = $objUsuario->obterDadosUsuarioLogado();
-$dadosEndereco = $objUsuario->SelectEndereco($usuario['id']);
+
+
+if (isset($_GET['id'])) {
+  $idEndereco = $_GET['id'];
+  $endereco = $objUsuario->SelectMultiplosEnderecos($idEndereco);
+} 
+
 
 if ($usuario) { 
 ?>
@@ -57,32 +65,32 @@ if ($usuario) {
     <form class="row g-3" method="POST">
         <div class="col-6">
           <label class="form-label">Endereço</label>
-          <input type="text" name="endereco" class="form-control" required value="<?php echo $dadosEndereco['endereco']; ?>">
+          <input type="text" name="endereco" class="form-control" required value="<?php echo $endereco['endereco']; ?>">
         </div>
         <div class="col-md-4">
           <label class="form-label">Cidade</label>
-          <input type="text" name="cidade" class="form-control" required value="<?php echo $dadosEndereco['cidade']; ?>">
+          <input type="text" name="cidade" class="form-control" required value="<?php echo $endereco['cidade']; ?>">
         </div>
         <div class="col-md-4">
           <label class="form-label">Bairro</label>
-          <input type="text" name="bairro" class="form-control" required value="<?php echo $dadosEndereco['bairro']; ?>">
+          <input type="text" name="bairro" class="form-control" required value="<?php echo $endereco['bairro']; ?>">
         </div>
         <div class="col-md-4">
           <label class="form-label"> Estado</label>
           <select name="estado" class="form-select" required>
             <option selected>Estado</option>
-            <option value="SP" <?php echo ($dadosEndereco['estado'] == 'SP') ? 'selected' : ''; ?>>SP</option>
-            <option value="RJ" <?php echo ($dadosEndereco['estado'] == 'RJ') ? 'selected' : ''; ?>>RJ</option>
-            <option value="BA" <?php echo ($dadosEndereco['estado'] == 'BA') ? 'selected' : ''; ?>>BA</option>
-            <option value="AM" <?php echo ($dadosEndereco['estado'] == 'AM') ? 'selected' : ''; ?>>AM</option>
-            <option value="PB" <?php echo ($dadosEndereco['estado'] == 'PB') ? 'selected' : ''; ?>>PB</option>
+            <option value="SP" <?php echo ($endereco['estado'] == 'SP') ? 'selected' : ''; ?>>SP</option>
+            <option value="RJ" <?php echo ($endereco['estado'] == 'RJ') ? 'selected' : ''; ?>>RJ</option>
+            <option value="BA" <?php echo ($endereco['estado'] == 'BA') ? 'selected' : ''; ?>>BA</option>
+            <option value="AM" <?php echo ($endereco['estado'] == 'AM') ? 'selected' : ''; ?>>AM</option>
+            <option value="PB" <?php echo ($endereco['estado'] == 'PB') ? 'selected' : ''; ?>>PB</option>
           </select>
         </div>
         <div class="col-md-2">
           <label class="form-label">CEP</label>
-          <input type="text" name="cep" class="form-control" required value="<?php echo $dadosEndereco['cep']; ?>">
+          <input type="text" name="cep" class="form-control" required value="<?php echo $endereco['cep']; ?>">
         </div>
-        <input type="hidden" name="idCliente" value="<?php echo $usuario['id']; ?>">
+        <input type="hidden" name="idEndereco" value="<?php echo $endereco['id']; ?>">
         <div class="col-12">  
         <button type="submit" class="btn-1">Editar Endereço</button>
           <a href="suaconta.php" type="submit" class="btn-1">Voltar</a>
@@ -91,7 +99,6 @@ if ($usuario) {
 
       <?php
 if (isset($_POST['endereco'])) {
-  $idCliente = $usuario['id'];
   $endereco = $_POST['endereco'];
   $cidade = $_POST['cidade'];
   $bairro = $_POST['bairro'];
@@ -100,17 +107,17 @@ if (isset($_POST['endereco'])) {
 
   // Verificar se está preenchido
   if (!empty($endereco) && !empty($cidade) && !empty($bairro) && !empty($estado) && !empty($cep)) {
-      if ($objUsuario->msgErro == "") { // está tudo certo
-          if ($objUsuario->EditarEndereco($idCliente, $endereco, $cidade, $bairro, $estado, $cep)) {
-            
-              header("location: suaconta.php");
-          } else {
-              echo "Erro ao editar o endereço.";
-          }
-      }
-  } else {
-      echo "Erro: Preencha todos os campos!";
-  }
+    if ($objUsuario->msgErro == "") {
+        if ($objUsuario->EditarEndereco($idEndereco, $endereco, $cidade, $bairro, $estado, $cep)) {
+            header("location: suaconta.php");
+            exit();
+        } else {
+            echo "Erro ao editar o endereço.";
+        }
+    }
+} else {
+    echo "Erro: Preencha todos os campos!";
+}
 }
 
 ?>
