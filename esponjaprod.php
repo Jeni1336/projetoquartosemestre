@@ -19,8 +19,8 @@ $u = new Cart($pdo);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Batom</title>
-    <link rel="stylesheet" type="text/css" href="batom.css">
+    <title>Esponjinha</title>
+    <link rel="stylesheet" type="text/css" href="esponja.css">
     <link rel="shortcut icon" href="https://i.imgur.com/gBQhCJ6.png" type="x-icon">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -102,11 +102,11 @@ $u = new Cart($pdo);
                   </li>
                 </ul>
                 <div class="produto-container">
-                  <img src="https://i.imgur.com/KoReX3t.jpg"" alt="Produto">
+                  <img src="https://imgur.com/Y2HpXX6.jpg" alt="Produto">
                   <div class="descricao-produto">
-                      <h2>Batom</h2>
-                      <p> Batom Matte.</p>
-                      <p>R$ 30,00</p>
+                      <h2>Esponjinha</h2>
+                      <p> Esponjinha de Maquiagem</p>
+                      <p>R$ 20,00</p>
                       <form method="post">
    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)">

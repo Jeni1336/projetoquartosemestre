@@ -54,19 +54,9 @@ h1, p{
 h3{
     margin: 300px;
 }
-.btn-2{
-    background-color: #770624;
-    border-radius: 10px;
-    color: white;
-    width: 15%;
-    justify-content: end;
-    
-}
- footer p{
+ footer{
      margin: 10px;
      padding: 20px;
-     color: black;
-
  }
  .icon1{
      margin: 10px;
@@ -77,23 +67,47 @@ h3{
  .cabecalho-item-car{
      color: #770624;
  }
- .btn-1{
-     background-color: #770624;
-     border-radius: 10px;
-     color: white;
- }
- p{
-    text-align: center;
-    color: #770624;
-    padding: 20px;
- }
- .texto{
-    display: flex;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transform: translate(00.5s);
- }
+ .btn-{
+    background-color: #770624;
+    border-radius: 10px;
+    color: white;
+}
+.produto-container {
+   display: flex;
+   max-width: 600px;
+   margin: 20px auto;
+   padding: 10px;
+   border: 1px solid #ddd;
+   border-radius: 8px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   transform: translate(00.5s);
+}
+
+.produto-container img {
+   max-width: 100%;
+   border-radius: 8px;
+}
+
+.descricao-produto {
+   padding: 0 20px;
+   text-align: center;
+}
+
+.descricao-produto h2 {
+   font-size: 1.5em;
+   margin-bottom: 10px;
+}
+
+.descricao-produto p {
+    font-size: 1em;
+   color: #555;
+   white-space: nowrap;
+   
+}
+
+
+
+
+
+
+
