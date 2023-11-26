@@ -3,7 +3,10 @@ require_once '../projetoquartosemestre/classes/usuarios.php';
 require_once '../projetoquartosemestre/classes/cart.php';
 
 if (empty($_SESSION)) {
-  session_start();
+    session_start();
+}
+if (!isset($_SESSION['salvos'])) {
+  $_SESSION['salvos'] = [];
 }
 
 $objUsuario = new Usuario();
@@ -12,7 +15,41 @@ $usuario = $objUsuario->obterDadosUsuarioLogado();
 
 $u = new Cart($pdo);
 
+if (isset($_POST['add_to_saved'])) {
+    if ($usuario && isset($usuario['id'])) {
+        $id_produto = filter_input(INPUT_POST, 'id_produto', FILTER_SANITIZE_STRING);
 
+        // Consulta ao banco de dados para obter informações do produto
+        $select_produto = $pdo->prepare("SELECT * FROM `produtos` WHERE id = ?");
+        $select_produto->execute([$id_produto]);
+
+        if ($select_produto->rowCount() > 0) {
+            $fetch_produto = $select_produto->fetch(PDO::FETCH_ASSOC);
+
+            // Crie o array para salvar o item
+            $itemParaSalvar = [
+                'id_produto' => $id_produto,
+                'nome' => $fetch_produto['nome'],
+                'preco' => $fetch_produto['preco'],
+                'imagem' => $fetch_produto['imagem'],
+                'url_absoluta' => $fetch_produto['url_absoluta'],
+            ];
+
+            // Adicione os dados à sessão de "Salvos"
+            if (!in_array($itemParaSalvar, $_SESSION['salvos'])) {
+                // O item não está na lista de salvos, então podemos adicioná-lo
+                $_SESSION['salvos'][] = $itemParaSalvar;
+                echo "Produto adicionado aos Salvos!";
+            } else {
+                echo 'Este item já está na lista de salvos.';
+            }
+        } else {
+            echo "Erro: Produto não encontrado no banco de dados.";
+        }
+    } else {
+        echo "Erro: ID do cliente não encontrado. Usuário: " . print_r($usuario, true);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -49,13 +86,13 @@ $u = new Cart($pdo);
             <li class="nav-item">
               <a class="cabecalho-item" href="telainicial.php">Inicio <ion-icon class="icon" name="home-outline"></ion-icon>
             <li class="nav-item">
-              <a class="cabecalho-item" href="salvos.html">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
+              <a class="cabecalho-item" href="salvos.php">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
             </li>
             <li class="nav-item">
               <a class="cabecalho-item" href="suaconta.php">Minha Conta <ion-icon  class="icon" name="person-outline"></ion-icon></a>
             </li>
             <li class="nav-item">
-              <a class="cabecalho-item" href="carrinho.html">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
+              <a class="cabecalho-item" href="carrinho.php">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
             </li>
           </ul>
           <form class="d-flex" method="get" role="search" action="resultados_busca.php">
@@ -108,13 +145,13 @@ $u = new Cart($pdo);
                       <p> Base liquida</p>
                       <p>R$ 60,00</p>
                       <form method="post">
-   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)">
-         Adicionar aos Salvos <ion-icon name="heart-outline"></ion-icon>
-      </a>
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+   <button name="add_to_saved" class="btn-2 me-md-2" type="submit">Adicionar aos Salvos</button>
+            <input type="hidden" name="id_produto" value="7"> <!-- Defina o ID do sérum aqui -->
+
       <input type="number" name="quantidade" value="1" min="1"> <!-- Campo de entrada da quantidade -->
       <button name="add_to_cart" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
-      <input type="hidden" name="id_produto" value="2"> <!-- Defina o ID do sérum aqui -->
+      <input type="hidden" name="id_produto" value="7"> <!-- Defina o ID do sérum aqui -->
    </div>
    Avaliações
    <ion-icon name="star"></ion-icon>
@@ -127,7 +164,7 @@ $u = new Cart($pdo);
 </div>
 
  </div>
-<?php
+ <?php
  if (isset($_POST['add_to_cart'])) {
   if ($usuario && isset($usuario['id'])) {
       $id_produto = filter_input(INPUT_POST, 'id_produto', FILTER_SANITIZE_STRING);
@@ -136,7 +173,17 @@ $u = new Cart($pdo);
 
       $resultado = $u->adicionarAoCarrinho($pdo, $id_cliente, $id_produto, $quantidade);
       echo $resultado;
-  } else {
+
+      if (isset($_SESSION['salvos'])) {
+        foreach ($_SESSION['salvos'] as $key => $itemSalvo) {
+            if ($itemSalvo['id_produto'] == $id_produto) {
+                unset($_SESSION['salvos'][$key]);
+                break;
+            }
+        }
+    }
+} 
+  else {
       echo "Erro: ID do cliente não encontrado. Usuário: " . print_r($usuario, true);
   }
 }

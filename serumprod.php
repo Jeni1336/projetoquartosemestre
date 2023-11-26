@@ -5,6 +5,9 @@ require_once '../projetoquartosemestre/classes/cart.php';
 if (empty($_SESSION)) {
     session_start();
 }
+if (!isset($_SESSION['salvos'])) {
+  $_SESSION['salvos'] = [];
+}
 
 $objUsuario = new Usuario();
 $objUsuario->conectar("cadastro_cliente", "localhost", "root", "admin");
@@ -139,18 +142,19 @@ if (isset($_POST['add_to_saved'])) {
                   <img src="https://imgur.com/vio01Yo.jpg" alt="Produto">
                   <div class="descricao-produto">
                       <h2>Sérum Facial</h2>
-                      <p> SÉRUM ANTIACNE E ANTIOLEOSIDADE</p>
+                      <p> Sérum antiacne e antioleosidade</p>
                       <p>R$ 50,00</p>
                       <form method="post">
    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)">
-         Adicionar aos Salvos <ion-icon name="heart-outline"></ion-icon>
-      </a>
-      <input type="number" name="quantidade" value="1" min="1"> <!-- Campo de entrada da quantidade -->
-      <button name="add_to_cart" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
-      <input type="hidden" name="id_produto" value="2"> <!-- Defina o ID do sérum aqui -->
-   </div>
+   <button name="add_to_saved" class="btn-2 me-md-2" type="submit">Adicionar aos Salvos</button>
+    <input type="hidden" name="id_produto" value="1"> <!-- Defina o ID do sérum aqui -->
 
+    
+  <input type="number" name="quantidade" value="1" min="1"> <!-- Campo de entrada da quantidade -->
+      <button name="add_to_cart" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
+      <input type="hidden" name="id_produto" value="1"> <!-- Defina o ID do sérum aqui -->
+   </div>
+   
             
 </form>
 
@@ -183,7 +187,48 @@ if (isset($_POST['add_to_saved'])) {
 
 ?>
               
- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 
+              <div class="feedback"> 
+  <ion-icon name="star"></ion-icon>
+  <ion-icon name="star"></ion-icon>
+  <ion-icon name="star"></ion-icon>
+  <ion-icon name="star"></ion-icon>
+  <ion-icon name="star"></ion-icon>
+</div>
+<a style="color:#770624;" href="avaliacoes.php"> <h2 style="color: #770624;"> Avaliar Produto</h2></a>
+  
+               <footer>
+                <div class="card text-center">
+                  <div class="card-header">
+                    Tons de Beleza
+                  </div>
+                  <div class="card-body">
+                    <ul>
+                      <li class="prod1" > 
+                        <a class="link" href="sobre.html">Sobre</a>
+                      </li>
+                      <li class="prod1"> 
+                        <a class="link" href="contato.html">Contato</a>
+                      </li>
+                      <li class="prod1"> 
+                        <a class="link" href="trabalheconosco.html">Trabalhe Conosco</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="icon1">
+                  <ion-icon class="icon1" name="logo-instagram"> instagram</ion-icon>
+                  <ion-icon class="icon1" name="logo-twitter">x</ion-icon>
+                  <ion-icon class="icon1" name="logo-tiktok">tik tok</ion-icon>
+                </div>
+             <p>
+              Na Tons de Beleza, acreditamos que a maquiagem é uma forma de expressão, é pra quem quiser pra quem sonha, quem tem luta e quem tem fé, e pra quem tem empoderamento. Oferecemos uma ampla gama de produtos de beleza de alta qualidade para realçar sua beleza única. Nossa missão é ajudar você a se sentir confiante e deslumbrante todos os dias.
+             </p>
+                </div>
+                
+                
+              </footer>
+           
+
+               <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+              <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 
 </body>
 </html>
