@@ -5,6 +5,8 @@ body {
     font-family: Arial, sans-serif;
 }
 
+
+
 .cabecalho {
     display: flex;
     flex-direction: row;
@@ -37,12 +39,6 @@ select {
 
 img {
     margin: 25px;
-}
-
-.btn {
-    background-color: #770624;
-    border-radius: 10px;
-    color: white;
 }
 
 .caixa {

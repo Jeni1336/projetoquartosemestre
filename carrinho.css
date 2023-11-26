@@ -13,6 +13,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding: 24px;
 }
 .cabecalho-item{
     color: #963c54;
@@ -26,8 +27,25 @@ body {
     text-decoration: underline;
     margin: 10px;
 }
-#carouselExampleIndicators{
-   padding: 30px;
+ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 20px;
+   justify-content: center;
+   margin: 10px;
+}
+.icon-car{
+    margin: 10px;
+}
+.link{
+    color: #963c54;
+}
+
+.btn-1{
+    background-color: #770624;
+    border-radius: 10px;
+    color: white;
 }
 .bg-light {
     width: 100%; /* ou outro valor que você preferir, como 80%, por exemplo */

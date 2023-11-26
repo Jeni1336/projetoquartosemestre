@@ -81,6 +81,47 @@ if (empty($_SESSION)) {
       crossorigin="anonymous">
 
 </head>
+<style>
+.cabecalho{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 24px;
+}
+.cabecalho-item{
+    color: #963c54;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
+.nav-item{
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    text-decoration: underline;
+    margin: 10px;
+}
+ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 20px;
+   justify-content: center;
+   margin: 10px;
+}
+.icon-car{
+    margin: 10px;
+}
+.link{
+    color: #963c54;
+}
+
+.btn-1{
+    background-color: #770624;
+    border-radius: 10px;
+    color: white;
+}
+
+</style>
 
 <body>
     <a href="telainicial.html"></a>

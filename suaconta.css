@@ -21,8 +21,10 @@
 .bg-light{
     margin: 15px;
 }
-.btn-1, .btn-2, .btn-3{
+.btn-2 a{
     background-color: #770624;
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
+
 }
+

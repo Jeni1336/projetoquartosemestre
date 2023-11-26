@@ -23,7 +23,32 @@ $u = new Cart($pdo);
     <link rel="stylesheet" type="text/css" href="salvos.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
+</head>
+<style>
+  .cabecalho{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 24px;
+}
+.cabecalho-item{
+    color: #963c54;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
+.nav-item{
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    text-decoration: underline;
+    margin: 10px;
+}
+.btn-1{
+    background-color: #770624;
+    border-radius: 10px;
+    color: white;
+}
+</style>
 <body>
     <a href="telainicial.html"></a>
     <nav class="navbar navbar-expand-lg bg-light">
@@ -51,7 +76,7 @@ $u = new Cart($pdo);
           </ul>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
-            <button class="btn btn-outline-primary" type="submit">Pesquisa</button>
+            <button class="btn-1" type="submit">Pesquisa</button>
           </form>
         </div>
       </div>
@@ -111,5 +136,4 @@ if (isset($_SESSION['salvos']) && !empty($_SESSION['salvos'])) {
               <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
               <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 
     </body>
-    </head>
     </html>

@@ -21,6 +21,7 @@ $sth->execute();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados de Busca</title>
+    <link rel="shortcut icon" href="https://i.imgur.com/gBQhCJ6.png" type="x-icon">
     <link rel="stylesheet" type="text/css" href="resultados_busca.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -29,6 +30,51 @@ $sth->execute();
         crossorigin="anonymous"></script>
     <script src='https://kit.fontawesome.com/6c1b2d82eb.js' crossorigin='anonymous'></script>
 </head>
+<style>
+  ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 20px;
+    justify-content: center;
+    margin: 10px;
+}
+.icon-car{
+    margin: 10px;
+}
+.link{
+    color: #963c54;
+}
+    
+.btn-1{
+    background-color: #770624;
+    border-radius: 10px;
+    color: white;
+ }
+
+footer {
+     margin: 10px;
+     padding: 20px;
+     color: black;
+}
+.icon1{
+     margin: 10px;
+     display: flexbox;
+     flex-direction: row;
+     align-items: center;
+}
+.cabecalho-item-car{
+     color: #770624;
+}
+.btn-1{
+     background-color: #770624;
+     border-radius: 10px;
+     color: white;
+}
+</style>
+
+
+
 <body>
 <div class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
@@ -130,13 +176,21 @@ $resultados = $sth->fetchAll(PDO::FETCH_ASSOC);
         <ion-icon class="icon1" name="logo-twitter">x</ion-icon>
         <ion-icon class="icon1" name="logo-tiktok">tik tok</ion-icon>
       </div>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit consectetur iure sunt saepe voluptates ad ipsum tenetur molestiae. Non veritatis, asperiores expedita voluptate dolores blanditiis minus aliquid natus provident voluptatem?
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, beatae ullam, quisquam atque quam quibusdam, praesentium consectetur explicabo rerum velit rem. Eveniet quaerat esse, vel voluptatem provident incidunt impedit assumenda.
+        <p>
+        Na Tons de Beleza, acreditamos que a maquiagem é uma forma de expressão, é pra quem quiser pra quem sonha, quem tem luta e quem tem fé, e pra quem tem empoderamento. Oferecemos uma ampla gama de produtos de beleza de alta qualidade para realçar sua beleza única. Nossa missão é ajudar você a se sentir confiante e deslumbrante todos os dias.
         </p>
       </div>
+
+      
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 
       
       
     </footer>
+
+    </footer>
+      
+    
 </body>
 </html>
 

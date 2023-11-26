@@ -31,6 +31,14 @@ $u-> conectar("cadastro_cliente", "localhost", "root", "admin");
     <link rel="shortcut icon" href="https://i.imgur.com/gBQhCJ6.png" type="x-icon">
     <link rel="stylesheet" type="text/css" href="cadastrarProduto1.css">
 </head>
+<style>
+  .btn-1 {
+    background-color: #770624;
+    border-radius: 10px;
+    color: white;
+}
+</style>
+
 <body>
 <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
@@ -94,7 +102,7 @@ $u-> conectar("cadastro_cliente", "localhost", "root", "admin");
                 <input type="text" name="produto_url" class="form-control" required maxlength="50" placeholder="'../projetoquartosemestre/'">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary" name="add_produto">Cadastrar Produto</button>
+                <button type="submit" class="btn btn-secondary" name="add_produto">Cadastrar Produto</button>
                 <a href="telainicial.php" class="btn btn-secondary">Cancelar</a>
             </div>
         </form>
@@ -133,6 +141,11 @@ if (isset($_POST['add_produto'])) {
 }
 
 ?>
+
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+              <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 
 </body>
 </html>
 

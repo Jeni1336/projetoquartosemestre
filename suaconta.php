@@ -35,6 +35,16 @@ $dataFormatada = $dataNascimento->format('d/m/Y');
     <link rel="stylesheet" type="text/css" href="suaconta.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<style>
+  .btn-2 a{
+    background-color: #770624;
+    border-radius: 5px;
+    color: white;
+    
+
+}
+</style>
     
     
     
@@ -118,8 +128,10 @@ $dataFormatada = $dataNascimento->format('d/m/Y');
             echo '<form name="Endereco" method="POST" id="enderecoForm">';
             echo '<li><a href="editarEndereco.php?id=' . $endereco['id'] . '">Editar Endereço</a> <ion-icon name="create-outline"></ion-icon></li>';
             echo '<a href="#" onclick="removerEndereco(' . $endereco['id'] . ')">Remover Endereço</a>';
+            if (count($dadosEndereco) < 3) {
             echo '<a href="endereco.php">Adicionar Mais Um Endereço</a> <ion-icon name="add-outline"></ion-icon></li>
             </form>';
+            }
           }
         } else {
             echo '<li>Nenhum endereço cadastrado. <a href="endereco.php">Adicionar Endereço</a> <ion-icon name="add-outline"></ion-icon></li>';
@@ -179,9 +191,10 @@ $dataFormatada = $dataNascimento->format('d/m/Y');
         exit(); // Certifique-se de encerrar o script após o redirecionamento
     }
       ?>
-
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn-3" type="button" href="sair.php">Sair da Conta</a>
+      
+      
+      <div class="d-flex justify-content-end mt-3">
+       <button class="btn-2" type="submit"> <a href="sair.php">Sair da Conta</a></button>
       </div>
      
 

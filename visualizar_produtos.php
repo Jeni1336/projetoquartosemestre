@@ -136,9 +136,9 @@ $produtos = $produto->obterTodosProdutos();
             ?>
         </tbody>
     </table>
-    <div class="col-md-6 offset-md-3">
-                <button type="button" class="btn"> <a href="adicionar_produto.php"> Cadastrar Novo </a></button>  
-                <button type="button" class="btn"> <a href="telainicial.php"> Voltar </a></button>  
-            </div>
+ <div class="col-md-6 offset-md-3">
+    <button type="submit" class="btn-1"> <a style="color: white;" href="adicionar_produto.php"> Cadastrar Novo </a> </button>
+    <button type="submit" class="btn-1"> <a style="color: white;" href="telainicial.php"> Voltar </a> </button>
+   </div>
 </body>
 </html>

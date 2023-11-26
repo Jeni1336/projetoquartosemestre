@@ -84,7 +84,7 @@ if ($usuario) {
         <input type="hidden" name="idCliente" value="<?php echo $usuario['id']; ?>">
         <div class="col-12">  
         <button type="submit" class="btn-1">Adicionar Endereço</button>
-          <a href="suaconta.php" type="submit" class="btn-1">Voltar</a>
+         <button type="submit" class="btn-1"><a href="suaconta.php"></a>Voltar</button>
         </div>
       </form>
 

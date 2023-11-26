@@ -74,7 +74,7 @@ if ($usuario) {
           </div>
           <div class="col-md-6">
             <label class="form-label">Data de Vencimento</label>
-            <input type="date" name="data_vencimento" class="form-control">
+            <input type="date" name="data_vencimento" class="form-control" placeholder="MM/AA">
           </div>
         <div class="col-12">
           <button type="submit" class="btn-1">Adicionar Cartão</button>

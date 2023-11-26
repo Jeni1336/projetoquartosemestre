@@ -94,7 +94,7 @@ if(isset($_SESSION['id'])){
               <a class="cabecalho-item" href="carrinho.php">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
             </li>
             <li class="nav-item">
-                <a class="cabecalho-item" href="login2.php"><?= $saudacao; ?> <ion-icon name="heart-outline"></ion-icon></a>
+                <a class="cabecalho-item" href="login2.php"><?= $saudacao; ?></a>
             </li>
           </ul>
           <form class="d-flex" method="get" role="search" action="resultados_busca.php">
