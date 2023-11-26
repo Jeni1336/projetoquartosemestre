@@ -135,20 +135,23 @@ if (isset($_POST['add_to_saved'])) {
                     <a class="link" href="# ">Ofertas</a>
                   </li>
                 </ul>
-
-                <div>
-                  <h1> Serúm Facial</h1>
-                  <p>SÉRUM ANTIACNE E ANTIOLEOSIDADE</p>
-                  <p class="serumtexto"> Serúm com ativos para a pele, hidratação profundo e rejuvenescimento da pele </p>
-                  <h3> R$ 50,00</h3>
-                  <form method="post">
+                <div class="produto-container">
+                  <img src="https://imgur.com/vio01Yo.jpg" alt="Produto">
+                  <div class="descricao-produto">
+                      <h2>Sérum Facial</h2>
+                      <p> SÉRUM ANTIACNE E ANTIOLEOSIDADE</p>
+                      <p>R$ 50,00</p>
+                      <form method="post">
    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-   <button name="add_to_saved" class="btn-2 me-md-2" type="submit">Adicionar aos Salvos</button>
-            <input type="hidden" name="id_produto" value="1"> <!-- Defina o ID do sérum aqui -->
+      <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)">
+         Adicionar aos Salvos <ion-icon name="heart-outline"></ion-icon>
+      </a>
       <input type="number" name="quantidade" value="1" min="1"> <!-- Campo de entrada da quantidade -->
       <button name="add_to_cart" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
-      <input type="hidden" name="id_produto" value="1"> <!-- Defina o ID do sérum aqui -->
+      <input type="hidden" name="id_produto" value="2"> <!-- Defina o ID do sérum aqui -->
    </div>
+
+            
 </form>
 
                   </div>

@@ -218,40 +218,40 @@ if(isset($_SESSION['id'])){
                       <div class="mid">
                       <div class="row">
                         <div class="col-md-3">
-                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://imgur.com/VDI3xWZ" class="img-fluid">
+                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://imgur.com/t2S39qC.jpg" class="img-fluid"> 
                               <br>
-                              <h5 class="card-title">Sérum</h5 > 
-                              <p class="card-text">R$ 50,00</p>
-                              <a href="serumprod.php" class="btn btn-primary">Saiba mais</a> 
+                              <h5 class="card-title">Base </h5 > 
+                              <p class="card-text">R$ 60,00</p>
+                              <a href="baseprod.php" class="btn btn-primary">Saiba mais</a> 
                           </div>
                       </div>
                       <div class="col-md-3">
-                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://imgur.com/rlYcsIP" class="img-fluid">
+                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="" class="img-fluid">
                               <br>
-                              <h5 class="card-title">Batom</h5 > 
-                                <p class="card-text">R$ 30,00</p>
-                                <a href="batom.php" class="btn btn-primary">Saiba mais</a>
+                              <h5 class="card-title">Blush</h5 > 
+                                <p class="card-text">R$ 35,00</p>
+                                <a href="blushprod.php" class="btn btn-primary">Saiba mais</a>
                           </div>
                       </div>
                       <div class="col-md-3">
-                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://imgur.com/hyg0qS3" class="img-fluid">
+                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://imgur.com/Y2HpXX6.jpg" class="img-fluid">
                               <br>
-                              <h5 class="card-titlee">Kit de Maquiagem</h5 > 
-                                <p class="card-textt">R$ 70,00</p>
-                                <a href="maquiagem.php" class="btn btn-primary">Saiba mais</a>
+                              <h5 class="card-titlee">Esponjinha </h5 > 
+                                <p class="card-textt">R$ 20,00</p>
+                                <a href="esponjaprod.php" class="btn btn-primary">Saiba mais</a>
                           </div>
                       </div>
                       <div class="col-md-3">
-                        <div class="card wow  zoomIn animated" style="visibility: visible; zoomIn; align-items: center;"> <img src="https://imgur.com/iOvRdkU" class="img-fluid">
+                        <div class="card wow  zoomIn animated" style="visibility: visible; zoomIn; align-items: center;"> <img src="https://imgur.com/RrLzSTv.jpg" class="img-fluid">
                             <br>
-                            <h5 class="card-titlee">Máscara de Cílios</h5 > 
+                            <h5 class="card-titlee">Gloss Labial</h5 > 
                               <p class="card-textt">R$ 35,00</p>
-                              <a href="cilios.php" class="btn btn-primary">Saiba mais</a>
+                              <a href="glossprod.php" class="btn btn-primary">Saiba mais</a>
                         </div>
                     </div>
                   </div>
              
-              <img class="bannerprod" src="https://imgur.com/2LI2kL2" class="img-fluid" alt="..." style="margin-top: 50px;">
+              <img class="bannerprod" src="https://imgur.com/txN35Ac.jpg" class="img-fluid" alt="..." style="margin-top: 50px;">
                             
                   
             
