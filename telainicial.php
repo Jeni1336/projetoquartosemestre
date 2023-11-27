@@ -226,7 +226,7 @@ if(isset($_SESSION['id'])){
                           </div>
                       </div>
                       <div class="col-md-3">
-                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="" class="img-fluid">
+                          <div class="card wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn; align-items: center;"> <img src="https://imgur.com/pTpKamE.jpg" class="img-fluid">
                               <br>
                               <h5 class="card-title">Blush</h5 > 
                                 <p class="card-text">R$ 35,00</p>

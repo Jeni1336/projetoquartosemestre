@@ -30,6 +30,12 @@ $u = new Cart($pdo);
     crossorigin="anonymous"></script>
     <script src='https://kit.fontawesome.com/6c1b2d82eb.js' crossorigin='anonymous'></script>
     </head>
+    <style>
+      .btn-{
+        height: 55px;
+        width: 90px;
+      }
+    </style>
     <body>
     <div class="caixinha"> </div>
     <!-- <div class="cont">
@@ -102,18 +108,16 @@ $u = new Cart($pdo);
                   </li>
                 </ul>
                 <div class="produto-container">
-                  <img src="" alt="Produto">
+                  <img src="https://imgur.com/pTpKamE.jpg" alt="Produto">
                   <div class="descricao-produto">
                       <h2>Blush</h2>
                       <p> Blush</p>
                       <p>R$ 35,00</p>
                       <form method="post">
    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a href="salvos.html" style="text-decoration: none; color:rgb(121, 28, 28)">
-         Adicionar aos Salvos <ion-icon name="heart-outline"></ion-icon>
-      </a>
+    <button name="add_to_cart" class="btn-" type="submit">Adicionar ao Salvos</ion-icon></button> 
       <input type="number" name="quantidade" value="1" min="1"> <!-- Campo de entrada da quantidade -->
-      <button name="add_to_cart" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
+      <button name="add_to_cart" class="btn-" type="submit">Adicionar à Sacola</button>
       <input type="hidden" name="id_produto" value="2"> <!-- Defina o ID do sérum aqui -->
    </div>
    Avaliações
