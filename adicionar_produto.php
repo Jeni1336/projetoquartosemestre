@@ -83,7 +83,7 @@ $u-> conectar("cadastro_cliente", "localhost", "root", "admin");
             </div>
             <div class="form-group">
                 <label>Descrição do Produto<span>*</span></label>
-                <input type="text" name="produto_descricao" class="form-control" required maxlength="50" placeholder="Descricao do Produto">
+                <input type="text" name="produto_descricao" class="form-control" required maxlength="250" placeholder="Descricao do Produto">
             </div>
             <div class="form-group">
                 <label>Preço do Produto<span>*</span></label>
