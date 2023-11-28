@@ -67,6 +67,12 @@ if (isset($_POST['add_to_saved'])) {
     crossorigin="anonymous"></script>
     <script src='https://kit.fontawesome.com/6c1b2d82eb.js' crossorigin='anonymous'></script>
     </head>
+    <style>
+      .btn-{
+        height: 55px;
+        width: 90px;
+      }
+    </style>
     <body>
     <div class="caixinha"> </div>
     <!-- <div class="cont">
@@ -86,13 +92,13 @@ if (isset($_POST['add_to_saved'])) {
             <li class="nav-item">
               <a class="cabecalho-item" href="telainicial.php">Inicio <ion-icon class="icon" name="home-outline"></ion-icon>
             <li class="nav-item">
-              <a class="cabecalho-item" href="salvos.html">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
+              <a class="cabecalho-item" href="salvos.php">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
             </li>
             <li class="nav-item">
               <a class="cabecalho-item" href="suaconta.php">Minha Conta <ion-icon  class="icon" name="person-outline"></ion-icon></a>
             </li>
             <li class="nav-item">
-              <a class="cabecalho-item" href="carrinho.html">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
+              <a class="cabecalho-item" href="carrinho.php">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
             </li>
           </ul>
           <form class="d-flex" method="get" role="search" action="resultados_busca.php">
@@ -145,13 +151,10 @@ if (isset($_POST['add_to_saved'])) {
                       <p> Batom Matte.</p>
                       <p>R$ 30,00</p>
                       <form method="post">
-   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-   <button name="add_to_saved" class="btn-2 me-md-2" type="submit">Adicionar aos Salvos</button>
-    <input type="hidden" name="id_produto" value="2"> <!-- Defina o ID do sérum aqui -->
-
-    
-  <input type="number" name="quantidade" value="1" min="1"> <!-- Campo de entrada da quantidade -->
-      <button name="add_to_cart" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button name="add_to_cart" class="btn-" type="submit">Adicionar ao Salvos</ion-icon></button> 
+      <input type="number" name="quantidade" value="1" min="1"> <!-- Campo de entrada da quantidade -->
+      <button name="add_to_cart" class="btn-" type="submit">Adicionar à Sacola</button>
       <input type="hidden" name="id_produto" value="2"> <!-- Defina o ID do sérum aqui -->
    </div>
    

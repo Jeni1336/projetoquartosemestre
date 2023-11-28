@@ -37,13 +37,13 @@ if ($usuario) {
             <li class="nav-item">
               <a class="cabecalho-item" href="telainicial.php">Inicio <ion-icon class="icon" name="home-outline"></ion-icon>
             <li class="nav-item">
-              <a class="cabecalho-item" href="salvos.html">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
+              <a class="cabecalho-item" href="salvos.php">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
             </li>
             <li class="nav-item">
               <a class="cabecalho-item" href="suaconta.php">Minha Conta <ion-icon  class="icon" name="person-outline"></ion-icon></a>
             </li>
             <li class="nav-item">
-              <a class="cabecalho-item" href="carrinho.html">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
+              <a class="cabecalho-item" href="carrinho.php">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
             </li>
           </ul>
           <form class="d-flex" method="get" role="search" action="resultados_busca.php">
@@ -75,6 +75,17 @@ if ($usuario) {
             <option>BA</option>
             <option>AM</option>
             <option>PB</option>
+            <option>GO</option>
+            <option>MA</option>
+            <option>AC</option>
+            <option>SE</option>
+            <option>PA</option>
+            <option>BH</option>
+            <option>RS</option>
+            <option>RN</option>
+            <option>PI</option>
+            <option>CE</option>
+            <option>ES</option>
           </select>
         </div>
         <div class="col-md-2">

@@ -143,7 +143,7 @@ ul{
                                                                                      name="home-outline"></ion-icon></a>
                     </li>
                     <li class="nav-item">
-                        <a class="cabecalho-item" href="salvos.html">Salvos <ion-icon class="icon"
+                        <a class="cabecalho-item" href="salvos.php">Salvos <ion-icon class="icon"
                                                                                     name="heart-outline"></ion-icon></a>
                     </li>
                     <li class="nav-item">
@@ -151,7 +151,7 @@ ul{
                                                                                           name="person-outline"></ion-icon></a>
                     </li>
                     <li class="nav-item">
-                        <a class="cabecalho-item" href="carrinho.html">Sacola <ion-icon
+                        <a class="cabecalho-item" href="carrinho.php">Sacola <ion-icon
                                 name="bag-handle-outline"></ion-icon></a>
                     </li>
                 </ul>

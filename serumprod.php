@@ -67,6 +67,12 @@ if (isset($_POST['add_to_saved'])) {
     crossorigin="anonymous"></script>
     <script src='https://kit.fontawesome.com/6c1b2d82eb.js' crossorigin='anonymous'></script>
     </head>
+    <style>
+      .btn-{
+        height: 55px;
+        width: 90px;
+      }
+    </style>
     <body>
     <div class="caixinha"> </div>
     <!-- <div class="cont">

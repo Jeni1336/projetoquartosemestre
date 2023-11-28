@@ -67,6 +67,12 @@ if (isset($_POST['add_to_saved'])) {
     crossorigin="anonymous"></script>
     <script src='https://kit.fontawesome.com/6c1b2d82eb.js' crossorigin='anonymous'></script>
     </head>
+    <style>
+      .btn-{
+        height: 55px;
+        width: 90px;
+      }
+    </style>
     <body>
     <div class="caixinha"> </div>
     <!-- <div class="cont">
@@ -86,13 +92,13 @@ if (isset($_POST['add_to_saved'])) {
             <li class="nav-item">
               <a class="cabecalho-item" href="telainicial.php">Inicio <ion-icon class="icon" name="home-outline"></ion-icon>
             <li class="nav-item">
-              <a class="cabecalho-item" href="salvos.html">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
+              <a class="cabecalho-item" href="salvos.php">Salvos <ion-icon class="icon" name="heart-outline"></ion-icon></a>
             </li>
             <li class="nav-item">
               <a class="cabecalho-item" href="suaconta.php">Minha Conta <ion-icon  class="icon" name="person-outline"></ion-icon></a>
             </li>
             <li class="nav-item">
-              <a class="cabecalho-item" href="carrinho.html">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
+              <a class="cabecalho-item" href="carrinho.php">Sacola <ion-icon name="bag-handle-outline"></ion-icon></a>
             </li>
           </ul>
           <form class="d-flex" method="get" role="search" action="resultados_busca.php">

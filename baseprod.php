@@ -67,6 +67,12 @@ if (isset($_POST['add_to_saved'])) {
     crossorigin="anonymous"></script>
     <script src='https://kit.fontawesome.com/6c1b2d82eb.js' crossorigin='anonymous'></script>
     </head>
+    <style>
+      .btn-{
+        height: 55px;
+        width: 90px;
+      }
+    </style>
     <body>
     <div class="caixinha"> </div>
     <!-- <div class="cont">
@@ -146,12 +152,14 @@ if (isset($_POST['add_to_saved'])) {
                       <p>R$ 60,00</p>
                       <form method="post">
                       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-   <button name="add_to_saved" class="btn-2 me-md-2" type="submit">Adicionar aos Salvos</button>
-            <input type="hidden" name="id_produto" value="7"> <!-- Defina o ID do sérum aqui -->
-
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button name="add_to_cart" class="btn-" type="submit">Adicionar ao Salvos</ion-icon></button> 
       <input type="number" name="quantidade" value="1" min="1"> <!-- Campo de entrada da quantidade -->
-      <button name="add_to_cart" class="btn-2 me-md-2" type="submit">Adicionar à Sacola</button>
-      <input type="hidden" name="id_produto" value="7"> <!-- Defina o ID do sérum aqui -->
+      <button name="add_to_cart" class="btn-" type="submit">Adicionar à Sacola</button>
+      <input type="hidden" name="id_produto" value="2"> <!-- Defina o ID do sérum aqui -->
+   </div>
+   
    </div>
    Avaliações
    <ion-icon name="star"></ion-icon>
