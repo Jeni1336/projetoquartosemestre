@@ -65,7 +65,7 @@ $dadosCartao = $objUsuario->SelectCartao($usuario['id']); // Adicionado novament
         <span class="close-btn" onclick="closePopup('overlayEnd')">&times;</span>
         <h2>Adicionar Endereço</h2>
         
-        <form id="formEnd" method="POST" action="checkout.php">
+        <form id="formEnd" method="POST" >
           <!-- IDs únicos para os campos do cartão -->
           <label class="form-label">Endereço</label>
           <input type="text" name="endereco" class="form-control" required>
@@ -89,7 +89,7 @@ $dadosCartao = $objUsuario->SelectCartao($usuario['id']); // Adicionado novament
           <label class="form-label">CEP</label>
           <input type="text" name="cep" class="form-control" required>
           
-          <button type="submit" value="adicionarNovoEnd">Adicionar Endereço</button>
+          <button type="submit" name="adicionarNovoEnd">Adicionar Endereço</button>
         </form>
       </div>
     </div>
@@ -124,32 +124,17 @@ if (!empty($dadosEndereco)) {
 ?>
 <?php
 if (isset($_POST['adicionarNovoEnd'])) {
+  $endereco = $_POST['endereco'];
+  $cidade = $_POST['cidade'];
+  $bairro = $_POST['bairro'];
+  $estado = $_POST['estado'];
+  $cep = $_POST['cep'];
     
 
-    // Verificar se o ID do endereço está presente no array
-    if (isset($dadosEndereco[$enderecoSelecionadoId])) {
-        $enderecoSelecionado = $dadosEndereco[$enderecoSelecionadoId];
-
-        // Verificar se todos os campos necessários estão definidos e não vazios
-        if (
-            isset($enderecoSelecionado['endereco'], $enderecoSelecionado['cidade'], $enderecoSelecionado['bairro'], $enderecoSelecionado['estado'], $enderecoSelecionado['cep']) &&
-            !empty($enderecoSelecionado['endereco']) &&
-            !empty($enderecoSelecionado['cidade']) &&
-            !empty($enderecoSelecionado['bairro']) &&
-            !empty($enderecoSelecionado['estado']) &&
-            !empty($enderecoSelecionado['cep'])
-        ) {
-            // Todos os campos estão preenchidos
-            $endereco = $enderecoSelecionado['endereco'];
-            $cidade = $enderecoSelecionado['cidade'];
-            $bairro = $enderecoSelecionado['bairro'];
-            $estado = $enderecoSelecionado['estado'];
-            $cep = $enderecoSelecionado['cep'];
-
-            if (!empty($endereco) && !empty($cidade) && !empty($bairro) && !empty($estado) && !empty($cep)) {
-                if ($objUsuario->msgErro == "") { // está tudo certo
-                    if ($objUsuario->cadastrarEndereco($idCliente, $endereco, $cidade, $bairro, $estado, $cep)) {
-                        echo '<script>location.reload();</script>';
+  if (!empty($endereco) && !empty($cidade) && !empty($bairro) && !empty($estado) && !empty($cep)) {
+if ($objUsuario->msgErro == "") { // está tudo certo
+if ($objUsuario->cadastrarEndereco($idCliente, $endereco, $cidade, $bairro, $estado, $cep)) {
+   echo '<script>location.reload();</script>';
                     } else {
                         echo "Erro ao cadastrar o endereço.";
                     }
@@ -160,12 +145,7 @@ if (isset($_POST['adicionarNovoEnd'])) {
         } else {
             echo "Erro: Preencha todos os campos do endereço corretamente!";
         }
-    } else {
-        echo "Erro: Endereço inválido!";
-    }
-} else {
-    echo "Erro: Endereço não selecionado!";
-}
+
 ?>
 
             </div>
