@@ -124,27 +124,30 @@ if (!empty($dadosEndereco)) {
 ?>
 <?php
 if (isset($_POST['adicionarNovoEnd'])) {
+  // Obtém os dados do formulário
+  $id_cliente = $usuario['id'];
   $endereco = $_POST['endereco'];
   $cidade = $_POST['cidade'];
   $bairro = $_POST['bairro'];
   $estado = $_POST['estado'];
   $cep = $_POST['cep'];
-    
 
+  // Lógica para adicionar o novo endereço
   if (!empty($endereco) && !empty($cidade) && !empty($bairro) && !empty($estado) && !empty($cep)) {
-if ($objUsuario->msgErro == "") { // está tudo certo
-if ($objUsuario->cadastrarEndereco($idCliente, $endereco, $cidade, $bairro, $estado, $cep)) {
-   echo '<script>location.reload();</script>';
-                    } else {
-                        echo "Erro ao cadastrar o endereço.";
-                    }
-                } else {
-                    echo "Erro: Preencha todos os campos!";
-                }
-            }
-        } else {
-            echo "Erro: Preencha todos os campos do endereço corretamente!";
-        }
+      if ($objUsuario->msgErro == "") { // está tudo certo
+          // Certifique-se de que a variável $id_cliente esteja definida
+              if ($objUsuario->cadastrarEndereco($id_cliente, $endereco, $cidade, $bairro, $estado, $cep)) {
+                  echo '<script>location.reload();</script>';
+              } else {
+                  echo "Erro ao cadastrar o endereço.";
+              }
+
+          }
+      } else {
+          echo "Erro: " . $objUsuario->msgErro;
+      }
+  }
+
 
 ?>
 
@@ -152,6 +155,7 @@ if ($objUsuario->cadastrarEndereco($idCliente, $endereco, $cidade, $bairro, $est
         </div>
         <div class="column">
   <div class="checkout-form2">
+    <form method="post">
     <h2>Forma de Pagamento</h2>
     
     <input type="radio" id="pix" name="forma_de_pagamento" value="pix" required>
@@ -163,8 +167,9 @@ if ($objUsuario->cadastrarEndereco($idCliente, $endereco, $cidade, $bairro, $est
     <input type="radio" id="cartao" name="forma_de_pagamento" value="cartao" onclick="showCartoes()" required>
    <label for="cartao">Cartão de Crédito</label><br>
 
+
     <div class="cartoes-cadastrados" style="display: none;">
-    
+    </form>
     <?php
     // Verificar se há endereço cadastrado
     if (!empty($dadosCartao)) {
@@ -183,7 +188,7 @@ if ($objUsuario->cadastrarEndereco($idCliente, $endereco, $cidade, $bairro, $est
 
     <?php
     if (count($dadosCartao) < 1) {
-    echo '<button type="submit" class="btn-1" id="cartao "onclick="openPopup(\'overlay\')">Adicionar Endereço</button>';
+    echo '<button type="submit" class="btn-1" name="adicionar_cartao" id="cartao "onclick="openPopup(\'overlay\')">Adicionar Cartão</button>';
     }
     ?>
 
@@ -217,7 +222,29 @@ if ($objUsuario->cadastrarEndereco($idCliente, $endereco, $cidade, $bairro, $est
   </div>
 </div>
 
+<?php
+ if (isset($_POST['adicionar_cartao'])) {
+    $id_cliente = $usuario['id'];
+     $nome = $_POST['nome'];
+     $numero_cartao = $_POST['numero_cartao'];
+     $cvv = $_POST['cvv'];
+     $data_vencimento = $_POST['data_vencimento'];
+     $cpf = $_POST['cpf'];
 
+     // Verificar se está preenchido
+     if (!empty($nome) && !empty($numero_cartao) && !empty($cvv) && !empty($data_vencimento) && !empty($cpf)) {
+         if ($objUsuario->msgErro == "") { // está tudo certo
+             if ($objUsuario->AdicionarCartao($idCliente, $nome, $numero_cartao, $cvv, $data_vencimento, $cpf)) {
+               echo '<script>location.reload();</script>';
+             } else {
+                 echo "Erro ao cadastrar o cartão.";
+             }
+         }
+     } else {
+         echo "Erro: Preencha todos os campos!";
+     }
+ }
+?>
 
 </div>
 
@@ -274,7 +301,7 @@ function showCartoes() {
          <img src="<?= $fetch_product['imagem']; ?>" class="image" alt="">
             <div>
                <h3 class="name"><?= $fetch_get['nome']; ?></h3>
-               <p class="price"><i class="fas fa-indian-rupee-sign"></i> <?= $fetch_get['preco']; ?> x 1</p>
+               <p class="price"> <?= $fetch_get['preco']; ?> x 1</p>
             </div>
 
          <?php
@@ -299,24 +326,22 @@ function showCartoes() {
                <p class="price">R$ <?= $fetch_product['preco']; ?> x <?= $fetch_cart['quantidade']; ?></p>
             </div>
          </div>
-         <input type="hidden" name="forma_de_pagamento" value="<?php echo $forma_de_pagamento; ?>">
-   <input type="hidden" name="endereco" value="<?php echo $endereco['id']; ?>">
-   <input type="hidden" name="cartao" value="<?php echo $id_cartao['id']; ?>">
-         <?php
+
+        
+        <input type="hidden" name="endereco" value="<?php echo $endereco['id']; ?>">
+        <input type="hidden" name="cartao" value="<?php echo $id_cartao['id']; ?>">
+        <input type="hidden" name="produto_id[]" value="<?= $fetch_cart['id_produto']; ?>">
+        <input type="hidden" name="quantidade[]" value="<?= $fetch_cart['quantidade']; ?>">
+  <?php
                   }
                }else{
                   echo '<p class="empty">Seu carrinho está vazio!</p>';
                }
             }
-         ?>
-        <!-- Campo Oculto para ID do Endereço -->
-        <input type="hidden" name="endereco" value="<?php echo $endereco['id']; ?>">
 
-        <!-- Campo Oculto para ID do Cartão -->
-        <input type="hidden" name="cartao" value="<?php echo $id_cartao['id']; ?>">
-        <?php // var_dump($endereco); ?>
+         ?>
          <div class="grand-total"><span>Total:</span><p>R$ <?= $grand_total; ?></p></div>
-         <button type="submit" value="fazer_pedido" class="btn-1">Finalizar Compra</button>
+         <button type="submit" name="fazer_pedido" class="btn-1">Finalizar Compra</button>
          </form>
       </div>
 
@@ -325,63 +350,48 @@ function showCartoes() {
 </section>
 
 
-
-
-
-<?php
- if (isset($_POST['nome'])) {
-     $idCliente = $usuario['id'];
-     $nome = $_POST['nome'];
-     $numero_cartao = $_POST['numero_cartao'];
-     $cvv = $_POST['cvv'];
-     $data_vencimento = $_POST['data_vencimento'];
-     $cpf = $_POST['cpf'];
-
-     // Verificar se está preenchido
-     if (!empty($nome) && !empty($numero_cartao) && !empty($cvv) && !empty($data_vencimento) && !empty($cpf)) {
-         if ($objUsuario->msgErro == "") { // está tudo certo
-             if ($objUsuario->AdicionarCartao($idCliente, $nome, $numero_cartao, $cvv, $data_vencimento, $cpf)) {
-               echo '<script>location.reload();</script>';
-             } else {
-                 echo "Erro ao cadastrar o cartão.";
-             }
-         }
-     } else {
-         echo "Erro: Preencha todos os campos!";
-     }
- }
-?>
 <?php
 
 if (isset($_POST['fazer_pedido'])) {
+  
   $idCliente = $usuario['id'];
-   $forma_de_pagamento = $_POST['forma_de_pagamento'];
-   $forma_de_pagamento = filter_var($forma_de_pagamento, FILTER_SANITIZE_STRING);
+  $forma_de_pagamento = isset($_POST['forma_de_pagamento']) ? filter_var($_POST['forma_de_pagamento'], FILTER_SANITIZE_STRING) : null;
+  $id_endereco = isset($_POST['endereco']) ? $_POST['endereco'] : null;
+  $produto_ids = isset($_POST['produto_id']) ? $_POST['produto_id'] : array();
+  $quantidades = isset($_POST['quantidade']) ? $_POST['quantidade'] : array();
 
-   // Obtendo o ID do endereço selecionado (se houver)
-   $id_endereco = isset($_POST['endereco']) ? $_POST['endereco'] : null;
 
-   $verify_cart = $pdo->prepare("SELECT * FROM `carrinho` WHERE id_cliente = ?");
-   $verify_cart->execute([$id_cliente]);
+  if (!empty($produto_ids)) {
+    // Iterar sobre os itens do carrinho
+    foreach ($produto_ids as $index => $produto_id) {
+        try {
+            // Obter detalhes do produto
+            $select_product = $pdo->prepare("SELECT * FROM `produtos` WHERE id = ?");
+            $select_product->execute([$produto_id]);
+            $produto = $select_product->fetch(PDO::FETCH_ASSOC);
 
-   if ($verify_cart->rowCount() > 0) {
-
-      while ($f_cart = $verify_cart->fetch(PDO::FETCH_ASSOC)) {
-
-         $insert_order = $pdo->prepare("INSERT INTO `pedidos` (id_cliente, id_produto, id_endereco, data, preco, quantidade, forma_de_pagamento) VALUES (?, ?, ?, NOW(), ?, ?, ?)");
-         $insert_order->execute([$id_cliente, $f_cart['id_produto'], $id_endereco, $f_cart['preco'], $f_cart['quantidade'], $forma_de_pagamento]);
+            // Inserir pedido para cada item no carrinho
+            $insert_order = $pdo->prepare("INSERT INTO `pedidos` (id_cliente, id_produto, id_endereco, data, preco, quantidade, forma_de_pagamento) VALUES (?, ?, ?, NOW(), ?, ?, ?)");
+            $insert_order->execute([$idCliente, $produto_id, $id_endereco, $produto['preco'], $quantidades[$index], $forma_de_pagamento]);
+        } catch (Exception $e) {
+            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+        }
+    }
       }
 
-      if ($insert_order) {
-         $delete_cart_id = $pdo->prepare("DELETE FROM `carrinho` WHERE id_cliente = ?");
-         $delete_cart_id->execute([$id_cliente]);
-         header('location:pedidos.php');
+      //if ($insert_order) {
+       //  $delete_cart_id = $pdo->prepare("DELETE FROM `carrinho` WHERE id_cliente = ?");
+      //   $delete_cart_id->execute([$id_cliente]);
+         ?>
+        <script> /*window.location.href = 'pedidos.php';*/</script>
+        <?php
+
       }
 
-   } else {
-      $warning_msg[] = 'Seu carrinho está vazio!';
-   }
-}
+   //} else {
+    //  $warning_msg[] = 'Seu carrinho está vazio!';
+  // }
+
 
 ?>
 </div>
@@ -390,6 +400,7 @@ function atualizarFormulario(enderecoId) {
     document.getElementById('enderecoIdSelecionado').value = enderecoId;
     document.getElementById('seuFormulario').submit();
 }
+
 </script>
 
 </body>

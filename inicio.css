@@ -1,45 +1,21 @@
 body{
    margin: 0;
    padding: 0;
-
 }
 h3{
     text-align: center;
     color: #770624;
 }
-.cabecalho{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 24px;
-}
+
 .cabecalho-item{
     color: #963c54;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 400;
 }
-.nav-item{
-    display: flex;
-    flex-direction: row;
-    padding: 15px;
-    text-decoration: underline;
-    margin: 10px;
-}
 #carouselExampleIndicators{
    padding: 30px;
 }
-ul{
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    gap: 20px;
-   justify-content: center;
-   margin: 10px;
-}
 
-li{
-    color: #963c54;
-}
 .banner{
     justify-content: center;
 }
@@ -49,11 +25,53 @@ li{
     margin: 10px;
 
 }
-#navbarSupportedContent
-{
+#navbarSupportedContent {
     background-color: #ffffff;
-    margin: 10px;
+    margin: 0; /* Ajuste conforme necessário */
+    padding: 0; /* Ajuste conforme necessário */
 }
+
+.nav-item {
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    text-decoration: underline;
+}
+
+.navbar-nav {
+    align-items: center;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 20px;
+    justify-content: center;
+    margin: 0; /* Ajuste conforme necessário */
+}
+
+li {
+    color: #963c54;
+    margin: 0; /* Ajuste conforme necessário */
+}
+
+.logo2 {
+    max-height: 100%; /* Ajuste conforme necessário */
+}
+
+.logo {
+    margin-right: 20px; /* Ajuste conforme necessário */
+}
+
+.cabecalho {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 24px;
+    justify-content: space-between; /* Ajuste conforme necessário */
+}
+
 .card3{
     height: 100px;
     width: 100px;
@@ -86,11 +104,6 @@ img{
     width: 100%;
     height: 50%;
 }
-.caixinha{
-    background-color: #963c54;
-    height: 100%;
-}
-
 footer{
     margin: 10px;
     padding: 20px;

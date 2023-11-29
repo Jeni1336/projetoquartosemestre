@@ -37,12 +37,19 @@ $dataFormatada = $dataNascimento->format('d/m/Y');
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <style>
-  .btn-2 a{
+  .btn-{
     background-color: #770624;
     border-radius: 5px;
     color: white;
-    
-
+    padding: 10px;
+    margin: 5px;
+  }
+  .btn-2{
+    background-color: #770624;
+    border-radius: 5px;
+    color: white;
+    margin: 5px;
+   
 }
 </style>
     
@@ -176,9 +183,13 @@ $dataFormatada = $dataNascimento->format('d/m/Y');
                               </div>
                           </div>
       </section>
+      
+      
+      
+      <div class="d-flex justify-content-end mt-3">
       <?php
       echo '<form method="post" onsubmit="return confirm(\'Tem certeza que deseja excluir sua conta?\');">';
-      echo '<input class="btn-2" type="submit" name="excluir" value="Excluir Conta">';
+      echo '<input class="btn-" type="submit" name="excluir" value="Excluir Conta">';
       echo '</form>';
       if (isset($_POST['excluir'])) {
         // Chame o método deletar para excluir o usuário
@@ -191,10 +202,7 @@ $dataFormatada = $dataNascimento->format('d/m/Y');
         exit(); // Certifique-se de encerrar o script após o redirecionamento
     }
       ?>
-      
-      
-      <div class="d-flex justify-content-end mt-3">
-       <button class="btn-2" type="submit"> <a href="sair.php">Sair da Conta</a></button>
+      <button class="btn-2" type="submit"> <a href="sair.php">Sair da Conta</a></button>
       </div>
      
 
