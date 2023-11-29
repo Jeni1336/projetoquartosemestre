@@ -10,28 +10,22 @@ if (!isset($_SESSION['id'])) {
     header("location: login2.php");
     exit;
 }
-//var_dump($_SESSION['id']);
+
 $objUsuario = new Usuario();
 $objUsuario->conectar("cadastro_cliente", "localhost", "root", "admin");
 
 $usuario = $objUsuario->obterDadosUsuarioLogado();
 
 $dadosEndereco = $objUsuario->SelectEndereco($usuario['id']);
-$endereco = $objUsuario->SelectMultiplosEnderecos($idEndereco);
-
-
-$dadosCartao = $objUsuario->SelectCartao($usuario['id']);
-
-
-var_dump ($dadosCartao['id']);
-var_dump ($dadosEndereco['id']);
-//var_dump($dadosEndereco);
 $id_cliente = $usuario['id'];
 
 $u = new Cart($pdo);
 if (isset($_COOKIE['user_id'])) {
     $id_cliente = $_COOKIE['user_id'];
 }
+
+$dadosCartao = $objUsuario->SelectCartao($usuario['id']); // Adicionado novamente
+
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +65,7 @@ if (isset($_COOKIE['user_id'])) {
         <span class="close-btn" onclick="closePopup('overlayEnd')">&times;</span>
         <h2>Adicionar Endereço</h2>
         
-        <form method="POST">
+        <form id="formEnd" method="POST" >
           <!-- IDs únicos para os campos do cartão -->
           <label class="form-label">Endereço</label>
           <input type="text" name="endereco" class="form-control" required>
@@ -95,7 +89,7 @@ if (isset($_COOKIE['user_id'])) {
           <label class="form-label">CEP</label>
           <input type="text" name="cep" class="form-control" required>
           
-          <button type="submit">Adicionar Endereço</button>
+          <button type="submit" name="adicionarNovoEnd">Adicionar Endereço</button>
         </form>
       </div>
     </div>
@@ -103,30 +97,57 @@ if (isset($_COOKIE['user_id'])) {
 
             <?php
 if (!empty($dadosEndereco)) {
-   echo '<div class="checkout-form">';
-   
-   // Itera sobre cada endereço retornado
-   foreach ($dadosEndereco as $endereco) {
-    $enderecoId = isset($endereco['id']) ? $endereco['id'] : '';
-       echo '<label>';
-       echo '<input type="radio" name="endereco" value="' . $endereco['id'] . '" required>';
-       echo '<ul>';
-       echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Endereço:</span>' . $endereco['endereco'] . '</li>';
-       echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Cidade:</span>' . $endereco['cidade'] . '</li>';
-       echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Bairro:</span>' . $endereco['bairro'] . '</li>';
-       echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Estado:</span>' . $endereco['estado'] . '</li>';
-       echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">CEP:</span>' . $endereco['cep'] . '</li>';
-       echo '</ul>';
-       echo '</label>';
-       echo '</br>';
-   }
+  echo '<div class="checkout-form">';
+  
+  // Itera sobre cada endereço retornado
+  foreach ($dadosEndereco as $endereco) {
+      echo '<label>';
+      // Utiliza o operador de coalescência nula para obter o valor de 'id'
+      $enderecoId = isset($endereco['id']) ? $endereco['id'] : '';
+      echo '<input type="radio" name="endereco" value="' . $enderecoId . '" required>';
+      echo '<ul>';
+      echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Endereço:</span>' . $endereco['endereco'] . '</li>';
+      echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Cidade:</span>' . $endereco['cidade'] . '</li>';
+      echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Bairro:</span>' . $endereco['bairro'] . '</li>';
+      echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Estado:</span>' . $endereco['estado'] . '</li>';
+      echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">CEP:</span>' . $endereco['cep'] . '</li>';
+      echo '<input type="hidden" name="enderecoIdSelecionado" id="enderecoIdSelecionado" value="">';
+      echo '</ul>';
+      echo '</label>';
+      echo '</br>';
+  }
 
-   echo '</div>';
+  echo '</div>';
 } else {
-   echo '<p>Nenhum endereço cadastrado. <a href="endereco.php">Adicionar Endereço</a> <ion-icon name="add-outline"></ion-icon></p>';
+  echo '<p>Nenhum endereço cadastrado. <a href="endereco.php">Adicionar Endereço</a> <ion-icon name="add-outline"></ion-icon></p>';
 }
-                ?>
-                
+?>
+<?php
+if (isset($_POST['adicionarNovoEnd'])) {
+  $endereco = $_POST['endereco'];
+  $cidade = $_POST['cidade'];
+  $bairro = $_POST['bairro'];
+  $estado = $_POST['estado'];
+  $cep = $_POST['cep'];
+    
+
+  if (!empty($endereco) && !empty($cidade) && !empty($bairro) && !empty($estado) && !empty($cep)) {
+if ($objUsuario->msgErro == "") { // está tudo certo
+if ($objUsuario->cadastrarEndereco($idCliente, $endereco, $cidade, $bairro, $estado, $cep)) {
+   echo '<script>location.reload();</script>';
+                    } else {
+                        echo "Erro ao cadastrar o endereço.";
+                    }
+                } else {
+                    echo "Erro: Preencha todos os campos!";
+                }
+            }
+        } else {
+            echo "Erro: Preencha todos os campos do endereço corretamente!";
+        }
+
+?>
+
             </div>
         </div>
         <div class="column">
@@ -147,14 +168,16 @@ if (!empty($dadosEndereco)) {
     <?php
     // Verificar se há endereço cadastrado
     if (!empty($dadosCartao)) {
-        echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Nome do Titular:</span>' . $dadosCartao['nome'] . '</li>';
-        echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Número Cartão:</span>' . '**** **** **** ' . substr($dadosCartao['numero_cartao'], -4) . '</li>';
-        echo '<form name="cartao" method="POST" id="cartaoForm">
-            </form>';
-    } else {
-        echo '<li>Nenhum cartão cadastrado. <a href="cartao.php">Adicionar Cartão</a> <ion-icon name="add-outline"></ion-icon></li>';
-    }
-    ?>
+      echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Nome do Titular:</span>' . $dadosCartao['nome'] . '</li>';
+      // Utiliza o operador de coalescência nula para obter o valor de 'numero_cartao'
+      $numeroCartao = $dadosCartao['numero_cartao'] ?? '';
+      echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Número Cartão:</span>' . '**** **** **** ' . substr($numeroCartao, -4) . '</li>';
+      echo '<form name="cartao" method="POST" id="cartaoForm">
+          </form>';
+  } else {
+      echo '<li>Nenhum cartão cadastrado. <a href="cartao.php">Adicionar Cartão</a> <ion-icon name="add-outline"></ion-icon></li>';
+  }
+  ?>
 </ul>
 
 
@@ -199,7 +222,7 @@ if (!empty($dadosEndereco)) {
 </div>
 
 <script>
-   var radioGroup = document.getElementsByName('paymentMethod');
+   var radioGroup = document.getElementsByName('forma_de_pagamento');
 radioGroup.forEach(function(radio) {
     radio.addEventListener('change', showCartoes);
 });
@@ -276,6 +299,9 @@ function showCartoes() {
                <p class="price">R$ <?= $fetch_product['preco']; ?> x <?= $fetch_cart['quantidade']; ?></p>
             </div>
          </div>
+         <input type="hidden" name="forma_de_pagamento" value="<?php echo $forma_de_pagamento; ?>">
+   <input type="hidden" name="endereco" value="<?php echo $endereco['id']; ?>">
+   <input type="hidden" name="cartao" value="<?php echo $id_cartao['id']; ?>">
          <?php
                   }
                }else{
@@ -288,7 +314,7 @@ function showCartoes() {
 
         <!-- Campo Oculto para ID do Cartão -->
         <input type="hidden" name="cartao" value="<?php echo $id_cartao['id']; ?>">
-
+        <?php // var_dump($endereco); ?>
          <div class="grand-total"><span>Total:</span><p>R$ <?= $grand_total; ?></p></div>
          <button type="submit" value="fazer_pedido" class="btn-1">Finalizar Compra</button>
          </form>
@@ -298,31 +324,9 @@ function showCartoes() {
 
 </section>
 
-<?php
-if (isset($_POST['endereco'])) {
-  $idCliente = $usuario['id'];
-  $endereco = $_POST['endereco'];
-  $cidade = $_POST['cidade'];
-  $bairro = $_POST['bairro'];
-  $estado = $_POST['estado'];
-  $cep = $_POST['cep'];
 
-  // Verificar se está preenchido
-  if (!empty($endereco) && !empty($cidade) && !empty($bairro) && !empty($estado) && !empty($cep)) {
-      if ($objUsuario->msgErro == "") { // está tudo certo
-          if ($objUsuario->cadastrarEndereco($idCliente, $endereco, $cidade, $bairro, $estado, $cep)) {
-            
-             echo '<script>location.reload();</script>';
-          } else {
-              echo "Erro ao cadastrar o endereço.";
-          }
-      }
-  } else {
-      echo "Erro: Preencha todos os campos!";
-  }
-}
 
-?>
+
 
 <?php
  if (isset($_POST['nome'])) {
@@ -378,7 +382,15 @@ if (isset($_POST['fazer_pedido'])) {
       $warning_msg[] = 'Seu carrinho está vazio!';
    }
 }
+
 ?>
 </div>
+<script>
+function atualizarFormulario(enderecoId) {
+    document.getElementById('enderecoIdSelecionado').value = enderecoId;
+    document.getElementById('seuFormulario').submit();
+}
+</script>
+
 </body>
 </html>

@@ -140,5 +140,7 @@ $produtos = $produto->obterTodosProdutos();
     <button type="submit" class="btn-1"> <a style="color: white;" href="adicionar_produto.php"> Cadastrar Novo </a> </button>
     <button type="submit" class="btn-1"> <a style="color: white;" href="telainicial.php"> Voltar </a> </button>
    </div>
+   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+                <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 
 </body>
 </html>
