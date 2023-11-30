@@ -393,7 +393,7 @@ $enderecoIdSelecionado = $id_endereco;
 //var_dump($opcao_selecionada);
 $forma_de_pagamento = $opcao_selecionada;
 //var_dump($_POST['forma_de_pagamento']);
-var_dump($id_endereco);
+//var_dump($id_endereco);
 if (isset($_POST['fazer_pedido'])) {
 
   

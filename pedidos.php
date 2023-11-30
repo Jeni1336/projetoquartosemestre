@@ -10,7 +10,6 @@ if (!isset($_SESSION['id'])) {
     header("location: login2.php");
     exit;
 }
-$idEspecifico = 34;
 
 $objUsuario = new Usuario();
 $objUsuario->conectar("cadastro_cliente", "localhost", "root", "admin");
@@ -94,11 +93,12 @@ $dadosCartao = $objUsuario->SelectCartao($usuario['id']); // Adicionado novament
 <div class="box-container">
 
 <?php
-$select_all_orders = $pdo->prepare("SELECT * FROM `pedidos`");
-$select_all_orders->execute();
-$all_orders = $select_all_orders->fetchAll(PDO::FETCH_ASSOC);
+$select_user_orders = $pdo->prepare("SELECT * FROM `pedidos` WHERE id_cliente = ?");
+$select_user_orders->execute([$usuario['id']]);
+$user_orders = $select_user_orders->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($all_orders as $order) {
+
+foreach ($user_orders as $order) {
     $order_id = $order['id'];
     $grand_total = 0;
     $sub_total = ($order['preco'] * $order['quantidade']);

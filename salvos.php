@@ -124,7 +124,7 @@ if (isset($_SESSION['salvos']) && !empty($_SESSION['salvos'])) {
 </div>
 
 <ul class="list-unstyled mb-1-9">
-    <li> <a href="telainicial.html">Adicionar Produtos</a> <ion-icon name="add-outline"></ion-icon></li>
+    <li> <a href="telainicial.php">Adicionar Produtos</a> <ion-icon name="add-outline"></ion-icon></li>
 </ul>
                               </div>
                           </div>
