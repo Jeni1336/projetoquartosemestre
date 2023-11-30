@@ -11,6 +11,9 @@ if (!isset($_SESSION['id'])) {
     exit;
 }
 
+$id_endereco = null;
+
+
 $objUsuario = new Usuario();
 $objUsuario->conectar("cadastro_cliente", "localhost", "root", "admin");
 
@@ -94,32 +97,47 @@ $dadosCartao = $objUsuario->SelectCartao($usuario['id']); // Adicionado novament
       </div>
     </div>
 
+<form method="post" id="seuFormulario">
 
-            <?php
+<?php
 if (!empty($dadosEndereco)) {
-  echo '<div class="checkout-form">';
-  
-  // Itera sobre cada endereço retornado
-  foreach ($dadosEndereco as $endereco) {
-      echo '<label>';
-      // Utiliza o operador de coalescência nula para obter o valor de 'id'
-      $enderecoId = isset($endereco['id']) ? $endereco['id'] : '';
-      echo '<input type="radio" name="endereco" value="' . $enderecoId . '" required>';
-      echo '<ul>';
-      echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Endereço:</span>' . $endereco['endereco'] . '</li>';
-      echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Cidade:</span>' . $endereco['cidade'] . '</li>';
-      echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Bairro:</span>' . $endereco['bairro'] . '</li>';
-      echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Estado:</span>' . $endereco['estado'] . '</li>';
-      echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">CEP:</span>' . $endereco['cep'] . '</li>';
-      echo '<input type="hidden" name="enderecoIdSelecionado" id="enderecoIdSelecionado" value="">';
-      echo '</ul>';
-      echo '</label>';
-      echo '</br>';
-  }
+    echo '<div class="checkout-form">';
+    
+    // Itera sobre cada endereço retornado
+    foreach ($dadosEndereco as $endereco) {
+        echo '<label>';
+        // Utiliza o operador de coalescência nula para obter o valor de 'id'
+        $enderecoId = isset($endereco['id']) ? $endereco['id'] : '';
+        echo '<input type="radio" name="endereco" value="' . $enderecoId . '" onclick="atualizarFormulario(' . $enderecoId . ')" required>';
+        //echo '<input type="radio" name="endereco" value="' . $enderecoId . '" onclick="atualizarFormulario(' . $enderecoId . ')" required>';
+        echo '<ul>';
+        echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Endereço:</span>' . $endereco['endereco'] . '</li>';
+        echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Cidade:</span>' . $endereco['cidade'] . '</li>';
+        echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Bairro:</span>' . $endereco['bairro'] . '</li>';
+        echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Estado:</span>' . $endereco['estado'] . '</li>';
+        echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">CEP:</span>' . $endereco['cep'] . '</li>';
+        echo '</ul>';
+        echo '</label>';
+        echo '</br>';
+    }
 
-  echo '</div>';
+    echo '</div>';
 } else {
-  echo '<p>Nenhum endereço cadastrado. <a href="endereco.php">Adicionar Endereço</a> <ion-icon name="add-outline"></ion-icon></p>';
+    echo '<p>Nenhum endereço cadastrado. <a href="endereco.php">Adicionar Endereço</a> <ion-icon name="add-outline"></ion-icon></p>';
+}
+?>
+</form>
+<?php
+$enderecoIdSelecionado = null;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Verifica se a chave 'enderecoIdSelecionado' está definida no array $_POST
+  $enderecoIdSelecionado = isset($_POST['enderecoIdSelecionado']) ? filter_var($_POST['enderecoIdSelecionado'], FILTER_SANITIZE_STRING) : null;
+
+  // Use $enderecoIdSelecionado conforme necessário
+
+  // Atribui o valor da variável $enderecoIdSelecionado a $id_endereco
+  $id_endereco = $enderecoIdSelecionado;
+
 }
 ?>
 <?php
@@ -167,11 +185,22 @@ if (isset($_POST['adicionarNovoEnd'])) {
     <input type="radio" id="cartao" name="forma_de_pagamento" value="cartao" onclick="showCartoes()" required>
    <label for="cartao">Cartão de Crédito</label><br>
 
+   <input type="hidden" name="forma_de_pagamento_hidden" id="forma_de_pagamento_hidden" value="">
+   </form>
+   <?php
+   $opcao_selecionada = null;
+   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verifica se o botão de rádio foi selecionado
+    if (isset($_POST['forma_de_pagamento'])) {
+        // Cria uma nova variável PHP para armazenar a opção selecionada
+        $opcao_selecionada = $_POST['forma_de_pagamento'];
+    }
+  }
+?>
 
     <div class="cartoes-cadastrados" style="display: none;">
-    </form>
+
     <?php
-    // Verificar se há endereço cadastrado
     if (!empty($dadosCartao)) {
       echo '<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Nome do Titular:</span>' . $dadosCartao['nome'] . '</li>';
       // Utiliza o operador de coalescência nula para obter o valor de 'numero_cartao'
@@ -212,8 +241,6 @@ if (isset($_POST['adicionarNovoEnd'])) {
           <input type="date" id="expiryDate" name="data_vencimento" placeholder="MM/AA" required><br>
           <label for="cardCPF">CPF do Titular:</label>
           <input type="text" id="cardCPF" name="cpf" required><br>
-          
-
           
           <button type="submit">Adicionar Cartão</button>
         </form>
@@ -256,18 +283,28 @@ radioGroup.forEach(function(radio) {
 function showCartoes() {
     // Obtém a referência ao elemento com a classe .cartoes-cadastrados
     var cartoesCadastrados = document.querySelector('.cartoes-cadastrados');
-
+  console.log('forma_de_pagamento');
     // Verifica se o botão de Cartão de Crédito está selecionado
     if (document.getElementById('cartao').checked) {
         // Mostra a seção de Cartões Cadastrados
         cartoesCadastrados.style.display = 'block';
+        document.getElementById('forma_de_pagamento_hidden').value = "cartao";  // Corrigido para usar getElementById
     } else {
         // Oculta a seção de Cartões Cadastrados
         cartoesCadastrados.style.display = 'none';
     }
 }
 </script>
+<script>
+    var radioGroup = document.getElementsByName('forma_de_pagamento');
 
+    radioGroup.forEach(function (radio) {
+        radio.addEventListener('change', function () {
+            var formaPagamentoHidden = document.getElementById('forma_de_pagamento');
+            formaPagamentoHidden.value = radio.value;
+        });
+    });
+</script>
 
 
 
@@ -326,10 +363,10 @@ function showCartoes() {
                <p class="price">R$ <?= $fetch_product['preco']; ?> x <?= $fetch_cart['quantidade']; ?></p>
             </div>
          </div>
-
-        
+         <input type="hidden" name="forma_de_pagamento" id="forma_de_pagamento" value="">
+         <input type="hidden" name="forma_de_pagamento_hidden" id="forma_de_pagamento_hidden" value="">
         <input type="hidden" name="endereco" value="<?php echo $endereco['id']; ?>">
-        <input type="hidden" name="cartao" value="<?php echo $id_cartao['id']; ?>">
+        <input type="hidden" name="cartao" value="<?php echo isset($id_cartao['id']) ? $id_cartao['id'] : ''; ?>">
         <input type="hidden" name="produto_id[]" value="<?= $fetch_cart['id_produto']; ?>">
         <input type="hidden" name="quantidade[]" value="<?= $fetch_cart['quantidade']; ?>">
   <?php
@@ -351,11 +388,19 @@ function showCartoes() {
 
 
 <?php
-
+//var_dump($_POST);
+$enderecoIdSelecionado = $id_endereco;
+//var_dump($opcao_selecionada);
+$forma_de_pagamento = $opcao_selecionada;
+//var_dump($_POST['forma_de_pagamento']);
+var_dump($id_endereco);
 if (isset($_POST['fazer_pedido'])) {
+
   
   $idCliente = $usuario['id'];
   $forma_de_pagamento = isset($_POST['forma_de_pagamento']) ? filter_var($_POST['forma_de_pagamento'], FILTER_SANITIZE_STRING) : null;
+  //$id_endereco = $_POST['enderecoIdSelecionado'];
+  //$id_endereco = isset($_POST['enderecoIdSelecionado']) ? $_POST['enderecoIdSelecionado'] : null;
   $id_endereco = isset($_POST['endereco']) ? $_POST['endereco'] : null;
   $produto_ids = isset($_POST['produto_id']) ? $_POST['produto_id'] : array();
   $quantidades = isset($_POST['quantidade']) ? $_POST['quantidade'] : array();
@@ -363,6 +408,7 @@ if (isset($_POST['fazer_pedido'])) {
 
   if (!empty($produto_ids)) {
     // Iterar sobre os itens do carrinho
+
     foreach ($produto_ids as $index => $produto_id) {
         try {
             // Obter detalhes do produto
@@ -379,27 +425,40 @@ if (isset($_POST['fazer_pedido'])) {
     }
       }
 
-      //if ($insert_order) {
-       //  $delete_cart_id = $pdo->prepare("DELETE FROM `carrinho` WHERE id_cliente = ?");
-      //   $delete_cart_id->execute([$id_cliente]);
-         ?>
-        <script> /*window.location.href = 'pedidos.php';*/</script>
+     if ($insert_order) {
+        $delete_cart_id = $pdo->prepare("DELETE FROM `carrinho` WHERE id_cliente = ?");
+      $delete_cart_id->execute([$id_cliente]);
+        ?>
+       <script> window.location.href = 'pedidos.php';</script>
         <?php
 
-      }
+  }
 
-   //} else {
-    //  $warning_msg[] = 'Seu carrinho está vazio!';
-  // }
+   } else {
+      $warning_msg[] = 'Seu carrinho está vazio!';
+   }
 
 
 ?>
 </div>
 <script>
 function atualizarFormulario(enderecoId) {
-    document.getElementById('enderecoIdSelecionado').value = enderecoId;
-    document.getElementById('seuFormulario').submit();
+  document.getElementById('enderecoIdSelecionado').value = enderecoId;
+    // Adicionando a linha abaixo, que submeterá o formulário automaticamente quando um endereço for selecionado
+   // document.getElementById('seuFormulario').submit();
 }
+
+// Obtendo referências aos botões de rádio
+var botoesRadio = document.querySelectorAll('input[type="radio"][name="endereco"]');
+
+// Adicionando um ouvinte de eventos a cada botão de rádio
+botoesRadio.forEach(function(radio) {
+    radio.addEventListener('change', function() {
+        // Chamando a função atualizarFormulario quando um botão de rádio for alterado
+        atualizarFormulario(this.value);
+    });
+});
+
 
 </script>
 
