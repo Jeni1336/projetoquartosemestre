@@ -74,10 +74,6 @@ if (isset($_POST['add_to_saved'])) {
       }
     </style>
     <body>
-    <div class="caixinha"> </div>
-    <!-- <div class="cont">
-      <img  src="img/20231025_faixa_topo_desk.avif" alt="banner">
-    </div>  --->
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
         <a class="logo"> <img class="logo2" src="https://i.imgur.com/gBQhCJ6.png" height="60"></a>
@@ -85,7 +81,7 @@ if (isset($_POST['add_to_saved'])) {
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-start align-items-center">
             <li class="nav-item">
               <a class="cabecalho-item" href="notificacoes.html">Notificações<ion-icon class="icon" name="notifications-outline"></ion-icon></a>
             </li>

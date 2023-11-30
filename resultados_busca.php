@@ -72,9 +72,6 @@ footer {
      color: white;
 }
 </style>
-
-
-
 <body>
 <div class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
@@ -85,7 +82,7 @@ footer {
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-start align-items-center">
             <li class="nav-item">
               <a class="cabecalho-item" href="notificacoes.html">Notificações<ion-icon class="icon" name="notifications-outline"></ion-icon></a>
             </li>
