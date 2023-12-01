@@ -31,6 +31,8 @@ if(isset($_SESSION['id'])){
         }
     
         $saudacao .= '
+                    <li><a class="dropdown-item" href="pedidos.php">Pedidos</a></li>
+                    <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="sair.php">Sair</a></li>
                 </ul>
             </li>

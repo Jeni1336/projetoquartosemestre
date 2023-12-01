@@ -136,6 +136,7 @@ $dataFormatada = $dataNascimento->format('d/m/Y');
             echo '<li><a href="editarEndereco.php?id=' . $endereco['id'] . '">Editar Endereço</a> <ion-icon name="create-outline"></ion-icon></li>';
             echo '<a href="#" onclick="removerEndereco(' . $endereco['id'] . ')">Remover Endereço</a>';
             if (count($dadosEndereco) < 3) {
+              echo "</br>";
             echo '<a href="endereco.php">Adicionar Mais Um Endereço</a> <ion-icon name="add-outline"></ion-icon></li>
             </form>';
             }
@@ -171,7 +172,7 @@ $dataFormatada = $dataNascimento->format('d/m/Y');
         echo ' <li><a href="#" onclick="removerCartao(event)">Remover Cartão</a> <ion-icon name="create-outline"></ion-icon></li>
             </form>';
     } else {
-        echo '<li>Nenhum cartão cadastrado. <a href="cartao.php">Adicionar Cartão</a> <ion-icon name="add-outline"></ion-icon></li>';
+        echo '<li>Nenhum cartão cadastrado. <a href="cartao.php">Adicionar Cartão de Crédito</a> <ion-icon name="add-outline"></ion-icon></li>';
     }
     ?>
 </ul>
@@ -259,6 +260,7 @@ function removerEndereco(idEndereco) {
         xhr.send(formData);
     }
 }
+
 function removerCartao(event) {
   
     // Confirmar com o usuário antes de excluir

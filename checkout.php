@@ -209,7 +209,7 @@ if (isset($_POST['adicionarNovoEnd'])) {
       echo '<form name="cartao" method="POST" id="cartaoForm">
           </form>';
   } else {
-      echo '<li>Nenhum cartão cadastrado. <a href="cartao.php">Adicionar Cartão</a> <ion-icon name="add-outline"></ion-icon></li>';
+      echo '<li>Nenhum cartão cadastrado. <a href="cartao.php">Adicionar Cartão de Crédito</a> <ion-icon name="add-outline"></ion-icon></li>';
   }
   ?>
 </ul>
