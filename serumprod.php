@@ -171,7 +171,9 @@ if (isset($_POST['add_to_saved'])) {
       $id_cliente = $usuario['id'];
 
       $resultado = $u->adicionarAoCarrinho($pdo, $id_cliente, $id_produto, $quantidade);
-      echo $resultado;
+      echo '<script>';
+      echo 'if ("' . $resultado . '" === "Adicionado ao carrinho!") { alert("Produto adicionado ao carrinho!"); }';
+      echo '</script>';
 
       if (isset($_SESSION['salvos'])) {
         foreach ($_SESSION['salvos'] as $key => $itemSalvo) {

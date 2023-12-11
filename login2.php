@@ -24,7 +24,7 @@ $u = new Usuario;
         <div class="form-group">
             <div class="col-md-6 offset-md-3">
                 <label > Email</label>
-                  <input type="text" name="email" class="form-control" placeholder="Nome@exemplo.com" required>
+                  <input type="text" name="email" class="form-control" placeholder="Nome@exemplo.com" autocomplete="off" required>
             </div>
             <div class="form-group">
             <div class="col-md-6 offset-md-3">

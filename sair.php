@@ -11,6 +11,7 @@
 <?php
 session_start();
 unset($_SESSION['id']);
+unset($_SESSION['salvos']);
 header("location: telainicial.php");
 
 

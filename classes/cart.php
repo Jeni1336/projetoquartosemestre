@@ -50,7 +50,7 @@ class Cart {
             $insert_cart = $pdo->prepare("INSERT INTO `carrinho` (id_cliente, id_produto, preco, quantidade) VALUES (?, ?, ?, ?)");
             $insert_cart->execute([$id_cliente, $id_produto, $preco, $quantidade]);
 
-            return 'Adicionado ao carrinho!';
+            return true;
         }
     } catch (PDOException $e) {
         // Lidar com exceções do PDO aqui

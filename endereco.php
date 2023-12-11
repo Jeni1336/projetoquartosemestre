@@ -56,11 +56,11 @@ if ($usuario) {
     <form class="row g-3" method="POST">
         <div class="col-6">
           <label class="form-label">Endereço</label>
-          <input type="text" name="endereco" class="form-control" required>
+          <input type="text" name="endereco" class="form-control" autocomplete="off" required>
         </div>
         <div class="col-md-4">
           <label class="form-label">Cidade</label>
-          <input type="text" name="cidade" class="form-control" required>
+          <input type="text" name="cidade" class="form-control" autocomplete="off" required>
         </div>
         <div class="col-md-4">
           <label class="form-label">Bairro</label>
@@ -68,7 +68,7 @@ if ($usuario) {
         </div>
         <div class="col-md-4">
           <label class="form-label"> Estado</label>
-          <select name="estado" class="form-select" required>
+          <select name="estado" class="form-select" autocomplete="off" required>
             <option selected>Estado</option>
             <option>SP</option>
             <option>RJ</option>
@@ -90,7 +90,7 @@ if ($usuario) {
         </div>
         <div class="col-md-2">
           <label class="form-label">CEP</label>
-          <input type="text" name="cep" class="form-control" required>
+          <input type="text" name="cep" class="form-control" autocomplete="off" required>
         </div>
         <input type="hidden" name="idCliente" value="<?php echo $usuario['id']; ?>">
         <div class="col-12">  

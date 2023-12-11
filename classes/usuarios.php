@@ -270,6 +270,12 @@ Class Usuario{
 
     }
     
-
+    public function obterProdutosSalvos() {
+        if (isset($_SESSION['salvos']) && is_array($_SESSION['salvos'])) {
+            return $_SESSION['salvos'];
+        } else {
+            return array();
+        }
+    }
 }
 ?>

@@ -44,7 +44,7 @@
             <input type="date" name="data_nasc" class="form-control" placeholder="Data de Nascimento" maxlength="10" required>    
         </div> <div class="   col-md-6 offset-md-3">
           <label > Email</label>
-          <input type="text" name="email" class="form-control" placeholder="Nome@exemplo.com" maxlength="30" required>    
+          <input type="text" name="email" class="form-control" placeholder="Nome@exemplo.com" maxlength="30" autocomplete="off" required>    
       </div>
           </div>
           <div class="form-group">
